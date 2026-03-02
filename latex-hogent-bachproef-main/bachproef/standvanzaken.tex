@@ -7,45 +7,61 @@
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+%Inleiding paragraaf:
+Het voorgaande hoofdstuk schetst de relevantie van werkgerelateerde stress binnen de IT-sector. Ook formuleert het op welke manier we die stress kunnen verlagen. Het formuleert zowel de probleemstelling als de centrale onderzoeksvraag rond het inzetten van artificiële intelligentie voor een meer evenwichtige taakverdeling binnen het bedrijf (Cisco).
 
-Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz.\ naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin (narratieve referentie), gebruik je \texttt{$\backslash${}textcite\{\}}. Soms is de auteursnaam niet expliciet een onderdeel van de zin, dan gebruik je \texttt{$\backslash${}autocite\{\}} (referentie tussen haakjes). Dit gebruik je bv.~bij een citaat, of om in het bijschrift van een overgenomen afbeelding, broncode, tabel, enz. te verwijzen naar de bron. In de volgende paragraaf een voorbeeld van elk.
+Om deze onderzoeksvraag goed te beantwoorden, is het noodzakelijk om eerst de bestaande literatuur rond taakverdeling, werkstress en AI-gestuurde modellen te analyseren.
 
-\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+Deze analyse vormt de theoretische basis voor het daaropvolgende hoofdstuk, waarin wordt beschreven hoe deze theorieën concreet worden vertaald naar het ontwerp, data-verzameling en ontwikkeling van het conceptueel AI-model.
 
-Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van een paragraaf.
+%sectie vertellen hoe het agile werken nu gebeurt in (Cisco):
+\vspace{1em}Het bedrijf (Cisco) werkt via agile. De manier hoe de planningstechnieken voor agile projectmanagement nu werken, is niet genoeg om de kwaliteiten van werknemers ten volle te gebruiken. In deze proef worden die planningstechnieken verbeterd door de introductie van intelligente, datagestuurde mogelijkheden die een aanvulling vormen op menselijke besluitvorming (AI-model). 
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{grail.jpg}
-  \caption[Voorbeeld figuur.]{\label{fig:grail}Voorbeeld van invoegen van een figuur. Zorg altijd voor een uitgebreid bijschrift dat de figuur volledig beschrijft zonder in de tekst te moeten gaan zoeken. Vergeet ook je bronvermelding niet!}
-\end{figure}
+%sectie over al bestaande AI-modellen:
 
-\begin{listing}
-  \begin{minted}{python}
-    import pandas as pd
-    import seaborn as sns
+%sectie over over hoe we het AI model gaan construeren in deze proef:
 
-    penguins = sns.load_dataset('penguins')
-    sns.relplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", hue="species")
-  \end{minted}
-  \caption[Voorbeeld codefragment]{Voorbeeld van het invoegen van een codefragment.}
-\end{listing}
 
-\lipsum[7-20]
 
-\begin{table}
-  \centering
-  \begin{tabular}{lcr}
-    \toprule
-    \textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
-    $\alpha$         & $\beta$          & $\gamma$         \\
-    \midrule
-    A                & 10.230           & a                \\
-    B                & 45.678           & b                \\
-    C                & 99.987           & c                \\
-    \bottomrule
-  \end{tabular}
-  \caption[Voorbeeld tabel]{\label{tab:example}Voorbeeld van een tabel.}
-\end{table}
+%Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+
+%Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz.\ naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin (narratieve referentie), gebruik je \texttt{$\backslash${}textcite\{\}}. Soms is de auteursnaam niet expliciet een onderdeel van de zin, dan gebruik je \texttt{$\backslash${}autocite\{\}} (referentie tussen haakjes). Dit gebruik je bv.~bij een citaat, of om in het bijschrift van een overgenomen afbeelding, broncode, tabel, enz. te verwijzen naar de bron. In de volgende paragraaf een voorbeeld van elk.
+
+%\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+
+%Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van een paragraaf.
+
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=0.8\textwidth]{grail.jpg}
+%  \caption[Voorbeeld figuur.]{\label{fig:grail}Voorbeeld van invoegen van een figuur. Zorg altijd voor een uitgebreid bijschrift dat de figuur volledig beschrijft zonder in de tekst te moeten gaan %zoeken. Vergeet ook je bronvermelding niet!}
+%\end{figure}
+
+%\begin{listing}
+%  \begin{minted}{python}
+%    import pandas as pd
+%    import seaborn as sns
+
+%    penguins = sns.load_dataset('penguins')
+%    sns.relplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", hue="species")
+%  \end{minted}
+%  \caption[Voorbeeld codefragment]{Voorbeeld van het invoegen van een codefragment.}
+%\end{listing}
+
+%\lipsum[7-20]
+
+%\begin{table}
+%  \centering
+%  \begin{tabular}{lcr}
+%    \toprule
+%    \textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
+%    $\alpha$         & $\beta$          & $\gamma$         \\
+%    \midrule
+%    A                & 10.230           & a                \\
+%    B                & 45.678           & b                \\
+%    C                & 99.987           & c                \\
+%    \bottomrule
+%  \end{tabular}
+%  \caption[Voorbeeld tabel]{\label{tab:example}Voorbeeld van een tabel.}
+%\end{table}
 
