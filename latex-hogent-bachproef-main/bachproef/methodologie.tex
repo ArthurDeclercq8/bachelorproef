@@ -1,10 +1,3 @@
-%%=============================================================================
-%% Methodologie
-%%=============================================================================
-
-\chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
-\label{ch:methodologie}
-
 %% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
 %% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
 %% de doelstelling was, welke deliverables daar uit gekomen zijn, en welke
@@ -26,5 +19,133 @@
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
 
-\lipsum[21-25]
+%%=============================================================================
+%% Methodologie
+%%=============================================================================
 
+\chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
+\label{ch:methodologie}
+
+In dit hoofdstuk wordt de methodologie van deze bachelorproef toegelicht. Het ontwerpen van een AI-systeem vereist een gestructureerde aanpak. Daarom werd het onderzoek opgedeeld in verschillende fasen, elk met een duidelijke doelstelling, bijhorende deliverables en toegepaste onderzoeksmethoden. De volledige doorlooptijd bedraagt 19 weken.
+
+De gekozen aanpak combineert theoretisch onderzoek met praktische uitwerking. Eerst wordt het probleem grondig geanalyseerd en onderbouwd via literatuurstudie. Vervolgens wordt de technische haalbaarheid onderzocht en wordt een Proof of Concept (PoC) ontwikkeld. Tot slot worden risico’s en impactfactoren geëvalueerd.
+
+%%-----------------------------------------------------------------------------
+\chapter{Requirements-analyse}
+\label{ch:requirements}
+
+\textbf{Doelstelling:}  
+Het bepalen van de functionele en niet-functionele vereisten van het AI-systeem.
+
+Tijdens deze fase (2 weken) wordt onderzocht welke functies het systeem moet kunnen vervullen. Vooraleer de vereisten van de oplossing worden vastgelegd, worden eerst de deelvragen met betrekking tot het probleemdomein beantwoord. Dit gebeurt op basis van een literatuurstudie.
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item Afbakening van het probleem
+    \item Overzicht van functionele eisen
+    \item Overzicht van niet-functionele eisen
+\end{itemize}
+
+\textbf{Onderzoeksmethoden:}
+\begin{itemize}
+    \item Literatuurstudie
+    \item Requirements analyse
+\end{itemize}
+
+%%-----------------------------------------------------------------------------
+\chapter{Literatuurstudie}
+\label{ch:literatuur}
+
+\textbf{Doelstelling:}  
+Inzicht verwerven in bestaande systemen en methoden binnen het domein.
+
+Deze fase (2 weken) omvat een grondige studie van bestaande systemen die vergelijkbare doelstellingen nastreven. Er wordt onderzocht hoe taakallocatie momenteel gebeurt en of er reeds AI-systemen of gelijkaardige oplossingen bestaan.
+
+Daarnaast wordt bestudeerd hoe AI-systemen in het algemeen tot stand komen. Op basis van deze inzichten wordt de ontwikkelingsfase vergemakkelijkt. Dit model wordt uitgewerkt met behulp van een UML-tool, zoals Enterprise Architect, en vormt de basis voor verdere systeemontwikkeling.
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item Overzicht van bestaande oplossingen
+    \item Conceptueel UML-model
+\end{itemize}
+
+\textbf{Onderzoeksmethoden:}
+\begin{itemize}
+    \item Literatuurstudie
+    \item Vergelijkende analyse
+    \item Modellering (UML)
+\end{itemize}
+
+%%-----------------------------------------------------------------------------
+\chapter{Haalbaarheidsonderzoek}
+\label{ch:haalbaarheid}
+
+\textbf{Doelstelling:}  
+Nagaan of het voorgestelde systeem realiseerbaar is binnen de beschikbare middelen.
+
+Gedurende 2 weken wordt de haalbaarheid van het systeem geëvalueerd. Hierbij worden beschikbare middelen zoals tijd, budget en technische expertise in kaart gebracht. Ook worden mogelijke problemen en uitdagingen tijdens implementatie geïdentificeerd.
+
+Deze fase ondersteunt het prioriteren van systeemfunctionaliteiten en helpt bij het bepalen van een realistische scope.
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item Haalbaarheidsrapport
+    \item Prioriteitenlijst van functionaliteiten
+\end{itemize}
+
+\textbf{Onderzoeksmethoden:}
+\begin{itemize}
+    \item Technische analyse
+    \item Resource-analyse
+    \item Risico-inschatting
+\end{itemize}
+
+%%-----------------------------------------------------------------------------
+\chapter{Ontwikkelresources en Ontwikkeling}
+\label{ch:ontwikkeling}
+
+\textbf{Doelstelling:}  
+Selecteren van geschikte technologieën en realiseren van een werkend prototype.
+
+In deze fase (12 weken) wordt een gedetailleerde analyse uitgevoerd van de benodigde ontwikkelresources. Hierbij worden technische componenten zoals programmeertalen, frameworks en databanken geëvalueerd.
+
+Op basis van deze analyse worden de geschikte technologieën gekozen. Als eerste stap wordt een Proof of Concept (PoC) ontwikkeld. Deze PoC is gebaseerd op een regel- en score-gebaseerd systeem. De implementatie gebeurt met Python als kerntechnologie en (PostgreSQ)L voor de datalaag.
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item Technologiekeuze en motivatie
+    \item Proof of Concept
+    \item Werkend prototype
+\end{itemize}
+
+\textbf{Onderzoeksmethoden:}
+\begin{itemize}
+    \item Vergelijkende toolanalyse
+    \item Experimentele implementatie
+    \item Ontwikkeling
+\end{itemize}
+
+%%-----------------------------------------------------------------------------
+\chapter{Risico- en Impactanalyse}
+\label{ch:risico}
+
+\textbf{Doelstelling:}  
+Identificeren en evalueren van potentiële risico’s en maatschappelijke impact.
+
+In de laatste fase (1 week) wordt een risico- en impactanalyse uitgevoerd. Hierbij worden technische, organisatorische en ethische uitdagingen in kaart gebracht. Specifieke aandacht gaat naar risico’s omtrent privacy en dataveiligheid.
+
+Deze analyse zorgt ervoor dat het systeem niet alleen technisch haalbaar is, maar ook verantwoord kan worden ingezet.
+
+\textbf{Deliverables:}
+\begin{itemize}
+    \item Risicoanalyse
+    \item Impactanalyse
+\end{itemize}
+
+\textbf{Onderzoeksmethoden:}
+\begin{itemize}
+    \item Risico-identificatie
+    \item Ethische analyse
+    \item Evaluatie van beveiligingsaspecten
+\end{itemize}
+\lipsum[21-25]
