@@ -1,0 +1,911 @@
+[
+  {
+    "id": "TASK-001",
+    "job_category": "Junior IT Support",
+    "task": "Laptop van nieuwe werknemer installeren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-002",
+    "job_category": "Junior IT Support",
+    "task": "Email account configureren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-003",
+    "job_category": "Junior IT Support",
+    "task": "Printer verbinden met netwerk",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-004",
+    "job_category": "Junior IT Support",
+    "task": "Gebruikerswachtwoord resetten",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 1
+  },
+  {
+    "id": "TASK-005",
+    "job_category": "Junior IT Support",
+    "task": "Software installeren op laptop",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-006",
+    "job_category": "Junior IT Support",
+    "task": "Docking station configureren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-007",
+    "job_category": "Junior IT Support",
+    "task": "Microsoft Office installeren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-008",
+    "job_category": "Junior IT Support",
+    "task": "Netwerkverbinding van gebruiker controleren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-009",
+    "job_category": "Junior IT Support",
+    "task": "IT inventaris bijwerken",
+    "required_role": "IT Support",
+    "type": "administration",
+    "difficulty": 1,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-010",
+    "job_category": "Junior IT Support",
+    "task": "Nieuwe monitor aansluiten",
+    "required_role": "IT Support",
+    "type": "hardware",
+    "difficulty": 1,
+    "days_remaining": 1
+  },
+
+  {
+    "id": "TASK-011",
+    "job_category": "IT Support Engineer",
+    "task": "Active Directory gebruiker aanmaken",
+    "required_role": "IT Support",
+    "type": "administration",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-012",
+    "job_category": "IT Support Engineer",
+    "task": "Groepsbeleid toepassen",
+    "required_role": "IT Support",
+    "type": "administration",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-013",
+    "job_category": "IT Support Engineer",
+    "task": "VPN voor werknemer configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-014",
+    "job_category": "IT Support Engineer",
+    "task": "Remote desktop toegang configureren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-015",
+    "job_category": "IT Support Engineer",
+    "task": "Drivers installeren op werkstation",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 2,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-016",
+    "job_category": "IT Support Engineer",
+    "task": "Gebruikersrechten aanpassen",
+    "required_role": "IT Support",
+    "type": "administration",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-017",
+    "job_category": "IT Support Engineer",
+    "task": "Softwarelicenties controleren",
+    "required_role": "IT Support",
+    "type": "administration",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-018",
+    "job_category": "IT Support Engineer",
+    "task": "Werkstation opnieuw installeren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-019",
+    "job_category": "IT Support Engineer",
+    "task": "BitLocker encryptie activeren",
+    "required_role": "IT Support",
+    "type": "security",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-020",
+    "job_category": "IT Support Engineer",
+    "task": "IT documentatie bijwerken",
+    "required_role": "IT Support",
+    "type": "documentation",
+    "difficulty": 2,
+    "days_remaining": 5
+  },
+
+  {
+    "id": "TASK-021",
+    "job_category": "System Administrator",
+    "task": "Windows server installeren",
+    "required_role": "System/Network Admin",
+    "type": "infrastructure",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-022",
+    "job_category": "System Administrator",
+    "task": "Linux server configureren",
+    "required_role": "System/Network Admin",
+    "type": "infrastructure",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-023",
+    "job_category": "System Administrator",
+    "task": "Backups configureren",
+    "required_role": "System/Network Admin",
+    "type": "maintenance",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-024",
+    "job_category": "System Administrator",
+    "task": "Storage volumes configureren",
+    "required_role": "System/Network Admin",
+    "type": "infrastructure",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-025",
+    "job_category": "System Administrator",
+    "task": "Server monitoring instellen",
+    "required_role": "System/Network Admin",
+    "type": "monitoring",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-026",
+    "job_category": "System Administrator",
+    "task": "Patch updates installeren op servers",
+    "required_role": "System/Network Admin",
+    "type": "maintenance",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-027",
+    "job_category": "System Administrator",
+    "task": "User quotas instellen",
+    "required_role": "System/Network Admin",
+    "type": "administration",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-028",
+    "job_category": "System Administrator",
+    "task": "Server logs analyseren",
+    "required_role": "System/Network Admin",
+    "type": "analysis",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-029",
+    "job_category": "System Administrator",
+    "task": "Failover server configureren",
+    "required_role": "System/Network Admin",
+    "type": "infrastructure",
+    "difficulty": 4,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-030",
+    "job_category": "System Administrator",
+    "task": "Virtual machines beheren",
+    "required_role": "System/Network Admin",
+    "type": "virtualization",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+
+  {
+    "id": "TASK-031",
+    "job_category": "Network Engineer",
+    "task": "Router configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-032",
+    "job_category": "Network Engineer",
+    "task": "Switch configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-033",
+    "job_category": "Network Engineer",
+    "task": "WiFi access point installeren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-034",
+    "job_category": "Network Engineer",
+    "task": "VLAN configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-035",
+    "job_category": "Network Engineer",
+    "task": "Firewall regels instellen",
+    "required_role": "System/Network Admin",
+    "type": "security",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-036",
+    "job_category": "Network Engineer",
+    "task": "Netwerk latency analyseren",
+    "required_role": "System/Network Admin",
+    "type": "analysis",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-037",
+    "job_category": "Network Engineer",
+    "task": "Load balancer configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-038",
+    "job_category": "Network Engineer",
+    "task": "Netwerk monitoring tools instellen",
+    "required_role": "System/Network Admin",
+    "type": "monitoring",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-039",
+    "job_category": "Network Engineer",
+    "task": "DNS server configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-040",
+    "job_category": "Network Engineer",
+    "task": "DHCP server configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+
+  {
+    "id": "TASK-041",
+    "job_category": "Software Developer",
+    "task": "Nieuwe feature programmeren",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 3,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-042",
+    "job_category": "Software Developer",
+    "task": "Bug in applicatie oplossen",
+    "required_role": "Developer",
+    "type": "debugging",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-043",
+    "job_category": "Software Developer",
+    "task": "REST API endpoint bouwen",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-044",
+    "job_category": "Software Developer",
+    "task": "Database query optimaliseren",
+    "required_role": "Developer",
+    "type": "database",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-045",
+    "job_category": "Software Developer",
+    "task": "Unit tests schrijven",
+    "required_role": "Developer",
+    "type": "testing",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-046",
+    "job_category": "Software Developer",
+    "task": "Code refactoring uitvoeren",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-047",
+    "job_category": "Software Developer",
+    "task": "Frontend component bouwen",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-048",
+    "job_category": "Software Developer",
+    "task": "Backend service implementeren",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-049",
+    "job_category": "Software Developer",
+    "task": "API documentatie schrijven",
+    "required_role": "Developer",
+    "type": "documentation",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-050",
+    "job_category": "Software Developer",
+    "task": "Code review uitvoeren",
+    "required_role": "Senior Developer",
+    "type": "review",
+    "difficulty": 3,
+    "days_remaining": 3
+  },
+
+  {
+    "id": "TASK-051",
+    "job_category": "DevOps Engineer",
+    "task": "CI/CD pipeline opzetten",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 4,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-052",
+    "job_category": "DevOps Engineer",
+    "task": "Docker container bouwen",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-053",
+    "job_category": "DevOps Engineer",
+    "task": "Deployment automatiseren",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-054",
+    "job_category": "DevOps Engineer",
+    "task": "Infrastructure as Code schrijven",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 4,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-055",
+    "job_category": "DevOps Engineer",
+    "task": "Kubernetes cluster deployen",
+    "required_role": "DevOps Engineer",
+    "type": "cloud",
+    "difficulty": 5,
+    "days_remaining": 8
+  },
+  {
+    "id": "TASK-056",
+    "job_category": "DevOps Engineer",
+    "task": "Monitoring stack installeren",
+    "required_role": "DevOps Engineer",
+    "type": "monitoring",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-057",
+    "job_category": "DevOps Engineer",
+    "task": "Log aggregation configureren",
+    "required_role": "DevOps Engineer",
+    "type": "monitoring",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-058",
+    "job_category": "DevOps Engineer",
+    "task": "Cloud resources schalen",
+    "required_role": "DevOps Engineer",
+    "type": "cloud",
+    "difficulty": 4,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-059",
+    "job_category": "DevOps Engineer",
+    "task": "Build pipeline debuggen",
+    "required_role": "DevOps Engineer",
+    "type": "debugging",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-060",
+    "job_category": "DevOps Engineer",
+    "task": "Secrets management configureren",
+    "required_role": "DevOps Engineer",
+    "type": "security",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+
+  {
+    "id": "TASK-061",
+    "job_category": "Cybersecurity",
+    "task": "Security patch installeren",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 2,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-062",
+    "job_category": "Cybersecurity",
+    "task": "Vulnerability scan uitvoeren",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-063",
+    "job_category": "Cybersecurity",
+    "task": "Penetratietest uitvoeren",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 5,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-064",
+    "job_category": "Cybersecurity",
+    "task": "Security logs analyseren",
+    "required_role": "Security Specialist",
+    "type": "analysis",
+    "difficulty": 4,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-065",
+    "job_category": "Cybersecurity",
+    "task": "Firewall audit uitvoeren",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 4,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-066",
+    "job_category": "Cybersecurity",
+    "task": "Malware detectie onderzoeken",
+    "required_role": "Security Specialist",
+    "type": "analysis",
+    "difficulty": 4,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-067",
+    "job_category": "Cybersecurity",
+    "task": "Security monitoring uitvoeren",
+    "required_role": "Security Specialist",
+    "type": "monitoring",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-068",
+    "job_category": "Cybersecurity",
+    "task": "Incident response uitvoeren",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 5,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-069",
+    "job_category": "Cybersecurity",
+    "task": "Phishing aanval analyseren",
+    "required_role": "Security Specialist",
+    "type": "analysis",
+    "difficulty": 4,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-070",
+    "job_category": "Cybersecurity",
+    "task": "Toegangscontrole audit uitvoeren",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+
+  {
+    "id": "TASK-071",
+    "job_category": "Data Engineer",
+    "task": "Database schema ontwerpen",
+    "required_role": "Developer",
+    "type": "database",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-072",
+    "job_category": "Data Engineer",
+    "task": "SQL query schrijven",
+    "required_role": "Developer",
+    "type": "database",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-073",
+    "job_category": "Data Engineer",
+    "task": "Data pipeline bouwen",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-074",
+    "job_category": "Data Engineer",
+    "task": "ETL proces implementeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-075",
+    "job_category": "Data Engineer",
+    "task": "Data cleaning uitvoeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-076",
+    "job_category": "Data Engineer",
+    "task": "Data warehouse configureren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 4,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-077",
+    "job_category": "Data Engineer",
+    "task": "Data integratie uitvoeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-078",
+    "job_category": "Data Engineer",
+    "task": "Dataset importeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-079",
+    "job_category": "Data Engineer",
+    "task": "Data analyse uitvoeren",
+    "required_role": "Developer",
+    "type": "analysis",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-080",
+    "job_category": "Data Engineer",
+    "task": "Query performance optimaliseren",
+    "required_role": "Developer",
+    "type": "database",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+
+  {
+    "id": "TASK-081",
+    "job_category": "System Administrator",
+    "task": "UPS systeem testen",
+    "required_role": "System/Network Admin",
+    "type": "maintenance",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-082",
+    "job_category": "System Administrator",
+    "task": "Server rack organiseren",
+    "required_role": "System/Network Admin",
+    "type": "hardware",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-083",
+    "job_category": "Network Engineer",
+    "task": "Netwerk kabels labelen",
+    "required_role": "System/Network Admin",
+    "type": "hardware",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-084",
+    "job_category": "Network Engineer",
+    "task": "PoE switch installeren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-085",
+    "job_category": "DevOps Engineer",
+    "task": "Container registry configureren",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-086",
+    "job_category": "DevOps Engineer",
+    "task": "Cloud monitoring instellen",
+    "required_role": "DevOps Engineer",
+    "type": "cloud",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-087",
+    "job_category": "Cybersecurity",
+    "task": "SSL certificaat vernieuwen",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 3,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-088",
+    "job_category": "Cybersecurity",
+    "task": "Security audit uitvoeren",
+    "required_role": "Security Specialist",
+    "type": "security",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-089",
+    "job_category": "Software Developer",
+    "task": "Logging systeem toevoegen aan applicatie",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-090",
+    "job_category": "Software Developer",
+    "task": "Cache systeem implementeren",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+
+  {
+    "id": "TASK-091",
+    "job_category": "System Administrator",
+    "task": "Disk space probleem oplossen",
+    "required_role": "System/Network Admin",
+    "type": "maintenance",
+    "difficulty": 3,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-092",
+    "job_category": "Network Engineer",
+    "task": "Netwerk packet loss onderzoeken",
+    "required_role": "System/Network Admin",
+    "type": "analysis",
+    "difficulty": 4,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-093",
+    "job_category": "DevOps Engineer",
+    "task": "Zero downtime deployment uitvoeren",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 5,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-094",
+    "job_category": "Cybersecurity",
+    "task": "Brute force aanval analyseren",
+    "required_role": "Security Specialist",
+    "type": "analysis",
+    "difficulty": 4,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-095",
+    "job_category": "Data Engineer",
+    "task": "Dataset validatie uitvoeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-096",
+    "job_category": "Software Developer",
+    "task": "Microservice bouwen",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 4,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-097",
+    "job_category": "System Administrator",
+    "task": "Server performance analyseren",
+    "required_role": "System/Network Admin",
+    "type": "analysis",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-098",
+    "job_category": "Network Engineer",
+    "task": "QoS regels configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 4,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-099",
+    "job_category": "DevOps Engineer",
+    "task": "Blue-Green deployment configureren",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 5,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-100",
+    "job_category": "Cybersecurity",
+    "task": "Security incident rapport schrijven",
+    "required_role": "Security Specialist",
+    "type": "documentation",
+    "difficulty": 3,
+    "days_remaining": 4
+  }
+]

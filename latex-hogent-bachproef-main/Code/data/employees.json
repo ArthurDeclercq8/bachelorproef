@@ -1,0 +1,425 @@
+[
+  {
+    "name": "Lars De Smet",
+    "role": "IT Support",
+    "skills": ["windows support", "hardware troubleshooting", "office365"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 6,
+      "problem_solving": 7,
+      "speed": 7,
+      "code_quality": 3,
+      "reliability": 8,
+      "focus": 7,
+      "collaboration": 8,
+      "communication": 8,
+      "stress_handling": 7,
+      "initiative": 6
+    },
+    "experience": 4
+  },
+  {
+    "name": "Emma Verhoeven",
+    "role": "IT Support",
+    "skills": [
+      "helpdesk",
+      "user management",
+      "printer support",
+      "network support"
+    ],
+    "workload": 0.9,
+    "persona": {
+      "technical_skill": 7,
+      "problem_solving": 7,
+      "speed": 8,
+      "code_quality": 3,
+      "reliability": 8,
+      "focus": 7,
+      "collaboration": 9,
+      "communication": 9,
+      "stress_handling": 8,
+      "initiative": 7
+    },
+    "experience": 6
+  },
+  {
+    "name": "Jonas Peeters",
+    "role": "IT Support",
+    "skills": ["laptop setup", "active directory", "ticket handling"],
+    "workload": 0.3,
+    "persona": {
+      "technical_skill": 6,
+      "problem_solving": 6,
+      "speed": 7,
+      "code_quality": 3,
+      "reliability": 7,
+      "focus": 7,
+      "collaboration": 8,
+      "communication": 8,
+      "stress_handling": 7,
+      "initiative": 6
+    },
+    "experience": 6
+  },
+  {
+    "name": "Tom Jacobs",
+    "role": "System/Network Admin",
+    "skills": ["linux servers", "virtualization", "backups"],
+    "workload": 0.9,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 8,
+      "speed": 7,
+      "code_quality": 5,
+      "reliability": 8,
+      "focus": 8,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 8,
+      "initiative": 7
+    },
+    "experience": 9
+  },
+  {
+    "name": "Ahmed Benali",
+    "role": "System/Network Admin",
+    "skills": ["cisco networking", "vlans", "firewall configuration"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 9,
+      "speed": 7,
+      "code_quality": 5,
+      "reliability": 8,
+      "focus": 9,
+      "collaboration": 6,
+      "communication": 6,
+      "stress_handling": 8,
+      "initiative": 7
+    },
+    "experience": 2
+  },
+  {
+    "name": "Pieter Maes",
+    "role": "System/Network Admin",
+    "skills": ["windows server", "monitoring tools", "storage"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 7,
+      "problem_solving": 8,
+      "speed": 6,
+      "code_quality": 5,
+      "reliability": 8,
+      "focus": 8,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 6
+    },
+    "experience": 6
+  },
+  {
+    "name": "Sophie Dubois",
+    "role": "Developer",
+    "skills": ["java", "spring boot", "rest apis"],
+    "workload": 0.9,
+    "persona": {
+      "technical_skill": 9,
+      "problem_solving": 8,
+      "speed": 7,
+      "code_quality": 9,
+      "reliability": 8,
+      "focus": 8,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 8
+    },
+    "experience": 9
+  },
+  {
+    "name": "Ruben Martens",
+    "role": "Developer",
+    "skills": ["python", "django", "postgresql"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 8,
+      "speed": 7,
+      "code_quality": 8,
+      "reliability": 7,
+      "focus": 7,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 7
+    },
+    "experience": 4
+  },
+  {
+    "name": "Laura De Wilde",
+    "role": "Developer",
+    "skills": ["javascript", "react", "nodejs"],
+    "workload": 0.9,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 8,
+      "speed": 8,
+      "code_quality": 8,
+      "reliability": 7,
+      "focus": 7,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 7
+    },
+    "experience": 10
+  },
+  {
+    "name": "Kevin Zhang",
+    "role": "Developer",
+    "skills": ["c#", ".net", "azure"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 8,
+      "speed": 7,
+      "code_quality": 8,
+      "reliability": 8,
+      "focus": 7,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 7
+    },
+    "experience": 8
+  },
+  {
+    "name": "Maria Alvarez",
+    "role": "Developer",
+    "skills": ["javascript", "typescript", "angular"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 7,
+      "speed": 7,
+      "code_quality": 8,
+      "reliability": 7,
+      "focus": 7,
+      "collaboration": 7,
+      "communication": 7,
+      "stress_handling": 7,
+      "initiative": 7
+    },
+    "experience": 9
+  },
+  {
+    "name": "Bram Claes",
+    "role": "Developer",
+    "skills": ["python", "data processing", "apis"],
+    "workload": 0.3,
+    "persona": {
+      "technical_skill": 7,
+      "problem_solving": 7,
+      "speed": 6,
+      "code_quality": 7,
+      "reliability": 8,
+      "focus": 7,
+      "collaboration": 6,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 6
+    },
+    "experience": 3
+  },
+  {
+    "name": "Elena Petrova",
+    "role": "Developer",
+    "skills": ["java", "microservices", "kubernetes"],
+    "workload": 0.9,
+    "persona": {
+      "technical_skill": 9,
+      "problem_solving": 9,
+      "speed": 7,
+      "code_quality": 9,
+      "reliability": 8,
+      "focus": 8,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 8
+    },
+    "experience": 6
+  },
+  {
+    "name": "David Nguyen",
+    "role": "Developer",
+    "skills": ["go", "backend services", "docker"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 8,
+      "speed": 7,
+      "code_quality": 8,
+      "reliability": 7,
+      "focus": 7,
+      "collaboration": 6,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 7
+    },
+    "experience": 3
+  },
+  {
+    "name": "Noor Haddad",
+    "role": "Developer",
+    "skills": ["react", "ui/ux development", "frontend optimization"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 7,
+      "speed": 8,
+      "code_quality": 8,
+      "reliability": 7,
+      "focus": 7,
+      "collaboration": 8,
+      "communication": 7,
+      "stress_handling": 7,
+      "initiative": 7
+    },
+    "experience": 9
+  },
+  {
+    "name": "Thomas Janssen",
+    "role": "Developer",
+    "skills": ["php", "laravel", "mysql"],
+    "workload": 0.3,
+    "persona": {
+      "technical_skill": 7,
+      "problem_solving": 7,
+      "speed": 6,
+      "code_quality": 7,
+      "reliability": 8,
+      "focus": 7,
+      "collaboration": 6,
+      "communication": 6,
+      "stress_handling": 7,
+      "initiative": 6
+    },
+    "experience": 2
+  },
+  {
+    "name": "Alexei Ivanov",
+    "role": "DevOps Engineer",
+    "skills": ["docker", "kubernetes", "ci/cd pipelines"],
+    "workload": 0.9,
+    "persona": {
+      "technical_skill": 9,
+      "problem_solving": 9,
+      "speed": 7,
+      "code_quality": 7,
+      "reliability": 8,
+      "focus": 8,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 9,
+      "initiative": 8
+    },
+    "experience": 1
+  },
+  {
+    "name": "Charlotte Lefevre",
+    "role": "DevOps Engineer",
+    "skills": ["aws", "terraform", "infrastructure as code"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 8,
+      "speed": 7,
+      "code_quality": 7,
+      "reliability": 8,
+      "focus": 8,
+      "collaboration": 7,
+      "communication": 7,
+      "stress_handling": 8,
+      "initiative": 8
+    },
+    "experience": 4
+  },
+  {
+    "name": "Miguel Santos",
+    "role": "DevOps Engineer",
+    "skills": ["gitlab ci", "monitoring", "automation scripts"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 8,
+      "speed": 7,
+      "code_quality": 7,
+      "reliability": 8,
+      "focus": 7,
+      "collaboration": 7,
+      "communication": 6,
+      "stress_handling": 8,
+      "initiative": 7
+    },
+    "experience": 3
+  },
+  {
+    "name": "Sarah Kowalski",
+    "role": "Security Specialist",
+    "skills": ["penetration testing", "vulnerability scanning"],
+    "workload": 0.9,
+    "persona": {
+      "technical_skill": 9,
+      "problem_solving": 9,
+      "speed": 6,
+      "code_quality": 7,
+      "reliability": 9,
+      "focus": 9,
+      "collaboration": 6,
+      "communication": 6,
+      "stress_handling": 8,
+      "initiative": 8
+    },
+    "experience": 7
+  },
+  {
+    "name": "Daniel Rossi",
+    "role": "Security Specialist",
+    "skills": ["siem", "log analysis", "incident response"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 8,
+      "problem_solving": 9,
+      "speed": 6,
+      "code_quality": 7,
+      "reliability": 8,
+      "focus": 9,
+      "collaboration": 6,
+      "communication": 6,
+      "stress_handling": 8,
+      "initiative": 7
+    },
+    "experience": 9
+  },
+  {
+    "name": "Mark De Vries",
+    "role": "IT Manager",
+    "skills": ["it strategy", "team management", "infrastructure planning"],
+    "workload": 0.6,
+    "persona": {
+      "technical_skill": 7,
+      "problem_solving": 8,
+      "speed": 6,
+      "code_quality": 5,
+      "reliability": 9,
+      "focus": 8,
+      "collaboration": 9,
+      "communication": 9,
+      "stress_handling": 8,
+      "initiative": 9
+    },
+    "experience": 5
+  }
+]
