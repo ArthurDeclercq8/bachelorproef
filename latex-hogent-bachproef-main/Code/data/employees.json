@@ -125,7 +125,7 @@
     "workload": 0.9,
     "persona": {
       "technical_skill": 9,
-      "problem_solving": 8,
+      "problem_solving": 8, 
       "speed": 7,
       "code_quality": 9,
       "reliability": 8,

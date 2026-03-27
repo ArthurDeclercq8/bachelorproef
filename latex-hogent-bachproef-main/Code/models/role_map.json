@@ -1,0 +1,9 @@
+{
+  "DevOps Engineer": 0,
+  "Developer": 1,
+  "IT Manager": 2,
+  "IT Support": 3,
+  "Security Specialist": 4,
+  "Senior Developer": 5,
+  "System/Network Admin": 6
+}

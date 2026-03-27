@@ -1,0 +1,182 @@
+[
+  {
+    "id": "TASK-084",
+    "job_category": "Network Engineer",
+    "task": "PoE switch installeren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-054",
+    "job_category": "DevOps Engineer",
+    "task": "Infrastructure as Code schrijven",
+    "required_role": "DevOps Engineer",
+    "type": "devops",
+    "difficulty": 4,
+    "days_remaining": 7
+  },
+  {
+    "id": "TASK-071",
+    "job_category": "Data Engineer",
+    "task": "Database schema ontwerpen",
+    "required_role": "Developer",
+    "type": "database",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-046",
+    "job_category": "Software Developer",
+    "task": "Code refactoring uitvoeren",
+    "required_role": "Developer",
+    "type": "development",
+    "difficulty": 3,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-045",
+    "job_category": "Software Developer",
+    "task": "Unit tests schrijven",
+    "required_role": "Developer",
+    "type": "testing",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-040",
+    "job_category": "Network Engineer",
+    "task": "DHCP server configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-023",
+    "job_category": "System Administrator",
+    "task": "Backups configureren",
+    "required_role": "System/Network Admin",
+    "type": "maintenance",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-081",
+    "job_category": "System Administrator",
+    "task": "UPS systeem testen",
+    "required_role": "System/Network Admin",
+    "type": "maintenance",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-011",
+    "job_category": "IT Support Engineer",
+    "task": "Active Directory gebruiker aanmaken",
+    "required_role": "IT Support",
+    "type": "administration",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-001",
+    "job_category": "Junior IT Support",
+    "task": "Laptop van nieuwe werknemer installeren",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-019",
+    "job_category": "IT Support Engineer",
+    "task": "BitLocker encryptie activeren",
+    "required_role": "IT Support",
+    "type": "security",
+    "difficulty": 2,
+    "days_remaining": 4
+  },
+  {
+    "id": "TASK-031",
+    "job_category": "Network Engineer",
+    "task": "Router configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 5
+  },
+  {
+    "id": "TASK-074",
+    "job_category": "Data Engineer",
+    "task": "ETL proces implementeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-034",
+    "job_category": "Network Engineer",
+    "task": "VLAN configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-091",
+    "job_category": "System Administrator",
+    "task": "Disk space probleem oplossen",
+    "required_role": "System/Network Admin",
+    "type": "maintenance",
+    "difficulty": 3,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-005",
+    "job_category": "Junior IT Support",
+    "task": "Software installeren op laptop",
+    "required_role": "IT Support",
+    "type": "support",
+    "difficulty": 1,
+    "days_remaining": 2
+  },
+  {
+    "id": "TASK-077",
+    "job_category": "Data Engineer",
+    "task": "Data integratie uitvoeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 4,
+    "days_remaining": 6
+  },
+  {
+    "id": "TASK-078",
+    "job_category": "Data Engineer",
+    "task": "Dataset importeren",
+    "required_role": "Developer",
+    "type": "data",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-013",
+    "job_category": "IT Support Engineer",
+    "task": "VPN voor werknemer configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 2,
+    "days_remaining": 3
+  },
+  {
+    "id": "TASK-032",
+    "job_category": "Network Engineer",
+    "task": "Switch configureren",
+    "required_role": "System/Network Admin",
+    "type": "network",
+    "difficulty": 3,
+    "days_remaining": 5
+  }
+]

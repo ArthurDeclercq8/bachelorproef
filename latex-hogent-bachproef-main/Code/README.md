@@ -832,3 +832,37 @@ cva genoeg gelukt, maar nu werken we niet met persona
 Tasks moeten persona requirements krijgen
 bepaalt AI dit of de werkgever?
 VECTOREREN(persona + skilss)
+
+test data - trainings data
+limiet op gebruiker opdrachten
+
+it's a machine learning model
+"""
+train_model.py
+
+---
+
+Trains a RandomForestClassifier to predict whether an employee is a good
+match for a task.
+
+Label design
+
+```
+The old label was:  1 if employee["role"] == task["required_role"] else 0
+This made the model learn nothing beyond role matching — it never saw
+persona or workload in a meaningful way.
+
+The new label uses a composite score:
+  - +1.0  role match (hard requirement)
+  - +0–1  normalized persona fit (mean of relevant traits)
+  - –0–1  workload penalty (high load = bad candidate)
+
+A candidate is labelled 1 if their composite score is in the top-k for
+that task (k = 1 by default, i.e. only the single best candidate is
+positive).  This keeps the dataset balanced while teaching the model
+to distinguish good-fit from mediocre-fit employees who share the
+same role.
+"""
+```
+het is nog niet dynamic!!!!
+op de manier dat workload moet aanpassen en traits van persona ook mss moeten aanpassen

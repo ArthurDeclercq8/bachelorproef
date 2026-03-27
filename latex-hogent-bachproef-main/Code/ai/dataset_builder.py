@@ -1,22 +1,30 @@
-def build_features(employee, task):
+def build_role_map(employees: list, tasks: list) -> dict:
+    roles = set()
+    for e in employees:
+        roles.add(e["role"])
+    for t in tasks:
+        roles.add(t["required_role"])
+    return {role: i for i, role in enumerate(sorted(roles))}
 
+def encode_role(role: str, role_map: dict) -> int:
+    return role_map.get(role, -1)
+
+
+def build_features(employee: dict, task: dict, role_map: dict) -> list:
     features = []
-    role_match = 1 if employee["role"] == task["required_role"] else 0
-    features.append(role_match)
+    features.append(encode_role(employee["role"], role_map))
+    features.append(encode_role(task["required_role"], role_map))
+
     features.append(employee.get("experience", 0))
     features.append(employee.get("workload", 0))
-    persona = employee["persona"]
 
-    features.append(persona["technical_skill"])
-    features.append(persona["problem_solving"])
-    features.append(persona["speed"])
-    features.append(persona["code_quality"])
-    features.append(persona["reliability"])
-    features.append(persona["focus"])
-    features.append(persona["collaboration"])
-    features.append(persona["communication"])
-    features.append(persona["stress_handling"])
-    features.append(persona["initiative"])
+    persona = employee["persona"]
+    for trait in [
+        "technical_skill", "problem_solving", "speed", "code_quality",
+        "reliability", "focus", "collaboration", "communication",
+        "stress_handling", "initiative",
+    ]:
+        features.append(persona[trait])
 
     features.append(task["difficulty"])
     features.append(task["days_remaining"])
