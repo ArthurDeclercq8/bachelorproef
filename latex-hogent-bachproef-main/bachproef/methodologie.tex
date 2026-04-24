@@ -26,29 +26,42 @@
 \chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
 \label{ch:methodologie}
 
-In dit hoofdstuk wordt de methodologie van deze bachelorproef toegelicht. Het ontwerpen van een AI-systeem vereist een gestructureerde aanpak. Daarom werd het onderzoek opgedeeld in verschillende fasen, elk met een duidelijke doelstelling, bijhorende deliverables en toegepaste onderzoeksmethoden. De volledige doorlooptijd bedraagt 19 weken.
+\vspace{1em} Het doel van dit onderzoek is om aan te tonen dat een data-gedreven benadering beter taken kan verdelen tussen IT-werknemers dan de  traditionele manier waarop managers dit hedendaags vaak doen. Dit wordt gedaan door eerst een experimentele onderzoeksopzet te hanteren waarbij een machine learning-gebaseerd beslissingsondersteunend model wordt ontwikkeld. Ten tweede wordt er geanalyseerd in welke mate deze geautomatiseerde aanpak leidt tot een evenwichtigere verdeling van werkdruk en stress in vergelijking met een klassieke toewijzingsmethode. Hierbij wordt gekeken naar factoren zoals workload, stressontwikkeling en skill-matching binnen een gesimuleerde werkomgeving.
 
+Aangezien er geen toegang is tot reële bedrijfsdata, wordt gebruikgemaakt van synthetisch gegenereerde datasets die werknemers en taken simuleren. Deze datasets worden opgebouwd in JSON-formaat en ingelezen via scripts geschreven in Python, ontwikkeld binnen Visual Studio Code. De dataset bevat informatie over werknemers (zoals rol, workload en stressniveau) en taken (zoals vereiste rollen en moeilijkheidsgraad).
+
+Op basis van deze data wordt een machine learning-model ontwikkeld met behulp van scikit-learn. Het model is een regressiemodel dat leert een geschiktheidsscore te voorspellen voor elke mogelijke combinatie van werknemer en taak. Deze score is gebaseerd op kenmerken zoals skill-match, werkdruk, stressniveau en taakcomplexiteit. Tijdens de trainingsfase wordt het model gevoed met synthetisch gegenereerde voorbeelden waarin een optimale score wordt berekend op basis van een gewogen combinatie van deze factoren.
+
+De taaktoewijzing gebeurt vervolgens via een aparte beslissingsfunctie die per taak alle werknemers evalueert op basis van het getrainde model. De werknemer met de hoogste voorspelde score wordt geselecteerd voor de taak. Deze aanpak zorgt ervoor dat het systeem niet werkt met vaste regels, maar met een geleerd patroon dat de invloed van verschillende factoren automatisch afweegt.
+
+Daarnaast wordt de werkomgeving dynamisch gesimuleerd door de werkdruk en stress van werknemers iteratief aan te passen na elke taaktoewijzing. Hierdoor wordt rekening gehouden met het feit dat opeenvolgende taaktoewijzingen een impact hebben op de mentale belasting van werknemers.
+
+De evaluatie van het model gebeurt door de gegenereerde taakverdeling te analyseren op basis van werkdrukverdeling, stressniveaus en skill-matching. Hierbij wordt onderzocht in welke mate het model in staat is om een evenwichtige en logische verdeling van taken te realiseren.
+
+\vspace{1em}Een beperking van dit onderzoek is dat gebruik wordt gemaakt van synthetische data, waardoor de resultaten afhankelijk zijn van de aannames die tijdens de datageneratie zijn gemaakt. Hoewel dit de externe validiteit beperkt, maakt het wel gecontroleerde experimenten en reproduceerbaarheid van de resultaten mogelijk.
+
+Aangezien er geen gebruik wordt gemaakt van persoonsgegevens of reële werknemersdata, zijn er geen ethische bezwaren verbonden aan dit onderzoek.
 %%-----------------------------------------------------------------------------
 \chapter{Requirements-analyse}
 \label{ch:requirements}
 
-\textbf{Doelstelling:}  
-Het bepalen van de functionele en niet-functionele vereisten van het AI-systeem.
+%\textbf{Doelstelling:}  
+%Het bepalen van de functionele en niet-functionele vereisten van het AI-systeem.
 
-Tijdens deze fase (2 weken) wordt onderzocht welke functies het systeem moet kunnen vervullen. Vooraleer de vereisten van de oplossing worden vastgelegd, worden eerst de deelvragen met betrekking tot het probleemdomein beantwoord. Dit gebeurt op basis van een literatuurstudie.
+%Tijdens deze fase (2 weken) wordt onderzocht welke functies het systeem moet kunnen vervullen. Vooraleer de vereisten van de oplossing worden vastgelegd, worden eerst de deelvragen met betrekking tot het probleemdomein beantwoord. Dit gebeurt op basis van een literatuurstudie.
 
-\textbf{Deliverables:}
-\begin{itemize}
-    \item Afbakening van het probleem
-    \item Overzicht van functionele eisen
-    \item Overzicht van niet-functionele eisen
-\end{itemize}
+%\textbf{Deliverables:}
+%\begin{itemize}
+%    \item Afbakening van het probleem
+%    \item Overzicht van functionele eisen
+%    \item Overzicht van niet-functionele eisen
+%\end{itemize}
 
-\textbf{Onderzoeksmethoden:}
-\begin{itemize}
-    \item Literatuurstudie
-    \item Requirements analyse
-\end{itemize}
+%\textbf{Onderzoeksmethoden:}
+%\begin{itemize}
+%    \item Literatuurstudie
+%    \item Requirements analyse
+%\end{itemize}
 
 
 
@@ -56,25 +69,26 @@ Tijdens deze fase (2 weken) wordt onderzocht welke functies het systeem moet kun
 \chapter{Literatuurstudie}
 \label{ch:literatuur}
 
-\textbf{Doelstelling:}  
-Inzicht verwerven in bestaande systemen en methoden binnen het domein.
+%\textbf{Doelstelling:}  
+%Inzicht verwerven in bestaande systemen en methoden binnen het domein.
 
-Deze fase (2 weken) omvat een grondige studie van bestaande systemen die vergelijkbare doelstellingen nastreven. Er wordt onderzocht hoe taakallocatie momenteel gebeurt en of er reeds AI-systemen of gelijkaardige oplossingen bestaan.
+%Deze fase (2 weken) omvat een grondige studie van bestaande systemen die vergelijkbare doelstellingen nastreven. Er wordt onderzocht hoe taakallocatie momenteel gebeurt en of er reeds AI-systemen of gelijkaardige oplossingen bestaan.
 
-Daarnaast wordt bestudeerd hoe AI-systemen in het algemeen tot stand komen. Op basis van deze inzichten wordt de ontwikkelingsfase vergemakkelijkt. Dit model wordt uitgewerkt met behulp van een UML-tool, zoals Enterprise Architect, en vormt de basis voor verdere systeemontwikkeling.
+%Daarnaast wordt bestudeerd hoe AI-systemen in het algemeen tot stand komen. Op basis van deze inzichten wordt de ontwikkelingsfase vergemakkelijkt. Dit model wordt uitgewerkt met behulp van een UML-tool, zoals Enterprise Architect, en vormt de basis voor verdere systeemontwikkeling.
 
-\textbf{Deliverables:}
-\begin{itemize}
-    \item Overzicht van bestaande oplossingen
-    \item Conceptueel UML-model
-\end{itemize}
+%\textbf{Deliverables:}
+%\begin{itemize}
+%    \item Overzicht van bestaande oplossingen
+%    \item Conceptueel UML-model
+%\end{itemize}
 
-\textbf{Onderzoeksmethoden:}
-\begin{itemize}
-    \item Literatuurstudie
-    \item Vergelijkende analyse
-    \item Modellering (UML)
-\end{itemize}
+%\textbf{Onderzoeksmethoden:}
+%\begin{itemize}
+%    \item Literatuurstudie
+%    \item Vergelijkende analyse
+%    \item Modellering (UML)
+%\end{itemize}
+
 
 %%-----------------------------------------------------------------------------
 \chapter{Haalbaarheidsonderzoek}
