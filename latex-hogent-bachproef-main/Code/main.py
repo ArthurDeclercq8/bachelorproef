@@ -1,6 +1,7 @@
 import json
 import os
-from allocators.task_allocator import assign_task
+from allocators.task_allocator import assign_task, extract_features
+from models.train_model import train_model
 
 with open("data/employees.json") as f:
     employees = json.load(f)
@@ -16,12 +17,35 @@ if os.path.exists("data/test_tasks.json"):
 
 inference_tasks = [t for t in all_tasks if t.get("id") not in test_task_ids]
 
-print(f"Running allocation on {len(inference_tasks)} task(s) "
+print(f"Running ML allocation on {len(inference_tasks)} task(s) "
       f"({len(test_task_ids)} held out for evaluation)\n")
 
+print("Training model...\n")
+model = train_model()
+
+# init state
+for emp in employees:
+    emp["workload"] = emp.get("workload", 0.0)
+    emp["stress"] = emp.get("stress", 0.0)
+    emp["tasks"] = []
+
 for task in inference_tasks:
-    employee = assign_task(task, employees)
+    best_employee = assign_task(
+        task=task,
+        employees=employees,
+        model=model,
+        extract_features=extract_features
+    )
+    best_employee["tasks"].append(task)
+    best_employee["workload"] += 0.1
+    best_employee["stress"] = min(
+        1.0,
+        best_employee["stress"] + 0.1
+    )
+
     print(f"Task:        {task['task']}")
     print(f"Required:    {task['required_role']}")
-    print(f"Assigned to: {employee['name']} ({employee['role']})")
+    print(f"Assigned to: {best_employee['name']} ({best_employee['role']})")
+    print(f"Workload:    {best_employee['workload']:.2f}")
+    print(f"Stress:      {best_employee['stress']:.2f}")
     print()
