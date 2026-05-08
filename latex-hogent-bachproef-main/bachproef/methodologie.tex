@@ -26,11 +26,11 @@
 \chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
 \label{ch:methodologie}
 
-\vspace{1em} Het doel van dit onderzoek is om aan te tonen dat een data-gedreven benadering beter taken kan verdelen tussen IT-werknemers dan de  traditionele manier waarop managers dit hedendaags vaak doen. Dit wordt gedaan door eerst een experimentele onderzoeksopzet te hanteren waarbij een machine learning-gebaseerd beslissingsondersteunend model wordt ontwikkeld. Ten tweede wordt er geanalyseerd in welke mate deze geautomatiseerde aanpak leidt tot een evenwichtigere verdeling van werkdruk en stress in vergelijking met een klassieke toewijzingsmethode. Hierbij wordt gekeken naar factoren zoals workload, stressontwikkeling en skill-matching binnen een gesimuleerde werkomgeving.
+\vspace{1em}Het doel van dit onderzoek is om aan te tonen dat een data-gedreven benadering beter taken kan verdelen tussen IT-werknemers dan de traditionele manier waarop managers dit hedendaags vaak doen. Dit wordt gedaan door eerst een experimentele onderzoeksopzet te hanteren waarbij een machine learning-gebaseerd beslissingsondersteunend model wordt ontwikkeld. Ten tweede wordt er geanalyseerd in welke mate deze geautomatiseerde aanpak leidt tot een evenwichtigere verdeling van werkdruk en stress in vergelijking met een klassieke toewijzingsmethode. Hierbij wordt gekeken naar factoren zoals workload, stressontwikkeling en skill-matching binnen een gesimuleerde werkomgeving.
 
 Aangezien er geen toegang is tot reële bedrijfsdata, wordt gebruikgemaakt van synthetisch gegenereerde datasets die werknemers en taken simuleren. Deze datasets worden opgebouwd in JSON-formaat en ingelezen via scripts geschreven in Python, ontwikkeld binnen Visual Studio Code. De dataset bevat informatie over werknemers (zoals rol, workload en stressniveau) en taken (zoals vereiste rollen en moeilijkheidsgraad).
 
-Op basis van deze data wordt een machine learning-model ontwikkeld met behulp van scikit-learn. Het model is een regressiemodel dat leert een geschiktheidsscore te voorspellen voor elke mogelijke combinatie van werknemer en taak. Deze score is gebaseerd op kenmerken zoals skill-match, werkdruk, stressniveau en taakcomplexiteit. Tijdens de trainingsfase wordt het model gevoed met synthetisch gegenereerde voorbeelden waarin een optimale score wordt berekend op basis van een gewogen combinatie van deze factoren.
+Op basis van deze data wordt een machine learning-model ontwikkeld met behulp van scikit-learn. Het model is een regressiemodel dat leert een geschiktheidsscore te voorspellen voor elke mogelijke combinatie van werknemer en taak. Deze score is gebaseerd op kenmerken zoals skill-match, werkdruk, stressniveau en taakcomplexiteit. Tijdens de trainingsfase wordt het model gevoed met synthetisch gegenereerde voorbeelden waarin een optimale score wordt berekend op basis van een gewogen combinatie van deze factoren. Hierbij wordt een onderscheid gemaakt tussen trainingsdata en leerdata: de trainingsdata verwijst naar de specifieke dataset die gebruikt wordt om het model te fitten. Leerdata is een breder begrip dat alle informatie omvat waaruit het model patronen kan afleiden, inclusief eventueel afgeleide kenmerken of gesimuleerde optimalisatiescores.
 
 De taaktoewijzing gebeurt vervolgens via een aparte beslissingsfunctie die per taak alle werknemers evalueert op basis van het getrainde model. De werknemer met de hoogste voorspelde score wordt geselecteerd voor de taak. Deze aanpak zorgt ervoor dat het systeem niet werkt met vaste regels, maar met een geleerd patroon dat de invloed van verschillende factoren automatisch afweegt.
 
@@ -42,7 +42,7 @@ De evaluatie van het model gebeurt door de gegenereerde taakverdeling te analyse
 
 Aangezien er geen gebruik wordt gemaakt van persoonsgegevens of reële werknemersdata, zijn er geen ethische bezwaren verbonden aan dit onderzoek.
 %%-----------------------------------------------------------------------------
-\chapter{Requirements-analyse}
+\section{Requirements-analyse}
 \label{ch:requirements}
 
 %\textbf{Doelstelling:}  
@@ -63,11 +63,21 @@ Aangezien er geen gebruik wordt gemaakt van persoonsgegevens of reële werknemer
 %    \item Requirements analyse
 %\end{itemize}
 
+\vspace{1em}Het doel van deze fase is het bepalen van de functionele en niet-functionele vereisten van het AI-systeem. De functionele vereisten kunnen worden onderverdeeld in een aantal kerntaken die typisch zijn voor AI-systemen. In eerste instantie moet het systeem beschikken over dataverwerkingscapaciteiten. Het systeem moet in staat zijn om gestructureerde datasets in JSON-formaat in te lezen, te verwerken en te interpreteren. Deze data omvat informatie over werknemers en taken, dat vervolgens worden gebruikt als input voor het model. Daarnaast moet het systeem patronen kunnen analyseren door middel van een machine learning-algoritme. Concreet betekent dit dat het model relaties moet leren tussen variabelen zoals skill-match, werkdruk, stressniveau en taakcomplexiteit om zo een geschiktheidsscore te voorspellen.
 
+Verder moet het systeem in staat zijn tot autonome besluitvorming, waarbij het op basis van de gegenereerde voorspellingen effectief taken toewijst aan werknemers. Dit gebeurt via een functie die per taak de meest geschikte werknemer selecteert. Het systeem vertoont hierbij een beperkte vorm van autonomie, aangezien het beslissingen neemt zonder menselijke tussenkomst binnen de simulatiecontext. Daarnaast moet het systeem leervermogen en adaptiviteit vertonen omdat het model getraind wordt op synthetische trainingsdata en vervolgens toegepast wordt op nieuwe situaties binnen de simulatie. Hoewel het model niet continu online leert, past het zich aan via de dynamische simulatie waarin werkdruk en stress evolueren na elke taaktoewijzing.
+
+Naast deze kerntaken moet het systeem ook voldoen aan functionele vereisten met betrekking tot betrouwbaarheid en naleving. Zo moet er aandacht zijn voor datakwaliteit en \href{https://www.ibm.com/think/topics/data-governance}{data governance}, waarbij de synthetisch gegenereerde datasets representatief en consistent moeten zijn om zinvolle resultaten te bekomen. Transparantie en uitlegbaarheid vormen eveneens een belangrijk aspect. Aangezien het model gebaseerd is op interpreteerbaren factoren moet het mogelijk zijn om inzicht te krijgen in hoe een bepaalde geschiktheidsscore tot stand komt. Verder moet het systeem robuust zijn, zodat het stabiel blijft functioneren bij variaties in inputdata en consistente resultaten oplevert binnen de simulatie. Het bijhouden van resultaten en beslissingen tijdens de simulatie kan bovendien beschouwd worden als een vorm van documentatie.
+
+Hoewel het systeem autonoom beslissingen neemt binnen de simulatie blijft menselijk toezicht nodig op conceptueel niveau. De parameters, gewichten en evaluatiecriteria worden door de onderzoeker bepaald en aangepast. Dit sluit aan bij het principe van \href{https://www.ibm.com/think/topics/human-in-the-loop}{“human in the loop”}.
+
+\vspace{1em}Naast deze functionele vereisten zijn er ook niet-functionele vereisten die de kwaliteit van het systeem bepalen. Het systeem moet performant zijn zodat berekeningen en simulaties binnen een redelijke tijd uitgevoerd kunnen worden. Daarnaast is reproduceerbaarheid essentieel, gezien het experimentele karakter en het gebruik van synthetische data. Verder moet het systeem onderhoudbaar en uitbreidbaar zijn. Toekomstige uitbreidingen zoals complexere modellen of extra variabelen moet mogelijk blijven. Tot slot zijn ook technische randvoorwaarden van belang, zoals een geschikte programmeeromgeving (Python en scikit-learn) en voldoende rekenkracht om het model te trainen en simulaties uit te voeren.
+
+Op basis van deze analyse worden de vereisten van het systeem op een gestructureerde manier vastgelegd. Niet alleen de functionele capaciteiten van het AI-systeem worden gedefinieerd, maar ook de betrouwbaarheid, transparantie en reproduceerbaarheid ervan worden gewaarborgd.
 
 %%-----------------------------------------------------------------------------
-\chapter{Literatuurstudie}
-\label{ch:literatuur}
+%\chapter{Literatuurstudie}
+%\label{ch:literatuur}
 
 %\textbf{Doelstelling:}  
 %Inzicht verwerven in bestaande systemen en methoden binnen het domein.
@@ -89,76 +99,157 @@ Aangezien er geen gebruik wordt gemaakt van persoonsgegevens of reële werknemer
 %    \item Modellering (UML)
 %\end{itemize}
 
+%denk aan agile - kanban - Scrum - jira - ... + het verschil uitleggen tussen RL en ML - SAP
+%\vspace{1em}Binnen het domein van taakallocatie zijn er verschillende modellen ontwikkeld die proberen het toewijzen van taken te optimaliseren. Deze systemen hebben als gemeenschappelijk doel om beslissingen rond taakverdeling te ondersteunen of te automatiseren op basis van data in plaats van louter menselijke intuïtie.
+
+%Een belangrijk aandachtspunt dat in de literatuur naar voren komt, is dat veel bestaande optimalisatiemodellen voornamelijk geëvalueerd worden in een statische context. In deze context wordt gewerkt wordt met vaste datasets. In dergelijke systemen moet het optimalisatieproces vaak opnieuw worden uitgevoerd telkens wanneer er een nieuwe taak wordt toegevoegd. Dit kan problematisch zijn in realistische bedrijfsomgevingen, waar projecten onder strikte deadlines vallen en snelle besluitvorming essentieel is. Het heroptimaliseren van modellen kan afhankelijk van de omvang en complexiteit van de data aanzienlijke tijd in beslag nemen, waardoor deze aanpak minder geschikt is voor real-time toepassingen.
+
+%heel belangrijk wat nu volgt!!
+%\vspace{1em}Om deze beperking te overwinnen, richten recentere AI-gebaseerde systemen zich op het zo snel mogelijk toewijzen van taken zodra deze beschikbaar zijn. Zowel in het onderzoek van \textcite{Arslan_2024} als in deze studie wordt daarom gekozen voor een aanpak waarbij taakallocatie onmiddellijk kan plaatsvinden zonder dat het volledige model telkens opnieuw moet worden getraind of geoptimaliseerd. Het systeem maakt gebruik van een vooraf getraind model dat in staat is om, op basis van de huidige gegevens, direct een geschiktheidsscore te berekenen en een beslissing te nemen.
+
+%Deze aanpak maakt het mogelijk om taaktoewijzing quasi in real-time uit te voeren, wat een cruciale factor is voor het tijdig afronden van projecten. Door het elimineren van tijdsintensieve herberekeningen wordt niet alleen de efficiëntie verhoogd, maar wordt het systeem ook beter toepasbaar in dynamische omgevingen waar continu nieuwe taken ontstaan. Hierdoor sluit deze benadering beter aan bij de noden van moderne organisaties, waarin snelheid en flexibiliteit een centrale rol spelen.
+
+%\vspace{1em}In het het onderzoek van \textcite{Arslan_2024} wordt een AI-systeem ontwikkeld dat automatisch de meest geschikte medewerker voorspelt wanneer een nieuwe taak wordt ingediend via een portaal. Het systeem houdt rekening met de vereiste vaardigheden van een taak en probeert deze zo goed mogelijk te matchen met de kwalificaties van werknemers om vertragingen en inefficiëntie te vermijden. In plaats van één enkele kandidaat te selecteren, genereert het systeem een gerangschikte lijst van geschikte medewerkers op basis van hun competenties.
+
+%De werking van het systeem bestaat uit twee hoofdfasen. In de eerste fase wordt de tekstuele beschrijving van een taak geanalyseerd met behulp van text mining-technieken. Hierbij wordt de tekst opgeschoond en omgezet naar vectorrepresentaties via methoden zoals TF-IDF en Word2Vec, zodat machine learning-modellen de inhoud kunnen interpreteren. In de tweede fase worden deze taakvectoren vergeleken met vectoren die de kwalificaties van werknemers voorstellen. Door gebruik te maken van ``cosine similarity'' kan het systeem bepalen welke medewerkers het best aansluiten bij de vereisten van de taak \autocite{Arslan_2024}.
+
+%Daarnaast houdt het systeem rekening met de evolutie van vaardigheden: na het uitvoeren van taken worden de kwalificaties van werknemers bijgewerkt. Hierdoor ontstaat een dynamisch systeem dat niet alleen taaktoewijzing optimaliseert, maar ook de ontwikkeling van personeel opvolgt.
+
+%\vspace{1em}Een belangrijk verschil tussen het besproken onderzoek en het systeem dat in deze studie wordt ontwikkeld, ligt in de aard van de gebruikte data en de focus van de taaktoewijzing. In het onderzoek van \textcite{Arslan_2024} wordt gewerkt met real-time data afkomstig uit een ERP-systeem, waarbij tekstuele taakbeschrijvingen centraal staan en text mining-technieken worden gebruikt om vaardigheden te extraheren en te matchen met personeel. In deze bachelorproef wordt daarentegen gebruikgemaakt van synthetisch gegenereerde data binnen een gesimuleerde omgeving, waarbij taken en werknemers reeds gestructureerd worden voorgesteld via expliciete kenmerken zoals workload, stressniveau en skill-matching.
+
+%Daarnaast ligt de nadruk in het besproken onderzoek voornamelijk op het correct matchen van taken met de meest geschikte medewerker op basis van kwalificaties. In deze studie wordt echter een bredere benadering gehanteerd, waarbij ook rekening wordt gehouden met de dynamische evolutie van werkdruk en stress. Het voorgestelde model richt zich dus niet uitsluitend op optimale matching, maar ook op een evenwichtige verdeling van taken over tijd. Hierdoor wordt een meer holistische vorm van optimalisatie nagestreefd, waarbij zowel efficiëntie als het welzijn van werknemers in rekening worden gebracht.
+
+%Het voorgestelde model vertoont bovendien adaptiviteit op systeemniveau, aangezien het rekening houdt met dynamische veranderingen in werkdruk en stress bij opeenvolgende taaktoewijzingen. Het model zelf wordt echter niet continu hertraind, waardoor de onderliggende patronen statisch blijven. Desondanks maakt de scheiding tussen training en inferentie het mogelijk om snel en efficiënt nieuwe taken toe te wijzen zonder nood aan heroptimalisatie. Hierdoor is het systeem beter geschikt voor dynamische omgevingen waarin snel beslissingen moeten worden genomen.
+
+%praten over ander onderzoek (Italiaanse thesis)
+%\vspace{1em}
+%praten over UML van ons project
+%\vspace{1em}
 
 %%-----------------------------------------------------------------------------
-\chapter{Haalbaarheidsonderzoek}
+\section{Haalbaarheidsonderzoek}
 \label{ch:haalbaarheid}
 
-\textbf{Doelstelling:}  
-Nagaan of het voorgestelde systeem realiseerbaar is binnen de beschikbare middelen.
+%\textbf{Doelstelling:}  
+%Nagaan of het voorgestelde systeem realiseerbaar is binnen de beschikbare middelen.
 
-Gedurende 2 weken wordt de haalbaarheid van het systeem geëvalueerd. Hierbij worden beschikbare middelen zoals tijd, budget en technische expertise in kaart gebracht. Ook worden mogelijke problemen en uitdagingen tijdens implementatie geïdentificeerd.
+%Gedurende 2 weken wordt de haalbaarheid van het systeem geëvalueerd. Hierbij worden beschikbare middelen zoals tijd, budget en technische expertise in kaart gebracht. Ook worden mogelijke problemen en uitdagingen tijdens implementatie geïdentificeerd.
 
-Deze fase ondersteunt het prioriteren van systeemfunctionaliteiten en helpt bij het bepalen van een realistische scope.
+%Deze fase ondersteunt het prioriteren van systeemfunctionaliteiten en helpt bij het bepalen van een realistische scope.
 
-\textbf{Deliverables:}
-\begin{itemize}
-    \item Haalbaarheidsrapport
-    \item Prioriteitenlijst van functionaliteiten
-\end{itemize}
+%\textbf{Deliverables:}
+%\begin{itemize}
+%    \item Haalbaarheidsrapport
+%    \item Prioriteitenlijst van functionaliteiten
+%\end{itemize}
 
-\textbf{Onderzoeksmethoden:}
-\begin{itemize}
-    \item Technische analyse
-    \item Resource-analyse
-    \item Risico-inschatting
-\end{itemize}
+%\textbf{Onderzoeksmethoden:}
+%\begin{itemize}
+%    \item Technische analyse
+%    \item Resource-analyse
+%    \item Risico-inschatting
+%\end{itemize}
 
+\vspace{1em}Het doel van deze fase is na te gaan of het voorgestelde AI-gebaseerde systeem voor taakallocatie realiseerbaar is binnen de beschikbare middelen. In deze bachelorproef ligt de focus op het ontwikkelen van een conceptueel AI-model (proof of concept) dat aantoont hoe een data-gedreven aanpak taaktoewijzing kan ondersteunen, eerder dan op een volledig geïntegreerd systeem. Eenmaal dit zou aangetoond zijn, zou deze poc een basis kunnen zijn voor latere implementaties. %zin nog aanpassen
+
+Het systeem is op een gestructureerde manier opgebouwd in Python, waarbij de code is opgesplitst in verschillende onderdelen: het inlezen van data, het trainen van het model en het uitvoeren van taaktoewijzingen. Eerst wordt het machine learning-model getraind op data, waarbij het leert welke combinaties van werknemer en taak goed werken. Dit is de zogenaamde trainingsfase. Nadien wordt datzelfde model gebruikt om nieuwe beslissingen te nemen: voor elke taak berekent het een score per werknemer en wordt de beste match gekozen. Dit gebeurt in de inferentiefase, die snel moet verlopen omdat ze bij elke nieuwe taak wordt uitgevoerd. Het belangrijkste principe hier is de scheiding tussen training en gebruik: het model wordt één keer getraind en daarna herhaaldelijk toegepast zonder opnieuw te moeten leren. Dit maakt het systeem veel efficiënter dan klassieke modellen die telkens opnieuw berekend moeten worden, en zorgt ervoor dat taaktoewijzing snel en schaalbaar kan gebeuren in een dynamische omgeving.
+
+Daarnaast wordt gebruikgemaakt van JSON-bestanden voor het beheren van werknemers- en taakdata, wat de implementatie eenvoudig en flexibel houdt. De taaktoewijzing gebeurt iteratief, waarbij na elke toewijzing de workload en het stressniveau van werknemers worden aangepast. Dit zorgt ervoor dat het systeem dynamisch gedrag simuleert en inspeelt op veranderingen in de werkomgeving. Aangezien er geen complexe deep learning-technieken of externe systemen worden gebruikt, blijven de technische vereisten beperkt en is het systeem uitvoerbaar op standaard hardware.
+
+Wat betreft de beschikbare middelen is het project realistisch binnen de tijdspanne van een bachelorproef. Door te werken met synthetische data wordt de afhankelijkheid van externe databronnen vermeden, wat het ontwikkelproces aanzienlijk vereenvoudigt. Bovendien is de code modulair opgebouwd (met aparte componenten voor training, voorspelling en allocatie), wat het mogelijk maakt om stapsgewijs te ontwikkelen en te testen.
+
+Er zijn echter ook enkele uitdagingen verbonden aan deze aanpak. De kwaliteit van de synthetische data heeft een directe invloed op de prestaties van het model, waardoor het belangrijk is om realistische aannames te maken. Daarnaast is het modelleren van factoren zoals stress en workload een vereenvoudiging van de realiteit. Ook blijft het model statisch na training, wat betekent dat het zich niet automatisch aanpast aan nieuwe patronen in de data, hoewel het systeem zelf wel dynamisch reageert via de simulatie.
+
+Op basis van deze analyse worden de functionaliteiten geprioriteerd. De kernfunctionaliteiten bestaan uit het trainen van het model, het berekenen van geschiktheidsscores en het uitvoeren van taaktoewijzingen. Dynamische updates van workload en stress maken eveneens deel uit van de kern, aangezien deze essentieel zijn voor de simulatie. Meer geavanceerde uitbreidingen, zoals real-time data-integratie of online learning, vallen buiten de scope van deze proef.
+
+Samenvattend kan gesteld worden dat het voorgestelde AI-model technisch en praktisch haalbaar is binnen de context van deze bachelorproef. De huidige implementatie toont aan dat een werkend prototype gerealiseerd kan worden dat de meerwaarde van een data-gedreven taaktoewijzing aantoont, zonder nood aan complexe infrastructuur of uitgebreide externe integraties.
 %%-----------------------------------------------------------------------------
-\chapter{Ontwikkelresources en Ontwikkeling}
+\section{Ontwikkeling}
 \label{ch:ontwikkeling}
 
-\textbf{Doelstelling:}  
-Selecteren van geschikte technologieën en realiseren van een werkend prototype.
+%\textbf{Doelstelling:}  
+%Selecteren van geschikte technologieën en realiseren van een werkend prototype.
 
-In deze fase (12 weken) wordt een gedetailleerde analyse uitgevoerd van de benodigde ontwikkelresources. Hierbij worden technische componenten zoals programmeertalen, frameworks en databanken geëvalueerd.
+%Op basis van deze analyse worden de geschikte technologieën gekozen. Als eerste stap wordt een Proof of Concept (PoC) ontwikkeld. Deze PoC is gebaseerd op een regel- en score-gebaseerd systeem. De implementatie gebeurt met Python als kerntechnologie.
 
-Op basis van deze analyse worden de geschikte technologieën gekozen. Als eerste stap wordt een Proof of Concept (PoC) ontwikkeld. Deze PoC is gebaseerd op een regel- en score-gebaseerd systeem. De implementatie gebeurt met Python als kerntechnologie en (PostgreSQ)L voor de datalaag.
+%\textbf{Deliverables:}
+%\begin{itemize}
+%    \item Technologiekeuze en motivatie
+%    \item Proof of Concept
+%    \item Werkend prototype
+%\end{itemize}
 
-\textbf{Deliverables:}
-\begin{itemize}
-    \item Technologiekeuze en motivatie
-    \item Proof of Concept
-    \item Werkend prototype
-\end{itemize}
+%\textbf{Onderzoeksmethoden:}
+%\begin{itemize}
+%    \item Vergelijkende toolanalyse
+%    \item Experimentele implementatie
+%    \item Ontwikkeling
+%\end{itemize}
 
-\textbf{Onderzoeksmethoden:}
-\begin{itemize}
-    \item Vergelijkende toolanalyse
-    \item Experimentele implementatie
-    \item Ontwikkeling
-\end{itemize}
+\vspace{1em}Het systeem is een AI-gestuurd taakverdelingssysteem dat taken automatisch toewijst aan de meest geschikte medewerker binnen een IT-organisatie. Het combineert twee machine learning-modellen en werkt op basis van gestructureerde data over medewerkers en taken.
 
+De basis van het systeem zijn twee JSON-bestanden. In employees.json staat per medewerker hun naam, rol (bijvoorbeeld "IT Support", ``Developer'' of ``DevOps Engineer''), werkbelasting, ervaringsjaren en een persona-profiel met tien persoonskenmerken zoals technical-skill, communication en stress-handling, elk gescoord op een schaal van 1 tot 10. In tasks.json staan de taken, elk met een uniek ID, een vereiste rol, een type zoals "support" of ``development'', een moeilijkheidsgraad en het aantal dagen dat nog resteert voor de deadline.
+
+Voordat een taak wordt toegewezen, berekent het systeem voor elke combinatie van medewerker en taak een stressscore via utils/stress-model.py. Die score is een gewogen som van drie factoren: de werkbelasting van de medewerker (40\% gewicht), de moeilijkheidsgraad van de taak (30\%) en de mate van rol-mismatch (30\%). De mismatch wordt berekend door te kijken hoeveel overlap er is tussen de rol van de medewerker en de vereiste rol van de taak. Het resultaat wordt afgetopt op maximaal 1.0, zodat de score altijd interpreteerbaar blijft als een waarde tussen 0 en 1.
+
+Het eerste model, te vinden in models/train-model.py, is een lineaire regressie via scikit-learn. Het wordt getraind op synthetisch gegenereerde data: 200 willekeurige combinaties van medewerkers en taken worden samengesteld, waarbij per combinatie vier kenmerken worden berekend: de rol-overeenkomst, de werkbelasting, de stressscore en de taakmoeilijkheid. Het doelgetal is een handmatig berekende suitability-score met 50\% gewicht op rol-match, 30\% op een lage werkbelasting en 20\% op een lage stress. Het model leert zo een lineaire formule die deze score zo goed mogelijk benadert op basis van de vier inputkenmerken.
+
+De taakverdelaar in allocators/task-allocator.py is het centrale onderdeel dat bij elke nieuwe taak de beste medewerker selecteert. De functie extract-features berekent voor een gegeven medewerker-taakcombinatie de vier kenmerken en geeft die als lijst terug. De functie assign-task loopt vervolgens door alle medewerkers, roept telkens extract-features aan en vraagt het getrainde lineaire model via model.predict() om een score te voorspellen. De medewerker met de hoogste score wordt geselecteerd en teruggegeven.
+
+Naast het lineaire model bevat het project ook een tweede, geavanceerder model in de ai/-map: een Random Forest classifier. Dit model werkt met een classificatieaanpak waarbij per taak voor elke medewerker bepaald wordt of hij of zij tot de beste kandidaten behoort (label 1) of niet (label 0). De selectie van de beste kandidaten tijdens het opbouwen van de trainingsdata gebeurt via een composite-score, die rekening houdt met rol-overeenkomst, een persona-score op basis van het taaktype en de werkbelasting. Voor een taak van het type "development" tellen vooral technical-skill, problem-solving en code-quality, terwijl voor "support"-taken eerder communication en reliability doorwegen. De kenmerken die het Random Forest-model meekrijgt zijn rijker dan bij het lineaire model: naast rol en werkbelasting worden ook alle tien persona-traits, het ervaringsniveau, de moeilijkheidsgraad en de resterende dagen meegegeven, wat neerkomt op 16 kenmerken per datapunt. Het model wordt getraind op 80\% van de taken en getest op de overige 20\%, waarna de accuracy, een classification report, een confusion matrix en de feature importances worden geprint. Het getrainde model wordt opgeslagen als models/task-model.pkl via joblib. Een aparte klasse in ai/predictor.py laadt dit opgeslagen model en biedt een functie score-employee aan die via predict-proba de kans berekent dat een medewerker de beste keuze is voor een gegeven taak.
+
+Het hoofdprogramma in main.py orkestreert het volledige proces. Het laadt de medewerkers- en takendata, filtert de testset-taken eruit zodat die niet gebruikt worden bij de uiteindelijke toewijzing, traint het model en wijst vervolgens elke resterende taak toe via assign-task. Na elke toewijzing worden de werkbelasting en stress van de toegewezen medewerker verhoogd met 0.1, zodat de toestand dynamisch evolueert naarmate meer taken worden verdeeld. Het resultaat wordt per taak geprint: de taaknaam, de vereiste rol, de toegewezen medewerker en diens actuele werkbelasting en stressniveau.
+
+Het project bevat twee parallelle machine learning-pijplijnen die nog niet volledig geïntegreerd zijn. De models/-map met het lineaire regressiemodel wordt actief gebruikt in main.py, terwijl de ai/-map met het Random Forest-model afzonderlijk getraind kan worden maar nog niet wordt aangeroepen vanuit het hoofdprogramma. Dit toont aan dat het systeem zich nog in een ontwikkelingsfase bevindt, waarbij het Random Forest-model bedoeld is als verbetering of vervanging van de lineaire aanpak.
+
+%De combinatie van een regelgebaseerde score voor het genereren van trainingsdata en een geleerd model voor de uiteindelijke voorspelling is een gangbare techniek in AI-systemen waarbij echte historische data ontbreekt.
 %%-----------------------------------------------------------------------------
-\chapter{Risico- en Impactanalyse}
+\section{Risico- en Impactanalyse}
 \label{ch:risico}
 
-\textbf{Doelstelling:}  
-Identificeren en evalueren van potentiële risico’s en maatschappelijke impact.
+%\textbf{Doelstelling:}  
+%Identificeren en evalueren van potentiële risico’s en maatschappelijke impact.
 
-In de laatste fase (1 week) wordt een risico- en impactanalyse uitgevoerd. Hierbij worden technische, organisatorische en ethische uitdagingen in kaart gebracht. Specifieke aandacht gaat naar risico’s omtrent privacy en dataveiligheid.
+%In de laatste fase (1 week) wordt een risico- en impactanalyse uitgevoerd. Hierbij worden technische, organisatorische en ethische uitdagingen in kaart gebracht. Specifieke aandacht gaat naar risico’s omtrent privacy en dataveiligheid.
 
-Deze analyse zorgt ervoor dat het systeem niet alleen technisch haalbaar is, maar ook verantwoord kan worden ingezet.
+%Deze analyse zorgt ervoor dat het systeem niet alleen technisch haalbaar is, maar ook verantwoord kan worden ingezet.
 
-\textbf{Deliverables:}
-\begin{itemize}
-    \item Risicoanalyse
-    \item Impactanalyse
-\end{itemize}
+%\textbf{Deliverables:}
+%\begin{itemize}
+%    \item Risicoanalyse
+%    \item Impactanalyse
+%\end{itemize}
 
-\textbf{Onderzoeksmethoden:}
-\begin{itemize}
-    \item Risico-identificatie
-    \item Ethische analyse
-    \item Evaluatie van beveiligingsaspecten
-\end{itemize}
+%\textbf{Onderzoeksmethoden:}
+%\begin{itemize}
+%    \item Risico-identificatie
+%    \item Ethische analyse
+%    \item Evaluatie van beveiligingsaspecten
+%\end{itemize}
+
+\vspace{1em}In deze fase wordt het ontwikkelde taakverdelingssysteem onderworpen aan een risico- en impactanalyse. Hierbij worden technische, organisatorische en ethische uitdagingen in kaart gebracht, met bijzondere aandacht voor privacy en dataveiligheid. Het doel is aan te tonen dat het systeem niet alleen technisch haalbaar is, maar ook op een verantwoorde manier ingezet kan worden binnen een organisatie.
+
+\subsection{Technische risico's}
+Een eerste technisch risico betreft de kwaliteit van de trainingsdata. Het systeem maakt gebruik van synthetisch gegenereerde data om het lineaire regressiemodel te trainen, omdat historische data moeilijk te verkrijgen was. Dit betekent dat de suitability-score die als doelwaarde dient niet gebaseerd is op echte beslissingen, maar op een handmatig opgestelde formule. Indien deze formule de werkelijkheid niet goed weergeeft, zal het model systematisch verkeerde beslissingen nemen. Dit risico is reëel en dient in een productieomgeving opgevangen te worden door het model te hertrainen.
+
+Een tweede technisch risico is de beperkte robuustheid van het lineaire model. Lineaire regressie veronderstelt een lineair verband tussen de inputkenmerken en de uitkomst, wat in de praktijk zelden volledig klopt. Complexe interacties tussen werkbelasting, stressniveau en rol-overeenkomst worden door dit model niet goed gevat. Het Random Forest-model in de ai/-map is hier een betere keuze, maar is op het moment van schrijven nog niet volledig geïntegreerd in het hoofdprogramma.
+
+Een derde risico is de dynamische update van werkbelasting en stress. Na elke toewijzing wordt de werkbelasting van de betrokken medewerker met een vaste waarde van 0.1 verhoogd. Dit is een vereenvoudiging van de werkelijkheid: taken hebben verschillende doorlooptijden en de werkbelasting zou pas moeten dalen wanneer een taak effectief afgerond is. Het huidige model houdt geen rekening met taakvoltooiing, wat op termijn leidt tot een oplopende werkbelasting die de realiteit niet meer weerspiegelt.
+
+\subsection{Organisatorische risico's}
+Op organisatorisch vlak is het grootste risico de acceptatie door medewerkers en leidinggevenden. Een geautomatiseerd systeem dat taken toewijst kan als bedreigend worden ervaren, zeker wanneer medewerkers het gevoel hebben dat hun autonomie of professionele oordeel ondergeschikt wordt gemaakt aan een algoritme. Het is daarom belangrijk dat het systeem transparant communiceert over de redenen voor een bepaalde toewijzing en dat leidinggevenden de mogelijkheid behouden om beslissingen handmatig te overschrijven.
+
+%Daarnaast bestaat het risico op overbelasting van specifieke medewerkers. Wanneer een medewerker consistent hoog scoort op de meeste taken — bijvoorbeeld omdat zijn of haar rol perfect overeenkomt én de persona-scores hoog zijn — zal het systeem die persoon vaker selecteren. Hoewel de werkbelastingspenalty dit effect dempt, is het denkbaar dat de werkbelasting van sterke profielen sneller oploopt dan die van zwakkere profielen, wat op termijn leidt tot een ongelijke verdeling van de werklast.
+
+\subsection{Ethische risico's}
+De persona-kenmerken die het systeem gebruikt, zoals stress-handling, initiative en communication, zijn persoonsgebonden eigenschappen. De manier waarop deze scores worden bepaald en bijgehouden is ethisch gevoelig. Indien deze waarden subjectief worden ingevuld door leidinggevenden, kunnen persoonlijke vooroordelen worden ingebakken in het model. Het systeem zou dan niet objectiever zijn dan een menselijke beslissing, maar de bias zou onzichtbaarder zijn en moeilijker aan te vechten. Het is daarom aanbevolen om de persona-scores te baseren op objectief meetbare prestatie-indicatoren en deze regelmatig te herzien.
+
+%Een bijkomend ethisch risico is algoritmische discriminatie. Wanneer bepaalde rollen of profielen stelselmatig hogere scores krijgen, kunnen medewerkers met een minder sterk profiel structureel minder interessante of minder uitdagende taken krijgen toegewezen. Dit kan hun professionele ontwikkeling belemmeren en op termijn leiden tot demotivatie of een ongelijke loopbaangroei binnen de organisatie.
+
+\subsection{Privacy en dataveiligheid}
+Het systeem verwerkt persoonsgebonden data: namen van medewerkers, hun ervaringsniveau, werkbelasting en gedetailleerde persona-scores worden opgeslagen in een JSON-bestand en gebruikt als input voor het machine learning-model. In het kader van de Algemene Verordening Gegevensbescherming (AVG, of GDPR in het Engels) dient deze data beschermd te worden. De huidige implementatie slaat alle gegevens op als onversleutelde lokale bestanden, wat in een productieomgeving onvoldoende is. Een veilige implementatie vereist toegangscontrole, versleuteling van gevoelige velden en een duidelijk beleid rond dataretentie en het recht op inzage en correctie door de betrokken medewerkers.
+
+Bovendien worden de toewijzingsbeslissingen van het model niet gelogd. In een professionele context is het noodzakelijk dat elke automatische beslissing traceerbaar is, zodat achteraf gecontroleerd kan worden waarom een bepaalde medewerker een taak toegewezen kreeg. Dit is zowel een vereiste vanuit de AVG, die het recht op uitleg bij geautomatiseerde beslissingen vastlegt, als een praktische nood voor auditing en kwaliteitscontrole.
+
+%\subsection{Conclusie}
+%Het systeem biedt een technisch onderbouwde aanpak voor automatische taaktoewijs­ing, maar de inzet ervan in een echte organisatie vereist bijkomende maatregelen op technisch, organisatorisch en ethisch vlak. De voornaamste aandachtspunten zijn de kwaliteit en objectiviteit van de inputdata, de transparantie van de beslissingen, de bescherming van persoonsgegevens conform de AVG en de bewaking van een eerlijke werklastver­deling. Wanneer deze aandachtspunten worden meegenomen in de verdere ontwikkeling, kan het systeem uitgroeien tot een betrouwbaar en verantwoord hulpmiddel voor taakbeheer binnen een IT-organisatie.

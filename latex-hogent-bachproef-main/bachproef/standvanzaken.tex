@@ -1,5 +1,5 @@
-\chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}%
-\label{ch:stand-van-zaken}
+\chapter{\IfLanguageName{dutch}{Literatuurstudie}{State of the art}}%
+\label{ch:literatuurstudie}
 
 % Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
 % dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
@@ -12,24 +12,22 @@ Het voorgaande hoofdstuk schetst de relevantie van werkgerelateerde stress binne
 
 Om deze onderzoeksvraag goed te beantwoorden, is het noodzakelijk om eerst de bestaande literatuur rond taakverdeling, werkstress en AI-gestuurde modellen te analyseren.
 
-Deze analyse vormt de theoretische basis voor het daaropvolgende hoofdstuk, waarin wordt beschreven hoe deze theorieën concreet worden vertaald naar het ontwerp, data-verzameling en ontwikkeling van het conceptueel AI-model.
+Deze analyse vormt de theoretische basis voor het daaropvolgende hoofdstuk, waarin wordt beschreven hoe deze theorieën concreet worden vertaald naar het ontwerp en ontwikkeling van het conceptueel AI-model.
 
 \section{(Optimale) taak-werknemer matching}
 \label{ch:optimale-taak-werknemer-matching} 
-\vspace{1em}Taak-werknemer matching betekent simpel gezegd: ``De juiste taak toewijzen aan de juiste persoon.``. Om te bepalen wie de juiste persoon is, wordt er gekeken naar wat een taak nodig heeft(skills, ervaring, kennis) en wat een werknemer kan. De bedoeling is om die twee zo goed mogelijk op elkaar af te stemmen. Als dit op een juiste manier wordt gedaan, zorgt het voor een hogere productiviteit en betere kwaliteit van werk in een bedrijf.
+\vspace{1em}Taak-werknemer matching betekent simpel gezegd: ``Een taak toewijzen aan de meest geschikte persoon voor die taak.``. Om te bepalen wie de juiste persoon is, wordt er gekeken naar wat een taak nodig heeft(skills, ervaring, kennis, ...) en wat een werknemer kan. De bedoeling is om die twee zo goed mogelijk op elkaar af te stemmen. Als de taakallocatie op een efficiënte en juiste manier wordt gedaan, zorgt het voor een hogere en betere productiviteit in een organisatie.
 
-\vspace{1em}Het bepalen van de 'juiste' taak voor de 'juiste' werknemer is niet gemakkelijk. Dit komt omdat taakallocatie een complex optimalisatieprobleem is. Men probeert de meest optimale oplossing te vinden waarbij meerdere projecten, beperkte middelen en verschillende beperkingen tegelijkertijd in rekening moeten worden gebracht. Zo moet er niet alleen rekening gehouden worden met de vaardigheden en ervaring van werknemers, maar ook met hun werkdruk, beschikbaarheid en soms zelfs hun voorkeuren of motivatie. Daarnaast spelen taakgebonden factoren een belangrijke rol, zoals de moeilijkheidsgraad en prioriteit van een taak \autocite{Pratama_2023}.
+%is er hierboven een bron nodig bij ``hogere en betere productiviteit''?
+Dit is makkelijker gezegd dan gedaan, want taakallocatie is een complex optimalisatieprobleem omdat men ook rekening moet houden met de werknemers. Natuurlijk is het belangrijkste om alle taken gelijk te verdelen en op tijd af te krijgen. Maar een juiste taakverdeling houdt ook rekening met het personeel en hun werkdruk, beschikbaarheid en soms zelfs hun voorkeuren of motivatie. Daarnaast spelen taakgebonden factoren ook een belangrijke rol, zoals de moeilijkheidsgraad en prioriteit van een taak \autocite{Pratama_2023}.
 
-\vspace{1em}In de praktijk gebeurt taakverdeling vaak op een subjectieve manier. Zo zijn er situaties waar de manager op basis van zijn of haar intuïtie of ervaring beslist wie welke taak krijgt. Dit is niet optimaal \autocite{Pratama_2023}. Ook zijn er situaties waar een groter deel van het werk wordt toegewezen aan de best presterende werknemers. Zij zijn efficiënter en betrouwbaarder. Hoewel deze aanpak op het eerste zicht oneerlijk lijkt, toont onderzoek met behulp van ABM's aan dat dit kan leiden tot een hogere efficiëntie in vergelijking met een gelijke verdeling van taken over alle werknemers. Een agent-gebaseerd model (ABM) is een simulatiemethode waarbij individuele factoren (agents) met eenvoudige gedragsregels worden gemodelleerd om het gedrag van een complex systeem te analyseren \autocite{Sobkowicz_2016}.
+In de praktijk gebeurt taakverdeling vaak op een subjectieve manier. Zo zijn er situaties waar de manager op basis van zijn of haar intuïtie of ervaring beslist wie welke taak krijgt. Dit is niet optimaal \autocite{Pratama_2023}. Ook zijn er situaties waar een groter deel van het werk wordt toegewezen aan de best presterende werknemers. Zij zijn efficiënter en betrouwbaarder. Hoewel deze aanpak op het eerste zicht oneerlijk lijkt, toont onderzoek met behulp van ABM's aan dat dit kan leiden tot een hogere efficiëntie in vergelijking met een gelijke verdeling van taken over alle werknemers. Een agent-gebaseerd model (ABM) is een simulatiemethode waarbij individuele factoren (agents) met eenvoudige gedragsregels worden gemodelleerd om het gedrag van een complex systeem te analyseren \autocite{Sobkowicz_2016}.
 
 Door verschillende werkverdelingsstrategieën te simuleren, blijkt toch dat het concentreren van taken bij de meest capabele medewerkers de totale output kan verhogen en inefficiënties kan verminderen. Deze strategie kent echter duidelijke grenzen. Want wanneer de top werknemers constant worden overbelast, wordt hun capaciteit overschreden en dat leidt tot vertragingen en een toenemende achterstand in onafgewerkt werk. Hierdoor kan de efficiëntie van de organisatie uiteindelijk afnemen. Taakverdeling op basis van prestaties kan dus op korte termijn effectief zijn, maar moet zorgvuldig worden beheerd om overbelasting te voorkomen en de workflow van de organisatie te waarborgen \autocite{Sobkowicz_2016}.
 
-%een manager die op basis van ervaring en inschatting beslist wie welke taak krijgt. Ook kunnen werknemers zelf taken kiezen in een agile werkomgeving. Hoewel deze methodes flexibel zijn, leiden ze niet altijd tot de meest optimale verdeling.
-
 \vspace{1em}Er wordt daarom steeds vaker gekeken naar meer objectieve en data-gedreven modellen. Moderne benaderingen maken gebruik van data-analyse en artificiële intelligentie om betere beslissingen te nemen. Zo kunnen systemen op basis van historische gegevens voorspellen hoeveel middelen nodig zijn en welke werknemer het meest geschikt is voor een bepaalde taak. Hierbij wordt niet alleen gekeken naar vaardigheden, maar ook naar factoren zoals huidige werkdruk en taakcomplexiteit \autocite{Pratama_2023}.
 
-Deze datagedreven aanpak maakt het mogelijk om taakverdeling efficiënter te organiseren, bottlenecks te vermijden en zowel tijd als kosten te reduceren \autocite{Pratama_2023}. Bovendien zorgt een goede taak-werknemer matching niet alleen voor voordelen op organisatieniveau, maar ook voor de werknemer zelf. Wanneer werknemers taken krijgen die aansluiten bij hun vaardigheden en ervaring, voelen zij zich competenter en meer in controle over hun werk, wat leidt tot minder stress.
-%sectie over: wat is stress? 1ste bron: stress op werk
+Deze datagedreven aanpak maakt het mogelijk om taakverdeling efficiënter te organiseren, bottlenecks te vermijden en zowel tijd als kosten te reduceren \autocite{Pratama_2023}. Bovendien zorgt een goede taak-werknemer matching niet alleen voor voordelen op organisatieniveau, maar ook voor de werknemer zelf. Wanneer werknemers taken krijgen die aansluiten bij hun vaardigheden en ervaring, voelen zij zich competenter en meer in controle over hun werk. Dit leidt tot minder stress.
 
 \section{Stress}
 \label{ch:stress} 
@@ -37,41 +35,28 @@ Stress is een reactie van zowel het lichaam als de geest op druk of eisen die gr
 
 Mensen ervaren stress in verschillende situaties, wanneer zij te veel of juist te weinig werk hebben of wanneer zij weinig controle hebben over hun werk. Ook onzekerheid over de job of veranderingen binnen de organisatie, evenals een gebrek aan steun van collega’s of leidinggevenden, kunnen stress veroorzaken. Kort samengevat ontstaat stress wanneer de ervaren druk groter is dan de individuele stressbestendigheid \autocite{Stranks2005}.
 
-\vspace{1em}De gevolgen van stress kunnen zowel het individu als de organisatie beïnvloeden. Voor het individu kan stress leiden tot emotionele klachten zoals angst, vermoeidheid en demotivatie. Daarnaast kunnen gedragsveranderingen optreden, zoals prikkelbaarheid, absenteïsme en slechtere sociale relaties. Op fysiek vlak kan stress zich uiten in klachten zoals hoofdpijn, slaapproblemen en zelfs hartproblemen. In ernstigere gevallen kan langdurige stress leiden tot mentale problemen zoals burn-out of depressie \autocite{Stranks2005}.
+\vspace{1em}De gevolgen van stress kunnen zowel het individu als de organisatie beïnvloeden. Voor het individu kan stress leiden tot emotionele klachten zoals angst, vermoeidheid en demotivatie. Daarnaast kunnen gedragsveranderingen optreden, zoals prikkelbaarheid, absenteïsme en slechtere sociale relaties. Op fysiek vlak kan stress zich uiten in klachten zoals hoofdpijn, slaapproblemen en zelfs hartproblemen. In ernstigere gevallen kan langdurige stress leiden tot mentale gezondheidsproblemen zoals burn-out of depressie \autocite{Stranks2005}.
 
-%sectie over burn-out en extreme gevolgen van stress + andere zaken dan stress bv autisme of andere mentale problemen
-
-Ook voor de organisatie heeft stress belangrijke gevolgen. Zo kan het leiden tot verminderde prestaties en productiviteit, een toename van fouten en ongelukken, en een hoger ziekteverzuim. Daarnaast kan stress bijdragen aan een hoger personeelsverloop en een daling in motivatie en betrokkenheid van werknemers \autocite{Stranks2005}.
+Ook voor de organisatie heeft stress belangrijke gevolgen. Zo kan het leiden tot verminderde prestaties en productiviteit, een toename van fouten en ongelukken en een hoger ziekteverzuim. Daarnaast kan stress bijdragen aan een hoger personeelsverloop en een daling in motivatie en betrokkenheid van werknemers \autocite{Stranks2005}.
 
 Een belangrijk inzicht is dat niet alle stress per definitie negatief is. Een bepaalde mate van druk kan juist bijdragen aan betere prestaties en verhoogde focus. Het is echter vooral langdurige of overmatige stress die schadelijk is en kan leiden tot ernstige gezondheidsproblemen. Bovendien verschilt de manier waarop stress wordt ervaren van persoon tot persoon, afhankelijk van individuele kenmerken en omstandigheden \autocite{Stranks2005}.
 
 \section{Stress in de IT-sector}
 \label{ch:stress-in-de-IT-sector} 
-\vspace{1em}Stress komt in elke job voor, maar in de IT-sector is het extra uitgesproken door de specifieke aard van het werk en de voortdurende technologische evoluties. Een belangrijke oorzaak hiervan is de hoge prestatiedruk. IT-bedrijven opereren in een sterk competitieve omgeving waarin werknemers verwacht worden efficiënt, snel en foutloos te presteren. Daarnaast worden zij vaak geconfronteerd met strakke deadlines en hoge verwachtingen, wat leidt tot een constante mentale druk \autocite{Iswarya_2024}.
+\vspace{1em}Stress komt in elke job voor, maar in de IT-sector is het extra uitgesproken door de specifieke aard van het werk en de voortdurende technologische evoluties. Een belangrijke oorzaak hiervan is de hoge prestatiedruk. IT-bedrijven opereren in een sterk competitieve omgeving waarin werknemers verwacht worden efficiënt, snel en foutloos te presteren. Daarnaast worden zij vaak geconfronteerd met strakke deadlines en hoge verwachtingen. Dit leidt tot een constante mentale druk \autocite{Iswarya_2024}.
 
 Een tweede factor is de nood aan continu bijleren. Technologie evolueert razendsnel, waardoor IT-professionals voortdurend nieuwe kennis en vaardigheden moeten verwerven. Dit kan leiden tot stress, aangezien werknemers het gevoel hebben dat ze permanent moeten presteren en zich moeten aanpassen om relevant te blijven \autocite{Iswarya_2024}.
 
 Verder speelt ook de hoge werkdruk en het aantal werkuren een belangrijke rol. Veel IT-werknemers maken overuren of werken onregelmatige uren, vooral tijdens intensieve projectfases. Deze verhoogde werkbelasting kan leiden tot vermoeidheid en vergroot het risico op burn-out \autocite{Iswarya_2024}.
 
-Daarnaast draagt ook jobonzekerheid en de impact van snelle veranderingen bij aan stress. Door globalisering en outsourcing ervaren werknemers onzekerheid over hun jobzekerheid. Bovendien kunnen vaardigheden snel verouderen, waardoor er een voortdurende druk ontstaat om bij te blijven en inzetbaar te blijven op de arbeidsmarkt \autocite{Iswarya_2024}.
+Daarnaast draagt ook jobonzekerheid en de impact van snelle veranderingen bij aan stress. Door globalisering en outsourcing ervaren werknemers onzekerheid over hun job. Bovendien kunnen vaardigheden snel verouderen, waardoor er een voortdurende druk ontstaat om bij te blijven en inzetbaar te blijven op de arbeidsmarkt \autocite{Iswarya_2024}.
 
 \vspace{1em}Een belangrijk inzicht is dat stress in de IT-sector tot op zekere hoogte onvermijdelijk is door de aard van het werk. Het doel is dan ook niet om stress volledig te elimineren, maar om deze op een doeltreffende manier te beheren. In dit kader zijn een positieve werkomgeving en voldoende ondersteuning van groot belang om de negatieve gevolgen van stress te beperken \autocite{Iswarya_2024}.
 
-\section{Methoden om stress te verlagen}
-\label{ch:methoden-om-stress-te-verlagen} 
-\vspace{1em}Er bestaan al verschillende methoden om de 'negatieve' stress te verlagen. Uit onderzoek blijkt dat bedrijven in de IT-sector stress kunnen verminderen door middel van gerichte stressmanagement-interventies, die grofweg in twee categorieën kunnen worden onderverdeeld \autocite{Iswarya_2024}.
-
-Enerzijds zijn er effectieve methoden die een duidelijk positief effect hebben op het verminderen van stress en het verbeteren van het welzijn van werknemers. Voorbeelden hiervan zijn mindfulness training, waarbij werknemers leren zich te focussen op het huidige moment en meer rust en concentratie ontwikkelen. Daarnaast helpt veerkrachttraining (resilience training) werknemers om beter om te gaan met druk en sneller te herstellen van stressvolle situaties. Het doel van veerkrachttraining is om je te leren hoe je sneller herstelt als iets moeilijk is/gaat, in plaats van dat je er lang door uit balans blijft. Ook psychologische interventies, zoals begeleiding en mentale ondersteuning, spelen een belangrijke rol in het omgaan met emoties en werkdruk. Verder dragen managerial grid training (een training in leiderschap die managers helpt hun eigen leiderschapsstijl te begrijpen en te verbeteren), wellnessprogramma’s beweging en een goede work-life balance bij aan het verlagen van stress. Deze methoden leiden niet alleen tot minder stress, maar ook tot betere prestaties en een hoger welzijn bij IT-professionals \autocite{Iswarya_2024}.
-
-Anderzijds zijn er minder effectieve methoden, zoals gedragsinterventies, conflictmanagement training en work role training. Uit de studie blijkt dat deze aanpakken geen significant effect hebben op het verminderen van stress \autocite{Iswarya_2024}.
-
-Een belangrijk inzicht uit het onderzoek is dat stress in de IT-sector vooral verminderd wordt door te focussen op mentale vaardigheden en het algemene welzijn van werknemers. Niet alle interventies zijn even effectief, en vooral persoonlijke en psychologische ondersteuning blijkt cruciaal. Daarom is het voor bedrijven aangewezen om meerdere strategieën te combineren \autocite{Iswarya_2024}.
-
 \section{Agile}
 \label{ch:agile} 
-\vspace{1em}Nu er verteld is wat de gevolgen kunnen zijn van slechte taak-werknemer matching, wordt er weer terug meer verteld over taakverdeling. Eerst moet er een belangrijke vraag gesteld worden: ``Nu we weten welke taak aan welke werknemer moet gegeven worden, hoe weten we nu wanneer en hoe de taken moeten verdeeld worden?''. Er wordt eerst meer verteld over de ``wanneer''.
-%bron: UNDERSTANDING THE CHARACTERISTICS, BENEFITS AND CHALLENGES OF AGILE IT PROJECTMANAGEMENT: A LITERATURE BASED PERSPECTIVE:
-Een methode die de ``wanneer'' goed uitlegt, is agile.
+\vspace{1em}Nu er besproken is wat de gevolgen kunnen zijn van slechte taak-werknemer matching, wordt er opnieuw ingezoomd op taakverdeling binnen een dynamische werkomgeving. Hierbij is niet alleen de vraag belangrijk welke werknemer welke taak uitvoert, maar ook hoe en in welke mate taken worden verdeeld en opgevolgd in de tijd. Dit sluit aan bij de vraag: ``Nu we weten welke taak aan welke werknemer moet worden toegewezen, hoe bepalen we dan hoe en wanneer taken worden uitgevoerd en opgevolgd?''.Een aanpak die goed aansluit bij deze manier van werken is Agile.
+
 Agile projectmanagement ontstond in 2001 toen zeventien experts het Agile Manifesto opstelden. Sindsdien is het uitgegroeid tot een belangrijke aanpak binnen softwareontwikkeling. In tegenstelling tot traditionele methoden zoals de watervalmethode, waarbij fases strikt na elkaar verlopen, richt agile zich op flexibiliteit, snelle oplevering en het omgaan met veranderingen. Software wordt niet in één keer volledig ontwikkeld, maar in korte iteraties. Dit maakt het mogelijk om sneller werk te leveren aan de klant en beter in te spelen op nieuwe eisen \autocite{Koi_Akrofi_2019}.
 
 \vspace{1em}Agile is gebaseerd op een aantal kernwaarden en principes die de nadruk leggen op samenwerking, eenvoud en aanpassingsvermogen. De vier belangrijkste waarden zijn: mensen/interactie, werkende software, samenwerking met de klant en inspelen op verandering. Deze waarden worden ondersteund door twaalf principes. Voorbeelden hiervan zijn het vroeg en regelmatig opleveren van werkende software, het opdelen van grote projecten in kleinere taken en het werken met zelfstandige teams \autocite{Koi_Akrofi_2019}.
@@ -79,6 +64,10 @@ Agile projectmanagement ontstond in 2001 toen zeventien experts het Agile Manife
 Binnen agile spelen deze kleine teams een centrale rol. Deze werken nauw samen en communiceren vaak face-to-face. Ze dragen ook gezamenlijk verantwoordelijkheid voor het resultaat. Vertrouwen tussen teamleden en leidinggevenden is essentieel voor succes. Agile wordt gezien als een aanpak die niet alleen toepasbaar is binnen IT, maar ook breder inzetbaar is in andere domeinen en zelfs in het dagelijks leven, vooral in situaties met veel onzekerheid \autocite{Koi_Akrofi_2019}.
 
 Agile projectmanagement is voortgekomen uit eerdere ideeën over productontwikkeling en werd populair door methoden zoals Scrum, ontwikkeld door Jeff Sutherland en Ken Schwaber. Scrum is tegenwoordig de meest gebruikte agile methode, naast andere varianten zoals Extreme Project Management en DSDM. Ondanks de voordelen en groeiende populariteit van agile, blijven veel organisaties traditionele methoden gebruiken en blijkt de toepassing van agile in de praktijk vooral beperkt tot IT-projecten \autocite{Koi_Akrofi_2019}.
+
+In de context van deze bachelorproef sluit dit principe sterk aan bij de werking van het voorgestelde AI-systeem. Het systeem wijst namelijk niet enkel een volledige taak toe aan een werknemer, maar houdt ook rekening met de dynamische opbouw van werkdruk en stress. Taken worden in feite impliciet “opgevolgd” via iteratieve toewijzingen, waarbij na elke stap de situatie van de werknemer wordt herbekeken. Hierdoor kan het systeem beslissen om toekomstige taken anders te verdelen of beter te balanceren. Dit weerspiegelt het Agile-principe waarbij werk in kleinere stappen wordt uitgevoerd en voortdurend wordt bijgestuurd.
+
+Agile is in deze context dus geen strikt ontwikkelproces van het systeem zelf, maar eerder een conceptuele manier om taakuitvoering en taakverdeling te modelleren. Het systeem simuleert als het ware een Agile-omgeving waarin taken niet statisch worden toegewezen, maar dynamisch worden opgesplitst en herverdeeld op basis van actuele omstandigheden zoals workload en stress.
 
 \section{Kritiek op agile}
 \label{ch:kritiek-op-agile} 
@@ -90,6 +79,18 @@ Op projectniveau brengt Agile ook verschillende risico’s met zich mee. Er kunn
 
 Ook binnen projectmanagement zijn er nadelen. Zo is er sprake van tools en processen die niet standaard zijn, wat kan leiden tot inefficiëntie en inconsistentie. Daarnaast is er een gebrek aan documentatie, waardoor de kennis beperkt blijft en voornamelijk in de hoofden van teamleden zit \autocite{Ijaz_2022}.
 
+In het kader van dit systeem wordt deze problematiek deels vermeden doordat de iteraties niet door menselijke planning worden gestuurd, maar door een algoritmisch model dat consistent beslissingen neemt op basis van data. Hierdoor wordt de flexibiliteit van Agile behouden, terwijl de nadelen zoals inconsistentie en gebrek aan structuur gedeeltelijk worden beperkt.
+
+\section{Methoden om stress te verlagen}
+\label{ch:methoden-om-stress-te-verlagen} 
+\vspace{1em}Er bestaan al verschillende methoden om de negatieve stress te verlagen. Uit onderzoek blijkt dat bedrijven in de IT-sector stress kunnen verminderen door middel van gerichte stressmanagement-interventies, die grofweg in twee categorieën kunnen worden onderverdeeld \autocite{Iswarya_2024}.
+
+Enerzijds zijn er effectieve methoden die een duidelijk positief effect hebben op het verminderen van stress en het verbeteren van het welzijn van werknemers. Voorbeelden hiervan zijn mindfulness training, waarbij werknemers leren zich te focussen op het huidige moment om meer rust en concentratie te ontwikkelen. Daarnaast helpt veerkrachttraining werknemers om beter om te gaan met druk en sneller te herstellen van stressvolle situaties. Het doel van veerkrachttraining is om je te leren hoe je sneller herstelt als iets moeilijk is/gaat, in plaats van dat je er lang door uit balans blijft. Ook psychologische interventies, zoals begeleiding en mentale ondersteuning, spelen een belangrijke rol in het omgaan met emoties en werkdruk. Verder dragen managerial grid training (een training in leiderschap die managers helpt hun eigen leiderschapsstijl te begrijpen en te verbeteren) en een goede work-life balance bij aan het verlagen van stress. Deze methoden leiden niet alleen tot minder stress, maar ook tot betere prestaties en een hoger welzijn bij IT-professionals \autocite{Iswarya_2024}.
+
+Anderzijds zijn er minder effectieve methoden, zoals gedragsinterventies, conflictmanagement training en work role training. Uit de studie blijkt dat deze aanpakken geen significant effect hebben op het verminderen van stress \autocite{Iswarya_2024}.
+
+Een belangrijk inzicht uit het onderzoek is dat stress in de IT-sector vooral verminderd wordt door te focussen op mentale vaardigheden en het algemene welzijn van werknemers. Niet alle interventies zijn even effectief, en vooral persoonlijke en psychologische ondersteuning blijkt cruciaal. Daarom is het voor bedrijven aangewezen om meerdere strategieën te combineren \autocite{Iswarya_2024}.
+
 \section{Een betere oplossing}
 \label{ch:een-betere-oplossing}
 \vspace{1em} In de voorgaande secties werd voornamelijk ingegaan op het wanneer van taakuitvoering. Een minstens even belangrijke vraag blijft echter het hoe: op welke manier kunnen taken het best verdeeld en ingepland worden binnen een organisatie. Deze bachelorproef richt zich op het onderzoeken en modelleren van de meest efficiënte methode voor taakverdeling tussen werknemers, waarbij gebruik wordt gemaakt van artificiële intelligentie.
@@ -99,6 +100,10 @@ De traditionele planningsmethoden schieten vaak te kort, zeker in dynamische omg
 Deze systemen maken het ook mogelijk om proactief knelpunten te identificeren en planningen automatisch aan te passen wanneer omstandigheden wijzigen, zoals veranderingen in capaciteit of prioriteiten. Hierdoor wordt niet alleen de efficiëntie verhoogd, maar ook de nauwkeurigheid van planningen en de verdeling van taken over werknemers verbeterd \autocite{Alan}. 
 
 Daarnaast speelt voorspellende analyse een cruciale rol bij het verdelen van taken en middelen. Door historische projectdata te analyseren, kan AI inschatten welke taken meer tijd of middelen vereisen en voorstellen doen voor een efficiëntere taakverdeling. Dit zorgt ervoor dat werknemers beter ingezet worden volgens hun capaciteit en vaardigheden, wat leidt tot een evenwichtigere werkverdeling en een hogere productiviteit \autocite{Somanathan2023}.
+
+\section{Wanneer kan je spreken over AI?}
+\label{ch:wanneer-is-iets-ai} 
+\vspace{1em}
 
 \section{Beperkingen van AI}
 \label{ch:beperkingen-van-ai}
@@ -112,8 +117,36 @@ Verder kunnen er methodologische beperkingen optreden, zoals mogelijke steekproe
 
 Tot slot vormt de integratie van AI in bestaande systemen een belangrijke uitdaging. Organisaties kunnen te maken krijgen met compatibiliteitsproblemen en een aanzienlijke leercurve bij de implementatie van nieuwe technologieën. Dit kan leiden tot extra kosten, vertragingen en weerstand bij gebruikers, wat de succesvolle toepassing van AI in taakverdeling en planning bemoeilijkt \autocite{Saha_2025}.
 
+\section{Eerdere oplossingen}
+\label{ch:een-eerdere-oplossing}
+\vspace{1em}Binnen het domein van taakallocatie zijn er verschillende modellen ontwikkeld die proberen het toewijzen van taken te optimaliseren. Deze systemen hebben als gemeenschappelijk doel om beslissingen rond taakverdeling te ondersteunen of te automatiseren op basis van data in plaats van louter menselijke intuïtie.
+
+Een belangrijk aandachtspunt dat in de literatuur naar voren komt, is dat veel bestaande optimalisatiemodellen voornamelijk geëvalueerd worden in een statische context. In deze context wordt gewerkt wordt met vaste datasets. In dergelijke systemen moet het optimalisatieproces vaak opnieuw worden uitgevoerd telkens wanneer er een nieuwe taak wordt toegevoegd. Dit kan problematisch zijn in realistische bedrijfsomgevingen, waar projecten onder strikte deadlines vallen en snelle besluitvorming essentieel is. Het heroptimaliseren van modellen kan afhankelijk van de omvang en complexiteit van de data aanzienlijke tijd in beslag nemen, waardoor deze aanpak minder geschikt is voor real-time toepassingen.
+
+%heel belangrijk wat nu volgt!!
+\vspace{1em}Om deze beperking te overwinnen, richten recentere AI-gebaseerde systemen zich op het zo snel mogelijk toewijzen van taken zodra deze beschikbaar zijn. Zowel in het onderzoek van \textcite{Arslan_2024} als in deze studie wordt daarom gekozen voor een aanpak waarbij taakallocatie onmiddellijk kan plaatsvinden zonder dat het volledige model telkens opnieuw moet worden getraind of geoptimaliseerd. Het systeem maakt gebruik van een vooraf getraind model dat in staat is om, op basis van de huidige gegevens, direct een geschiktheidsscore te berekenen en een beslissing te nemen.
+
+Deze aanpak maakt het mogelijk om taaktoewijzing quasi in real-time uit te voeren, wat een cruciale factor is voor het tijdig afronden van projecten. Door het elimineren van tijdsintensieve herberekeningen wordt niet alleen de efficiëntie verhoogd, maar wordt het systeem ook beter toepasbaar in dynamische omgevingen waar continu nieuwe taken ontstaan. Hierdoor sluit deze benadering beter aan bij de noden van moderne organisaties, waarin snelheid en flexibiliteit een centrale rol spelen.
+
+\vspace{1em}In het het onderzoek van \textcite{Arslan_2024} wordt een AI-systeem ontwikkeld dat automatisch de meest geschikte medewerker voorspelt wanneer een nieuwe taak wordt ingediend via een portaal. Het systeem houdt rekening met de vereiste vaardigheden van een taak en probeert deze zo goed mogelijk te matchen met de kwalificaties van werknemers om vertragingen en inefficiëntie te vermijden. In plaats van één enkele kandidaat te selecteren, genereert het systeem een gerangschikte lijst van geschikte medewerkers op basis van hun competenties.
+
+De werking van het systeem bestaat uit twee hoofdfasen. In de eerste fase wordt de tekstuele beschrijving van een taak geanalyseerd met behulp van text mining-technieken. Hierbij wordt de tekst opgeschoond en omgezet naar vectorrepresentaties via methoden zoals TF-IDF en Word2Vec, zodat machine learning-modellen de inhoud kunnen interpreteren. In de tweede fase worden deze taakvectoren vergeleken met vectoren die de kwalificaties van werknemers voorstellen. Door gebruik te maken van ``cosine similarity'' kan het systeem bepalen welke medewerkers het best aansluiten bij de vereisten van de taak \autocite{Arslan_2024}.
+
+Daarnaast houdt het systeem rekening met de evolutie van vaardigheden: na het uitvoeren van taken worden de kwalificaties van werknemers bijgewerkt. Hierdoor ontstaat een dynamisch systeem dat niet alleen taaktoewijzing optimaliseert, maar ook de ontwikkeling van personeel opvolgt.
+
+\vspace{1em}Een belangrijk verschil tussen het besproken onderzoek en het systeem dat in deze studie wordt ontwikkeld, ligt in de aard van de gebruikte data en de focus van de taaktoewijzing. In het onderzoek van \textcite{Arslan_2024} wordt gewerkt met real-time data afkomstig uit een ERP-systeem, waarbij tekstuele taakbeschrijvingen centraal staan en text mining-technieken worden gebruikt om vaardigheden te extraheren en te matchen met personeel. In deze bachelorproef wordt daarentegen gebruikgemaakt van synthetisch gegenereerde data binnen een gesimuleerde omgeving, waarbij taken en werknemers reeds gestructureerd worden voorgesteld via expliciete kenmerken zoals workload, stressniveau en skill-matching.
+
+Daarnaast ligt de nadruk in het besproken onderzoek voornamelijk op het correct matchen van taken met de meest geschikte medewerker op basis van kwalificaties. In deze studie wordt echter een bredere benadering gehanteerd, waarbij ook rekening wordt gehouden met de dynamische evolutie van werkdruk en stress. Het voorgestelde model richt zich dus niet uitsluitend op optimale matching, maar ook op een evenwichtige verdeling van taken over tijd. Hierdoor wordt een meer holistische vorm van optimalisatie nagestreefd, waarbij zowel efficiëntie als het welzijn van werknemers in rekening worden gebracht.
+
+Het voorgestelde model vertoont bovendien adaptiviteit op systeemniveau, aangezien het rekening houdt met dynamische veranderingen in werkdruk en stress bij opeenvolgende taaktoewijzingen. Het model zelf wordt echter niet continu hertraind, waardoor de onderliggende patronen statisch blijven. Desondanks maakt de scheiding tussen training en inferentie het mogelijk om snel en efficiënt nieuwe taken toe te wijzen zonder nood aan heroptimalisatie. Hierdoor is het systeem beter geschikt voor dynamische omgevingen waarin snel beslissingen moeten worden genomen.
+
+%praten over ander onderzoek (Italiaanse thesis)
+\vspace{1em}
+%praten over UML van ons project
+%\vspace{1em}
+
 \section{Conclusie}
-\label{ch:conclusie-standvanzaken}
+\label{ch:conclusie-literatuurstudie}
 Samenvattend vormt deze literatuurstudie een sterke theoretische basis voor het verder onderzoeken van een AI-gestuurd model voor taakverdeling. Het onderstreept dat een datagedreven, adaptieve aanpak noodzakelijk is om zowel organisatorische efficiëntie te verbeteren als werkgerelateerde stress in de IT-sector te verminderen.
 %Verschillende AI-methoden ondersteunen planning en scheduling: supervised learning voorspelt toekomstige scenario’s. Unsupervised learning detecteert verborgen patronen en risico’s. Reinforcement learning leert optimale beslissingen via simulatie en optimalisatie-algoritmen vinden de beste schema’s op basis van meerdere doelstellingen en beperkingen. AI biedt voordelen zoals snelheid, aanpasbaarheid, nauwkeurigheid en continue besluitvorming \autocite{Alan}. Hierdoor kunnen teams proactief plannen, risico’s verminderen en de efficiëntie van Agile-projecten aanzienlijk verbeteren.
 
