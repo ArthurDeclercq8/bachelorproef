@@ -39,8 +39,17 @@ def _persona_score(employee: dict, task: dict) -> float:
 def composite_score(employee: dict, task: dict) -> float:
     role_match  = 1.0 if employee["role"] == task["required_role"] else 0.0
     persona_fit = _persona_score(employee, task)
-    workload    = employee.get("workload", 0.0)     
-    return role_match + 0.5 * persona_fit - 0.5 * workload
+    
+    workload    = employee.get("workload", 0.0)
+    task_count  = len(employee.get("tasks", []))
+    
+    # Exponentiële penalty: hoe meer taken, hoe zwaarder de straf
+    workload_penalty = workload * (1 + 0.5 * task_count)
+    
+    # Minimumbonus: werknemers zonder taken worden kunstmatig aantrekkelijker
+    no_task_bonus = 1.5 if task_count == 0 else 0.0
+
+    return role_match + 0.5 * persona_fit - 0.5 * workload_penalty + no_task_bonus
 
 
 def build_dataset(tasks: list, employees: list, top_k: int = 1):

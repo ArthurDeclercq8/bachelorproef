@@ -1,33 +1,30 @@
-from models.train_model import train_model
-from utils.stress_model import compute_stress
+from ai.predictor import score_employee
+import json
 
-model = train_model()
+with open("models/role_map.json") as f:
+    role_map = json.load(f)
 
-def extract_features(employee, task):
-
-    skill_match = len(set(employee["role"]).intersection(task["required_role"])) / max(len(task["required_role"]), 1)
-    workload = employee.get("workload", 0.5)
-
-    # dynamisch
-    stress = compute_stress(employee, task)
-
-    difficulty = task.get("difficulty", 0.5)
-
-    return [[skill_match, workload, stress, difficulty]]
-
-
-def assign_task(task, employees, model, extract_features):
-
+def assign_task(task, employees):
     best_employee = None
-    best_score = -1
+    best_score = -float("inf")
 
     for employee in employees:
+        task_count = len(employee.get("tasks", []))
+        workload   = employee.get("workload", 0.0)
 
-        features = extract_features(employee, task)
-        score = model.predict(features)[0]
+        # ML-score van het RandomForest model
+        ml_score = score_employee(employee, task, role_map)
 
-        if score > best_score:
-            best_score = score
+        # Exponentiële werkdruk penalty
+        workload_penalty = workload * (1 + 0.5 * task_count)
+
+        # Minimumbonus voor werknemers zonder taken
+        no_task_bonus = 1.5 if task_count == 0 else 0.0
+
+        final_score = ml_score - 0.5 * workload_penalty + no_task_bonus
+
+        if final_score > best_score:
+            best_score = final_score
             best_employee = employee
 
     return best_employee

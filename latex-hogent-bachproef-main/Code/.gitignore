@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.pkl
+models/role_map.json
+data/test_tasks.json
+KLAD.md

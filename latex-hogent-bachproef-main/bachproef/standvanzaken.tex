@@ -101,10 +101,6 @@ Deze systemen maken het ook mogelijk om proactief knelpunten te identificeren en
 
 Daarnaast speelt voorspellende analyse een cruciale rol bij het verdelen van taken en middelen. Door historische projectdata te analyseren, kan AI inschatten welke taken meer tijd of middelen vereisen en voorstellen doen voor een efficiëntere taakverdeling. Dit zorgt ervoor dat werknemers beter ingezet worden volgens hun capaciteit en vaardigheden, wat leidt tot een evenwichtigere werkverdeling en een hogere productiviteit \autocite{Somanathan2023}.
 
-\section{Wanneer kan je spreken over AI?}
-\label{ch:wanneer-is-iets-ai} 
-\vspace{1em}
-
 \section{Beperkingen van AI}
 \label{ch:beperkingen-van-ai}
 \vspace{1em}Belangrijk is dat artificiële intelligentie hierbij niet de menselijke besluitvorming vervangt, maar ondersteunt. Door het combineren van menselijke expertise met data-gedreven inzichten ontstaat een flexibel en adaptief planningsproces dat beter bestand is tegen complexiteit en onzekerheid \autocite{Alan}.
@@ -141,14 +137,31 @@ Daarnaast ligt de nadruk in het besproken onderzoek voornamelijk op het correct 
 Het voorgestelde model vertoont bovendien adaptiviteit op systeemniveau, aangezien het rekening houdt met dynamische veranderingen in werkdruk en stress bij opeenvolgende taaktoewijzingen. Het model zelf wordt echter niet continu hertraind, waardoor de onderliggende patronen statisch blijven. Desondanks maakt de scheiding tussen training en inferentie het mogelijk om snel en efficiënt nieuwe taken toe te wijzen zonder nood aan heroptimalisatie. Hierdoor is het systeem beter geschikt voor dynamische omgevingen waarin snel beslissingen moeten worden genomen.
 
 %praten over ander onderzoek (Italiaanse thesis)
-\vspace{1em}
-%praten over UML van ons project
-%\vspace{1em}
+\vspace{1em}In het onderzoek van \textcite{Tonazzo} wordt er gebruikt gemaakt van reinforcement learning. Dit is een specifieke vorm van machine learning waarbij een systeem leert door interactie met een omgeving. In tegenstelling tot de machine learning-methode in deze proef, waarbij een model leert op basis van vooraf gelabelde data, leert een RL-systeem via trial-and-error.
+
+Het systeem ontvangt hierbij feedback in de vorm van een reward of straf en probeert op basis daarvan zijn toekomstige beslissingen te optimaliseren. Het doel van reinforcement learning is om een strategie te ontwikkelen die op lange termijn de hoogste cumulatieve beloning oplevert. Binnen RL bestaan verschillende kerncomponenten, namelijk een agent die beslissingen neemt, een omgeving waarin deze agent opereert, states die de huidige situatie voorstellen, actions die mogelijke beslissingen vertegenwoordigen en rewards die aangeven of een bepaalde actie gewenst is \autocite{Tonazzo}.
+
+Een belangrijk kenmerk van reinforcement learning is dat het systeem voortdurend leert uit interactie met een dynamische omgeving. De agent probeert verschillende acties uit, observeert de gevolgen daarvan en past zijn gedrag aan om betere resultaten te behalen. Hierdoor is RL bijzonder geschikt voor problemen waarbij opeenvolgende beslissingen genomen moeten worden en waarbij de omgeving continu verandert. Toepassingen van RL komen onder andere voor in robotica, autonome systemen, games en complexe optimalisatieproblemen \autocite{Tonazzo}.
+
+\vspace{1em}Hoewel reinforcement learning veel mogelijkheden biedt, verschilt deze aanpak fundamenteel van het systeem dat in deze bachelorproef wordt ontwikkeld. In deze studie wordt namelijk gebruikgemaakt van een meer klassieke machine learning-benadering in plaats van reinforcement learning. Het voorgestelde model wordt vooraf getraind op gestructureerde data met expliciete kenmerken zoals workload, stressniveau, beschikbaarheid en skill-matching tussen taken en werknemers. Op basis van deze aangeleerde patronen voorspelt het systeem vervolgens welke werknemer het meest geschikt is voor een bepaalde taak. De focus ligt hierbij niet op het leren van een optimale reeks opeenvolgende beslissingen via interactie, maar op het snel en efficiënt voorspellen van een evenwichtige taakverdeling.
+
+Daarnaast vereist reinforcement learning doorgaans een complexe simulatieomgeving waarin een agent herhaaldelijk kan experimenteren en feedback ontvangen. In deze bachelorproef wordt daarentegen gewerkt met synthetisch gegenereerde en gestructureerde data binnen een gecontroleerde omgeving. Hierdoor kan het model snel beslissingen nemen zonder dat voortdurende hertraining noodzakelijk is.
+
+\vspace{1em}Op basis van deze inzichten kan geconcludeerd worden dat AI een belangrijke meerwaarde biedt binnen moderne taakallocatie. Vooral systemen die rekening houden met zowel efficiëntie als menselijke factoren zoals stress en werkdruk bieden potentieel voor een duurzamere en evenwichtigere organisatie van werk. Het voorgestelde model probeert deze aspecten te combineren in een adaptief en praktisch toepasbaar systeem dat geschikt is voor dynamische IT-omgevingen waarin snelle en doordachte beslissingen noodzakelijk zijn.
 
 \section{Conclusie}
 \label{ch:conclusie-literatuurstudie}
-Samenvattend vormt deze literatuurstudie een sterke theoretische basis voor het verder onderzoeken van een AI-gestuurd model voor taakverdeling. Het onderstreept dat een datagedreven, adaptieve aanpak noodzakelijk is om zowel organisatorische efficiëntie te verbeteren als werkgerelateerde stress in de IT-sector te verminderen.
-%Verschillende AI-methoden ondersteunen planning en scheduling: supervised learning voorspelt toekomstige scenario’s. Unsupervised learning detecteert verborgen patronen en risico’s. Reinforcement learning leert optimale beslissingen via simulatie en optimalisatie-algoritmen vinden de beste schema’s op basis van meerdere doelstellingen en beperkingen. AI biedt voordelen zoals snelheid, aanpasbaarheid, nauwkeurigheid en continue besluitvorming \autocite{Alan}. Hierdoor kunnen teams proactief plannen, risico’s verminderen en de efficiëntie van Agile-projecten aanzienlijk verbeteren.
+Uit deze literatuurstudie blijkt dat taak-werknemer matching een cruciale rol speelt binnen organisaties en zeker binnen de IT-sector waar veel stress wordt ervaren. Een efficiënte taakverdeling heeft niet alleen invloed op de productiviteit van een organisatie, maar ook op het welzijn van werknemers. Wanneer taken beter aansluiten bij de vaardigheden, ervaring en beschikbare capaciteit van werknemers kan stress verminderd worden en ontstaat een meer evenwichtige werkomgeving.
+
+De literatuur toont aan dat traditionele en subjectieve methoden van taakverdeling vaak tekortschieten in dynamische omgevingen. Hoewel het concentreren van taken bij sterk presterende werknemers op korte termijn efficiënt kan lijken, verhoogt dit op lange termijn het risico op overbelasting, vertragingen en burn-out. Daarom groeit de interesse in objectieve en data-gedreven systemen die rekening houden met meerdere factoren zoals workload, stressniveau, vaardigheden en taakcomplexiteit.
+
+Daarnaast blijkt dat stress in de IT-sector niet volledig vermeden kan worden, maar wel beter beheerd kan worden. Ondersteuning van werknemers, aandacht voor mentale gezondheid en een evenwichtige werkverdeling zijn hierbij essentieel. Agile-methodologieën bieden een interessante benadering doordat zij flexibiliteit, iteratieve opvolging en continue bijsturing centraal plaatsen. Tegelijkertijd kent Agile ook beperkingen, zoals scope creep en organisatorische complexiteit, waardoor bijkomende ondersteuning nodig is.
+
+In deze context bieden AI-gedreven taakverdelingssystemen een veelbelovende oplossing. Door gebruik te maken van historische en actuele data kunnen dergelijke systemen efficiëntere en meer evenwichtige beslissingen nemen rond taakallocatie. Bovendien maken ze het mogelijk om werkdruk en stress dynamisch op te volgen en toekomstige taakverdelingen hierop aan te passen. In tegenstelling tot veel bestaande modellen richt deze bachelorproef zich niet enkel op optimale skill-matching, maar ook op het bewaken van het welzijn van werknemers door rekening te houden met de evolutie van stress en workload over tijd.
+
+Hoewel AI-systemen belangrijke voordelen bieden, blijven er ook beperkingen bestaan, zoals mogelijke bias, integratieproblemen en onzekerheid over langetermijneffecten. Toch toont de literatuur aan dat AI, wanneer het gebruikt wordt als ondersteunend hulpmiddel in plaats van als vervanging van menselijke besluitvorming, een sterke meerwaarde kan bieden binnen moderne organisaties.
+
+Op basis van deze inzichten vormt de literatuurstudie een stevige theoretische basis voor het verdere onderzoek. In het volgende hoofdstuk wordt beschreven hoe deze concepten vertaald worden naar het ontwerp en de implementatie van een AI-model dat een dynamische, efficiënte en stressbewuste taakverdeling binnen een gesimuleerde IT-omgeving ondersteunt.
 
 %Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
 
