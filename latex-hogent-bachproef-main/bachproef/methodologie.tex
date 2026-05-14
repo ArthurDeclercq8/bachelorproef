@@ -158,13 +158,13 @@ Daarnaast wordt gebruikgemaakt van JSON-bestanden voor het beheren van de data v
 
 Wat betreft de beschikbare middelen is het project realistisch binnen de tijdspanne van een bachelorproef. Door te werken met synthetische data wordt de afhankelijkheid van externe databronnen vermeden, wat het ontwikkelproces aanzienlijk vereenvoudigt. Bovendien is de code modulair opgebouwd (met aparte componenten voor training, voorspelling en allocatie), wat het mogelijk maakt om stapsgewijs te ontwikkelen en te testen.
 
-Er zijn echter ook enkele uitdagingen verbonden aan deze aanpak. De kwaliteit van de synthetische data heeft een directe invloed op de prestaties van het model, waardoor het belangrijk is om realistische aannames te maken. Daarnaast is het modelleren van factoren zoals stress en workload een vereenvoudiging van de realiteit. Ook blijft het model statisch na training, wat betekent dat het zich niet automatisch aanpast aan nieuwe patronen in de data, hoewel het systeem zelf wel dynamisch reageert via de simulatie.
+\vspace{1em}Er zijn echter ook enkele uitdagingen verbonden aan deze aanpak. De kwaliteit van de synthetische data heeft een directe invloed op de prestaties van het model, waardoor het belangrijk is om realistische aannames te maken. Daarnaast is het modelleren van factoren zoals stress en workload een vereenvoudiging van de realiteit. Ook blijft het model statisch na training, wat betekent dat het zich niet automatisch aanpast aan nieuwe patronen in de data, hoewel het systeem zelf wel dynamisch reageert via de simulatie.
 
 Een belangrijke beperking van het huidige systeem is het ontbreken van historische toewijzingsdata. Omdat geen reële voorbeelden beschikbaar zijn van vroegere taaktoewijzingen en de bijbehorende resultaten, wordt de trainingsdata synthetisch gegenereerd via een heuristisch puntensysteem. Dit betekent dat het model in essentie leert om datzelfde puntensysteem na te bootsen, en geen patronen kan ontdekken die buiten de vooraf gedefinieerde regels vallen. Het systeem functioneert bijgevolg correct als proof of concept en toont aan dat de architectuur — waarbij een machine learning-model geïntegreerd wordt in een taakverdelingsproces — technisch uitvoerbaar is. Voor een productieomgeving zou het model echter getraind moeten worden op echte historische data, zodat het zelfstandig bruikbare patronen kan leren en meerwaarde biedt ten opzichte van een zuiver regelgebaseerde aanpak
 
 Op basis van deze analyse worden de functionaliteiten geprioriteerd. De kernfunctionaliteiten bestaan uit het trainen van het model, het berekenen van geschiktheidsscores en het uitvoeren van taaktoewijzingen. Dynamische updates van workload en stress maken eveneens deel uit van de kern, aangezien deze essentieel zijn voor de simulatie. Meer geavanceerde uitbreidingen, zoals real-time data-integratie of online learning, vallen buiten de scope van deze proef.
 
-Samenvattend kan gesteld worden dat het voorgestelde AI-model technisch en praktisch haalbaar is binnen de context van deze bachelorproef. De huidige implementatie toont aan dat een werkend prototype gerealiseerd kan worden dat de meerwaarde van een data-gedreven taaktoewijzing aantoont, zonder nood aan complexe infrastructuur of uitgebreide externe integraties.
+\vspace{1em}Samenvattend kan gesteld worden dat het voorgestelde AI-model technisch en praktisch haalbaar is binnen de context van deze bachelorproef. De huidige implementatie toont aan dat een werkend prototype gerealiseerd kan worden dat de meerwaarde van een data-gedreven taaktoewijzing aantoont, zonder nood aan complexe infrastructuur of uitgebreide externe integraties.
 %%-----------------------------------------------------------------------------
 \section{Ontwikkeling}
 \label{ch:ontwikkeling}
@@ -192,19 +192,32 @@ Samenvattend kan gesteld worden dat het voorgestelde AI-model technisch en prakt
 
 Het model is opgebouwd aan de hand van vier modules. De module datasetbuilder.py is verantwoordelijk voor de constructie van feature-vectoren. trainmodel.py bevat de volledige trainingslogica, van het aanmaken van de dataset tot het opslaan van het getrainde model. predictor.py laadt het opgeslagen model en genereert kansschattingen voor individuele werknemer-taakcombinaties. Tot slot verzorgt taskallocator.py de eigenlijke toewijzingslogica tijdens de inferentiefase. Het hoofdscript main.py orkestreert dit geheel.
 
+\subsection{Data}
 De invoerdata bestaat uit twee JSON-bestanden. Het bestand employees.json bevat de profielen van 22 werknemers. Elk profiel omvat de naam en functie van de werknemer, het aantal jaren ervaring, een werkdrukwaarde tussen 0,0 en 1,0, een lijst van technische vaardigheden en een persona-lijst. Dit persona-woordenboek bestaat uit tien gedragskenmerken, elk gescoord op een schaal van 1 tot 10: technische vaardigheid, probleemoplossend vermogen, werksnelheid, kwaliteit van het geleverde werk, betrouwbaarheid, concentratievermogen, samenwerking, communicatie, stressbestendigheid en initiatief.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{../graphics/screenshot001.png}
-    \caption[Voorbeeld figuur.]{\label{fig:grail}Voorbeeld van invoegen van een figuur. Zorg altijd voor een uitgebreid bijschrift dat de figuur volledig beschrijft zonder in de tekst te moeten gaan zoeken. Vergeet ook je bronvermelding niet!}
+    \caption[Voorbeeld van een employee in employees.json]{\label{fig:screenshot1}Voorbeeld van een employee in employees.json}
 \end{figure}
  
-Het tweede bestand, tasks.json, bevat 100 te verdelen taken. Elke taak heeft een uniek identificatienummer, een omschrijving, een vereiste functie, een taaktype (development, support, management of devops), een moeilijkheidsgraad en het aantal resterende dagen tot de deadline. (screenshot002)
+Het tweede bestand, tasks.json, bevat 100 te verdelen taken. Elke taak heeft een uniek identificatienummer, een omschrijving, een vereiste functie, een taaktype (development, support, management of devops), een moeilijkheidsgraad en het aantal resterende dagen tot de deadline.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot002.png}
+    \caption[Voorbeeld van een task in tasks.json]{\label{fig:screenshot2}Voorbeeld van een task in tasks.json}
+\end{figure}
 
 Deze data is gegenereerd met behulp van een AI-chatbot en niet zelf gegenereerd met bijvoorbeeld Python, omdat het realistische cijfers moeten zijn. 
 
-\vspace{1em}De eerste module, datasetbuilder.py, zet de ruwe data om naar numerieke feature-vectoren die het machine learning-model kan verwerken. De functie \textbf{buildrolemap} verzamelt alle unieke rollen uit zowel de werknemers- als taakdata, sorteert ze alfabetisch en kent aan elke rol een geheel getal toe. Deze map wordt opgeslagen als \textbf{rolemap.json}. De hulpfunctie \textbf{encoderole} converteert een rol naar het bijbehorende getal en geeft de waarde -1 terug wanneer de rol onbekend is. De centrale functie \textbf{buildfeatures} bouwt per combinatie van werknemer en taak een vector van 16 elementen op. De eerste twee elementen zijn de gecodeerde rol van de werknemer en die van de taak. Daarna volgen de ervaring en de werkdruk van de werknemer, gevolgd door de tien persona-kenmerken. De vector sluit af met de moeilijkheidsgraad en het aantal resterende dagen van de taak. (screenshot003)
+\subsection{De eerste module: datasetbuilder.py}
+\vspace{1em}De eerste module, datasetbuilder.py, zet de ruwe data om naar numerieke feature-vectoren die het machine learning-model kan verwerken. De functie \textbf{buildrolemap} verzamelt alle unieke rollen uit zowel de werknemers- als taakdata, sorteert ze alfabetisch en kent aan elke rol een geheel getal toe. Deze map wordt opgeslagen als \textbf{rolemap.json}. De hulpfunctie \textbf{encoderole} converteert een rol naar het bijbehorende getal en geeft de waarde -1 terug wanneer de rol onbekend is. De centrale functie \textbf{buildfeatures} bouwt per combinatie van werknemer en taak een vector van 16 elementen op. De eerste twee elementen zijn de gecodeerde rol van de werknemer en die van de taak. Daarna volgen de ervaring en de werkdruk van de werknemer, gevolgd door de tien persona-kenmerken. De vector sluit af met de moeilijkheidsgraad en het aantal resterende dagen van de taak.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot003.png}
+    \caption[datasetbuilder.py]{\label{fig:screenshot3}De code van module: datasetbuilder.py}
+\end{figure}
 
+\subsection{De tweede module: trainmodel.py}
 \vspace{1em}De tweede module, trainmodel.py, genereert de trainingsdata en traint vervolgens het classificatiemodel. Omdat er geen historische toewijzingsdata beschikbaar is, wordt via een puntensysteem berekend wie de beste keuze zou zijn. Die uitkomst wordt vervolgens gebruikt als trainingsdata voor het model. Dit betekent dat het model in essentie leert om datzelfde puntensysteem na te bootsen, en geen patronen kan ontdekken die buiten de vooraf gedefinieerde regels vallen. Het systeem functioneert bijgevolg correct als proof of concept en toont aan dat de architectuur technisch uitvoerbaar is. Voor een productieomgeving zou het model echter getraind moeten worden op echte historische data, zodat het zelfstandig bruikbare patronen kan leren en meerwaarde biedt ten opzichte van een zuiver regelgebaseerde aanpak.
 
 Het puntensysteem werkt via een score die bestaat uit vier componenten. De rolmatch levert 1,0 op wanneer de functie van de werknemer overeenkomt met de vereiste functie voor de taak, en 0,0 in het andere geval. De persona-fit is afhankelijk van het taaktype: voor ontwikkelingstaken worden technische vaardigheid, probleemoplossend vermogen en codekwaliteit gewogen; voor ondersteuningstaken gelden communicatie, betrouwbaarheid en snelheid; voor managementtaken zijn samenwerking, communicatie en initiatief relevant; en voor devops-taken tellen betrouwbaarheid, stressbestendigheid en focus mee.
@@ -212,18 +225,50 @@ Het puntensysteem werkt via een score die bestaat uit vier componenten. De rolma
 De persona-fit wordt berekend als het gemiddelde van de relevante kenmerken, genormaliseerd naar het interval [0, 1]. De werkdrukpenalty stijgt naarmate een werknemer meer taken heeft, zodat drukbezette werknemers minder snel nieuwe taken ontvangen. Tot slot geldt een no-task-bonus van 1,5 voor werknemers die nog geen enkele taak hebben gekregen, zodat een evenwichtige spreiding gewaarborgd blijft. Al deze componenten samen vormen de uiteindelijke score:
 
 \vspace{0.5em}``rolmatch + 0,5 x persona-fit - 0,5 x de werkdrukpenalty + de no-task-bonus''.
-(screenshot004)
 
-\vspace{1em}Op basis van deze scores worden de 100 taken opgesplitst in 80 trainingstaken en 20 testtaken. Voor elke taak in de trainingsset worden alle werknemers gescoord. De twee werknemers met de hoogste score krijgen het label 1, wat staat voor de beste keuze; de overige werknemers krijgen het label 0. Voor de testset wordt enkel de beste werknemer per taak gelabeld als 1, zodat de evaluatie strenger is en beter weergeeft of het model de absolute beste keuze kan identificeren. Dit resulteert in een sterk onevenwichtige dataset, waarbij positieve labels aanzienlijk in de minderheid zijn. Om dit op te vangen wordt een Random Forest classifier getraind met 200 beslissingsbomen en de parameter classweight ingesteld op "balanced", waardoor het model de ondervertegenwoordigde klasse zwaarder weegt. Een Random Forest is een model dat bestaat uit veel beslissingsbomen die elk een eigen voorspelling maken. De uiteindelijke uitkomst is wat de meerderheid van de bomen voorspelt. Met 200 bomen is het resultaat stabieler en minder gevoelig voor toeval dan met een kleine hoeveelheid. (screenshot005)
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot004.png}
+    \caption[trainmodel.py]{\label{fig:screenshot4}Eerste deel van de code van module: trainmodel.py}
+\end{figure}
 
-Na de training wordt het model geëvalueerd op de testset via accuracy (hoeveel procent correct), een classificatierapport met precision (van alle voorspelde positieven, hoeveel waren echt positief), recall (van alle echte positieven, hoeveel werden gevonden) en de F1-score (het evenwicht tussen precision en recall in één getal, waarbij een waarde dichter bij 1 beter is). Daarnaast wordt een confusion matrix opgesteld, een tabel die toont hoeveel fouten van welk type er gemaakt werden. Tot slot worden de acht meest bepalende kenmerken gerapporteerd, gemeten via de mate waarin elk kenmerk bijdraagt aan de beslissingen van het model. (screenshot006)
+\vspace{1em}Op basis van deze scores worden de 100 taken opgesplitst in 80 trainingstaken en 20 testtaken. Voor elke taak in de trainingsset worden alle werknemers gescoord. De twee werknemers met de hoogste score krijgen het label 1, wat staat voor de beste keuze; de overige werknemers krijgen het label 0. Voor de testset wordt enkel de beste werknemer per taak gelabeld als 1, zodat de evaluatie strenger is en beter weergeeft of het model de absolute beste keuze kan identificeren. Dit resulteert in een sterk onevenwichtige dataset, waarbij positieve labels aanzienlijk in de minderheid zijn. Om dit op te vangen wordt een Random Forest classifier getraind met 200 beslissingsbomen en de parameter classweight ingesteld op "balanced", waardoor het model de ondervertegenwoordigde klasse zwaarder weegt. Een Random Forest is een model dat bestaat uit veel beslissingsbomen die elk een eigen voorspelling maken. De uiteindelijke uitkomst is wat de meerderheid van de bomen voorspelt. Met 200 bomen is het resultaat stabieler en minder gevoelig voor toeval dan met een kleine hoeveelheid. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot005.png}
+    \caption[trainmodel.py]{\label{fig:screenshot5}Tweede deel van de code van module: trainmodel.py}
+\end{figure}
 
-\vspace{1em}De derde module: predictor.py, laadt het opgeslagen model en berekent voor een gegeven werknemer-taakcombinatie de kans dat de werknemer de beste keuze is. Daarvoor wordt de methode \textbf{predictproba} gebruikt, die twee kansen teruggeeft: de kans op klasse 0 (niet de beste keuze) en de kans op klasse 1 (de beste keuze). Enkel die laatste waarde wordt als ML-score doorgegeven aan de toewijzingslogica. (screenshot007)
+Na de training wordt het model geëvalueerd op de testset via accuracy (hoeveel procent correct), een classificatierapport met precision (van alle voorspelde positieven, hoeveel waren echt positief), recall (van alle echte positieven, hoeveel werden gevonden) en de F1-score (het evenwicht tussen precision en recall in één getal, waarbij een waarde dichter bij 1 beter is). Daarnaast wordt een confusion matrix opgesteld, een tabel die toont hoeveel fouten van welk type er gemaakt werden. Tot slot worden de acht meest bepalende kenmerken gerapporteerd, gemeten via de mate waarin elk kenmerk bijdraagt aan de beslissingen van het model. \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot006.png}
+    \caption[trainmodel.py]{\label{fig:screenshot6}Derde deel van de code van module: trainmodel.py}
+\end{figure}
 
-\vspace{1em}De vierde en laatste module: taskallocator.py, is de kern van het systeem tijdens de inferentiefase. Dit is de fase waarin het model effectief gebruikt wordt om voorspellingen te maken, nadat het getraind is. Voor elke taak doorloopt de functie \textbf{assigntask} alle werknemers en berekent per werknemer een eindscore. Deze score is de som van de ML-score, verminderd met 0,5 maal de werkdrukpenalty en verhoogd met de no-task-bonus van 1,5 voor werknemers zonder taken. De werkdrukformule is identiek aan die in het heuristisch scoremodel, wat zorgt voor consistentie tussen de trainings- en inferentiefase. De werknemer met de hoogste eindscore wordt geselecteerd en ontvangt de taak. (screenshot008)
+\subsection{De derde module: predictor.py}
+\vspace{1em}De derde module: predictor.py, laadt het opgeslagen model en berekent voor een gegeven werknemer-taakcombinatie de kans dat de werknemer de beste keuze is. Daarvoor wordt de methode \textbf{predictproba} gebruikt, die twee kansen teruggeeft: de kans op klasse 0 (niet de beste keuze) en de kans op klasse 1 (de beste keuze). Enkel die laatste waarde wordt als ML-score doorgegeven aan de toewijzingslogica.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot007.png}
+    \caption[predictor.py]{\label{fig:screenshot7}De code van module: predictor.py}
+\end{figure}
 
+\subsection{De vierde module: taskallocator.py}
+\vspace{1em}De vierde en laatste module: taskallocator.py, is de kern van het systeem tijdens de inferentiefase. Dit is de fase waarin het model effectief gebruikt wordt om voorspellingen te maken, nadat het getraind is. Voor elke taak doorloopt de functie \textbf{assigntask} alle werknemers en berekent per werknemer een eindscore. Deze score is de som van de ML-score, verminderd met 0,5 maal de werkdrukpenalty en verhoogd met de no-task-bonus van 1,5 voor werknemers zonder taken. De werkdrukformule is identiek aan die in het heuristisch scoremodel, wat zorgt voor consistentie tussen de trainings- en inferentiefase. De werknemer met de hoogste eindscore wordt geselecteerd en ontvangt de taak.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot008.png}
+    \caption[taskallocator.py]{\label{fig:screenshot8}De code van module: taskallocator.py}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../graphics/screenshot009.png}
+    \caption[main.py]{\label{fig:screenshot9}De code van het main script: main.py}
+\end{figure}
+
+\subsection{Het laatste script: main.py}
 \vspace{1em}Tot slot, het hoofdscript: main.py orkestreert het volledige inferentieproces. Eerst worden de werknemers- en taakdata ingelezen. Taken die reeds tot de testset behoren, worden gefilterd zodat ze niet nogmaals worden verdeeld. Vervolgens wordt voor elke werknemer de werkdruk geïnitialiseerd en de takenlijst leeggemaakt. Daarna wordt voor elke resterende taak de toewijzingsfunctie aangeroepen. De toegewezen werknemer ontvangt de taak en zijn werkdruk stijgt met 0,1, tot een maximum van 1,0. Aan het einde geeft het script een overzicht per werknemer van het totale aantal ontvangen taken en de bijbehorende taakomschrijvingen.
-(screenshot009)
 
 %%-----------------------------------------------------------------------------
 \section{Risico- en Impactanalyse}
