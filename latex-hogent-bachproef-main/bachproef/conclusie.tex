@@ -31,30 +31,30 @@ Het ML-model is een Random Forest classifier die getraind werd op een samengeste
 
 \begin{listing}
   \begin{minted}{python}
-        def metrics(assignments):
-        role_match, skill_hits = 0, 0
-        workload = {e["name"]: e.get("workload", 0.0) for e in employees}
-        counts   = Counter()
-        for task, emp in assignments:
-        counts[emp["name"]] += 1
-        workload[emp["name"]] = min(1.0, workload[emp["name"]] + 0.1)
-        req = task["required_role"]
-        if req == emp["role"] or (req == "Senior Developer" and emp["role"] == "Developer"):
+  def metrics(assignments):
+    role_match, skill_hits = 0, 0
+    workload = {e["name"]: e.get("workload", 0.0) for e in employees}
+    counts   = Counter()
+    for task, emp in assignments:
+      counts[emp["name"]] += 1
+      workload[emp["name"]] = min(1.0, workload[emp["name"]] + 0.1)
+      req = task["required_role"]
+      if req == emp["role"] or (req == "Senior Developer" and emp["role"] == "Developer"):
         role_match += 1
-        task_text = (task["task"] + " " + task.get("type","")).lower()
-        if any(s.lower() in task_text for s in emp.get("skills",[])):
+      task_text = (task["task"] + " " + task.get("type","")).lower()
+      if any(s.lower() in task_text for s in emp.get("skills",[])):
         skill_hits += 1
-        n = len(assignments)
-        c = [counts.get(e["name"], 0) for e in employees]
-        overload = sum(1 for w in workload.values() if w >= 1.0)
-        return {
-            "Rol-match %":            round(100 * role_match / n, 1),
-            "Skill-overlap %":        round(100 * skill_hits / n, 1),
-            "Werklastverdeling std":  round(statistics.stdev(c), 2),
-            "Max taken (1 persoon)":  max(c),
-            "Min taken (1 persoon)":  min(c),
-            "Overbelasting %":        round(100 * overload / len(employees), 1),
-        }
+    n = len(assignments)
+    c = [counts.get(e["name"], 0) for e in employees]
+    overload = sum(1 for w in workload.values() if w >= 1.0)
+    return {
+      "Rol-match %":            round(100 * role_match / n, 1),
+      "Skill-overlap %":        round(100 * skill_hits / n, 1),
+      "Werklastverdeling std":  round(statistics.stdev(c), 2),
+      "Max taken (1 persoon)":  max(c),
+      "Min taken (1 persoon)":  min(c),
+      "Overbelasting %":        round(100 * overload / len(employees), 1),
+    }
       \end{minted}
   \caption[Stukje van het evaluatiescript]{Stukje van het evaluatiescript waarin de code staat voor de metrics.}
 \end{listing}
@@ -107,5 +107,47 @@ Dit onderscheid is in de praktijk van groot belang. Een allocatiesysteem dat tec
 % niet duidelijk zijn?
 % Heeft het onderzoek geleid tot nieuwe vragen die uitnodigen tot verder 
 %onderzoek?
-\vspace{1em}
+\vspace{1em}Deze bachelorproef vertrok vanuit een maatschappelijk relevante probleemstelling: de hoge werkgerelateerde stress bij IT-professionals. De centrale onderzoeksvraag luidde:
 
+\vspace{0.5em}``Hoe kan artificiële intelligentie worden ingezet om de taakverdeling binnen de IT-sector te optimaliseren, om zo enerzijds de mentale gezondheid bij werknemers te verbeteren en anderzijds de werking van het bedrijf vlotter te laten verlopen?''
+
+Op basis van de literatuurstudie, de ontwikkeling van het proof-of-concept en de vergelijkende evaluatie kan geconcludeerd worden dat een AI-gedreven aanpak voor taakallocatie inderdaad een meerwaarde biedt ten opzichte van traditionele methoden. Er zijn wel een paar nuances.
+
+\section{Antwoord op de onderzoeksvragen}
+\vspace{1em}Het ontwikkelde ML-model op basis van een Random Forest classifier toont aan dat het haalbaar is om een geautomatiseerd taakallocatiesysteem te bouwen dat meerdere factoren tegelijk afweegt: rol-match, persona-fit, werkdruk en taakaantal. De vergelijkende evaluatie met Round-Robin, Greedy Rol-Match en ChatGPT (GPT-4o) toont aan dat het ML-model de enige methode is die beide 
+dimensies van het probleem balanceert: het levert een aanvaardbare toewijzing en een eerlijke spreiding van de werklast over het volledige team. Concreet behaalt het model een werklastverdeling met een standaarddeviatie van 1,37, dat aanzienlijk lager ligt dan Greedy (3,13) en ChatGPT (3,35), terwijl elke werknemer minimaal drie taken ontvangt en niemand meer dan 7.
+
+Methoden die uitsluitend optimaliseren voor rol-match, zoals Greedy en ChatGPT, presteren inhoudelijk sterk maar creëren onevenwichten waarbij bepaalde werknemers worden overbelast en anderen 
+volledig worden overgeslagen. Precies dat soort onevenwicht ligt aan de basis van de werkstress die deze proef wil aanpakken. Het model geeft dus een concreet, onderbouwd antwoord op de onderzoeksvraag: AI kan ingezet worden om taakverdeling te optimaliseren, op voorwaarde dat het systeem werkdruk en welzijn als expliciete criteria opneemt in het leerproces.
+
+\vspace{1em}Daarnaast werd ook de deelvraag beantwoord:
+
+\vspace{0.5em}``Hoe creëer je zo een AI-model en welke resources heb je hiervoor nodig?''
+
+Het ontwikkelde systeem toont aan dat de technische drempel voor een werkend prototype lager ligt dan vaak wordt aangenomen. Het model is volledig opgebouwd in Python, met \textbf{scikit-learn} als enige machine learning-bibliotheek. Het draait op standaard hardware zonder nood aan GPU's of cloudinfrastructuur. De architectuur bestaat uit vier module scripts: \textbf{datasetbuilder.py} voor 
+de constructie van feature-vectoren, \textbf{trainmodel.py} voor de training van de Random Forest classifier, \textbf{predictor.py} voor het berekenen van geschiktheidsscores en \textbf{taskallocator.py} voor de eigenlijke toewijzingslogica. Invoerdata wordt beheerd via twee JSON-bestanden die de werknemers- en taakprofielen bevatten.
+
+De cruciale resource die in dit onderzoek ontbreekt, is een dataset van historische toewijzingsbeslissingen met bijbehorende uitkomsten. Bij afwezigheid daarvan werd de trainingsdata synthetisch gegenereerd via een heuristisch puntensysteem. Dit volstaat voor een proof of concept, maar beperkt de generaliseerbaarheid van het model.
+
+\section{Bijdrage aan het onderzoeksdomein}
+\vspace{1em}De meerwaarde van deze bachelorproef ligt in de benadering van het allocatieprobleem. Veel bestaande systemen, zoals het door \textcite{Arslan_2024} beschreven model focussen vrijwel uitsluitend op skill- en rol-matching. Dit onderzoek voegt een extra dimensie toe door ook stressniveau, persona en de dynamische evolutie van werkdruk na elke toewijzing mee te nemen in het model. Dit maakt het een meer duurzaam en mensgericht alternatief voor prestatiegerichte allocatiesystemen.
+
+Bovendien biedt het onderzoek een vergelijkingsbasis tussen vier fundamenteel verschillende allocatiestrategieën, wat de relatieve sterktes en zwaktes van elk model concreet zichtbaar maakt.
+
+\section{Kritische reflectie}
+\vspace{1em}Toch zijn er beperkingen die eerlijk benoemd moeten worden. De voornaamste is de afwezigheid van historische data. Omdat het model in essentie leert om een zelfopgesteld heuristisch puntensysteem na te bootsen, kan het geen patronen ontdekken die buiten die vooraf gedefinieerde regels vallen. Het systeem functioneert correct als proof of concept, maar zou voor productiegebruik getraind moeten worden op echte historische toewijzingsdata. Zonder die stap biedt het systeem geen aantoonbare meerwaarde ten opzichte van het onderliggende regelgebaseerde model zelf.
+
+Een tweede beperking is de vereenvoudigde modellering van werkdruk: na elke taaktoewijzing stijgt de werkbelasting met een vaste waarde van 0,1, zonder rekening te houden met taakvoltooiing of taakduur. In de praktijk varieert de impact van taken sterk en een realistischer model zou werkdruk dynamisch moeten laten dalen naarmate taken worden afgerond.
+
+Verder roepen de persona-kenmerken ethische vragen op over hoe deze scores in de praktijk bepaald worden. Subjectieve beoordelingen door leidinggevenden kunnen persoonlijke 
+vooroordelen inbakken in het model op een manier die moeilijker te detecteren is dan bij een menselijke beslissing. Een robuust systeem vereist objectief meetbare inputdata en transparante beslissingslogica, denkende aan de AVG-vereisten rond uitlegbaarheid van geautomatiseerde beslissingen.
+
+Wat betreft de verwachte uitkomst: de hypothese dat een ML-model beter zou presteren op het vlak van werklastbalans werd bevestigd. Minder verwacht was het zwakke resultaat op rol-match (46\%) in vergelijking met Greedy en ChatGPT (beiden 100\%). Dit is echter geen fout in het model, maar een gevolg van de afweging: het model verkiest soms een werknemer met een iets minder perfecte rol maar een lagere werkdruk, boven een perfecte kandidaat die al overbelast is. Of deze afweging in de praktijk wenselijk is, hangt af van de organisatiecontext. Hier kan wel verder onderzoek gedaan 
+worden door het systeem te testen binnen een reële bedrijfsomgevin. Hier geven leidinggevenden en werknemers feedback op de gegenereerde toewijzingen. Op basis van die feedback kan dan bepaald worden welke afweging tussen rol-match en werklastbalans het meest aansluit bij de noden van de organisatie en kunnen de gewichten in het model bijgestuurd worden.
+
+\section{Aanbevelingen voor verder onderzoek}
+
+\vspace{1em}Ten eerste is er nood aan validatie met echte historische toewijzingsdata uit een bedrijfsomgeving, om te toetsen of de geleerde patronen overeenkomen met wat menselijke 
+planners als optimaal beschouwen. Ten tweede biedt de integratie van reinforcement learning, waarbij het systeem leert via feedback op werkelijke uitkomsten in plaats van gesimuleerde scores, een veelbelovende richting voor een adaptief systeem dat zichzelf continu verbetert op basis van ervaringen uit de praktijk. Ten derde zou een longitudinale studie kunnen nagaan of een evenwichtigere taakverdeling wel effectief leidt tot lagere stressniveaus en minder burn-out, wat de kern is van de oorspronkelijke probleemstelling.
+
+Tot slot suggereert dit onderzoek dat de echte meerwaarde van AI in taakverdeling niet ligt in het volledig vervangen van menselijk oordeel, maar in het ondersteunen ervan: een systeem dat de planner wijst op onevenwichten, overbelasting of mismatches zorgt zo voor betere beslissingen die zowel de efficiëntie als het welzijn van het team dienen.

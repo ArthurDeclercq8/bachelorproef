@@ -100,7 +100,7 @@ if ml:
     print("  VERGELIJKINGSTABEL")
     print(f"{'='*70}")
     print(f"  {'Metric':<28}", end="")
-    for naam in all_metrics: print(f"  {naam[:20]:<22}", end="")
+    for naam in all_metrics: print(f"  {naam[:25]:<22}", end="")
     print()
     print(f"  {'─'*28}", end="")
     for _ in all_metrics: print(f"  {'─'*22}", end="")
