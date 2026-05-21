@@ -4,59 +4,74 @@
 \chapter{Resultaten}%
 \label{ch:resultaten}
 \section{Onderzoeksopzet}
-\vspace{1em}Om de meerwaarde van het ontwikkelde ML-model te beoordelen, werd het vergeleken met drie andere allocatiemethodes: Round-Robin, Greedy Rol-Match en ChatGPT (GPT-4o). Alle methodes ontvingen exact dezelfde invoer: een dataset van 100 taken en 22 werknemers met alle eigenschappen eraan. De evaluatie werd uitgevoerd op zes kwantitatieve metrics die samen de kwaliteit van de verdeling meten.
-
-\vspace{1em}De zes gebruikte metrics zijn:
+\vspace{1em}Om de meerwaarde van het ontwikkelde ML-model te beoordelen, werd het vergeleken met drie andere allocatiemethodes: Round-Robin, Greedy Rol-Match en ChatGPT (GPT-4o). Alle methodes ontvingen exact dezelfde invoer: een testset van 60 taken en 22 werknemers met alle eigenschappen eraan. De uitgebreide dataset van 300 taken werd opgesplitst in een trainingsset van 240 taken en een testset van 60 taken. De evaluatie werd uitgevoerd op zes kwantitatieve metrics die samen de kwaliteit van de verdeling meten. De zes gebruikte metrics zijn:
 
 \vspace{0.5em}Rol-match (\%): het percentage taken dat terechtkomt bij een werknemer met de vereiste rol.
 
-\vspace{0.5em}Skill-overlap (\%): het percentage taken waarbij de toegewezen werknemer minstens één relevante skill bezit.
-
 \vspace{0.5em}Werklastverdeling (std): de standaarddeviatie van het aantal taken per werknemer: een lagere waarde wijst op een eerlijkere spreiding.
 
-\vspace{0.5em}Maximale taaklast: het hoogste aantal taken dat één werknemer ontvangt.
-
-\vspace{0.5em}Minimale taaklast: het laagste aantal taken dat één werknemer ontvangt.
+\vspace{0.5em}Gemiddelde eindwerkdruk: de gemiddelde werkdruk over alle werknemers na allocatie, ongeacht hoeveel taken zij ontvingen.
 
 \vspace{0.5em}Overbelasting (\%): het percentage werknemers dat na allocatie een werkdruk van 1,0 of hoger bereikt.
+
+\vspace{0.5em}Ervaringsfit (\%): het percentage taken waarbij de moeilijkheidsgraad kleiner of gelijk is aan het aantal ervaringsjaren van de toegewezen werknemer.
+
+\vspace{0.5em}Deadline-risico (\%): het percentage taken waarbij de toegewezen werknemer een beginwerkdruk van 0,7 of hoger had én de deadline binnen 2 dagen valt.
 
 \section{Beschrijving van de methodes}
 \vspace{1em}Round-Robin is de meest basische allocatiestrategie: taken worden strikt om de beurt verdeeld over alle werknemers, zonder enige inhoudelijke overweging. Deze methode dient als absolute ondergrens en toont wat er gebeurt bij volledige afwezigheid van intelligentie in het systeem.
 
 Greedy Rol-Match is een regelgebaseerd algoritme dat bij elke taak de minst belaste werknemer met de vereiste rol selecteert. Wanneer geen enkele werknemer die rol bezit, wordt de minst belaste werknemer als fallback gekozen. Het algoritme is eendimensionaal: het optimaliseert uitsluitend voor rol-match en directe werkdruk, zonder rekening te houden met skills, persoonlijkheidskenmerken of ervaringsniveau.
 
-ChatGPT (GPT-4o) ontving een gestructureerde prompt met alle werknemers- en taakgegevens en werd gevraagd elke taak te verdelen op basis van rol, werkdruk, skills en moeilijkheidsgraad. In tegenstelling tot de twee vorige methodes maakt ChatGPT gebruik van een model dat meerdere criteria tegelijk kan afwegen.
+ChatGPT (GPT-4o) ontving een gestructureerde prompt met alle werknemers- en taakgegevens en werd gevraagd elke taak te verdelen op basis van rol, werkdruk, skills en moeilijkheidsgraad. In tegenstelling tot de twee vorige methodes maakt ChatGPT gebruik van een model dat meerdere criteria tegelijk kan afwegen. Omdat ChatGPT niet geïntegreerd kan worden in het geautomatiseerde evaluatiescript, werden de toewijzingen handmatig ingevoerd en apart berekend.
 
 Het ML-model is een Random Forest classifier die getraind werd op een samengestelde score die vier criteria combineert: rol-match, persona-fit (op basis van persoonlijkheidskenmerken), werkdruk en het huidige taakaantal. Het model leert patronen in welke combinaties van werknemers en taken het beste zijn en past deze kennis toe bij nieuwe toewijzingen.
 
 \begin{listing}
   \begin{minted}{python}
   def metrics(assignments):
-    role_match, skill_hits = 0, 0
-    workload = {e["name"]: e.get("workload", 0.0) for e in employees}
-    counts   = Counter()
-    for task, emp in assignments:
-      counts[emp["name"]] += 1
-      workload[emp["name"]] = min(1.0, workload[emp["name"]] + 0.1)
-      req = task["required_role"]
-      if req == emp["role"] or (req == "Senior Developer" and emp["role"] == "Developer"):
-        role_match += 1
-      task_text = (task["task"] + " " + task.get("type","")).lower()
-      if any(s.lower() in task_text for s in emp.get("skills",[])):
-        skill_hits += 1
-    n = len(assignments)
-    c = [counts.get(e["name"], 0) for e in employees]
-    overload = sum(1 for w in workload.values() if w >= 1.0)
-    return {
-      "Rol-match %":            round(100 * role_match / n, 1),
-      "Skill-overlap %":        round(100 * skill_hits / n, 1),
-      "Werklastverdeling std":  round(statistics.stdev(c), 2),
-      "Max taken (1 persoon)":  max(c),
-      "Min taken (1 persoon)":  min(c),
-      "Overbelasting %":        round(100 * overload / len(employees), 1),
-    }
+  role_match = 0
+  workload_start = {e["name"]: e.get("workload", 0.0) for e in employees}
+  workload       = {e["name"]: e.get("workload", 0.0) for e in employees}
+  counts         = Counter()
+  exp_fit        = 0
+  deadline_risk  = 0
+  
+  for task, emp in assignments:
+  counts[emp["name"]] += 1
+  workload[emp["name"]] = min(1.0, workload[emp["name"]] + 0.1)
+  
+  # Rol-match (inclusief Senior Developer → Developer fallback)
+  req = task["required_role"]
+  if req == emp["role"] or (req == "Senior Developer" and emp["role"] == "Developer"):
+  role_match += 1
+  
+  # Ervaringsfit: moeilijkheid <= ervaring van werknemer
+  difficulty = task.get("difficulty", 1)
+  experience = emp.get("experience", 1)
+  if difficulty <= experience:
+  exp_fit += 1
+  
+  # Deadline-risico: hoge werkdruk (>= 0.7) én deadline binnen 2 dagen
+  days = task.get("days_remaining", 99)
+  if workload_start[emp["name"]] >= 0.7 and days <= 2:
+  deadline_risk += 1
+  
+  n = len(assignments)
+  c = [counts.get(e["name"], 0) for e in employees]
+  overload     = sum(1 for w in workload.values() if w >= 1.0)
+  avg_workload = sum(workload.values()) / len(workload)
+  
+  return {
+      "Rol-match %":             round(100 * role_match / n, 1),
+      "Werklastverdeling std":   round(statistics.stdev(c), 2),
+      "Gem. eindwerkdruk":       round(avg_workload, 3),
+      "Overbelasting %":         round(100 * overload / len(employees), 1),
+      "Ervaringsfit %":          round(100 * exp_fit / n, 1),
+      "Deadline-risico %":       round(100 * deadline_risk / n, 1),
+  }
       \end{minted}
-  \caption[Stukje van het evaluatiescript]{Stukje van het evaluatiescript waarin de code staat voor de metrics.}
+  \caption[Een deel van het evaluatiescript]{Een deel van het evaluatiescript waarin de code staat voor de metrics.}
 \end{listing}
 
 \begin{table}
@@ -65,12 +80,12 @@ Het ML-model is een Random Forest classifier die getraind werd op een samengeste
         \toprule
         \textbf{Metric} & \textbf{Round-Robin} & \textbf{Greedy} & \textbf{ChatGPT} & \textbf{ML-model} \\
         \midrule
-        Rol-match (\%)            & 21{,}0 & \textbf{100{,}0} & \textbf{100{,}0} & 46{,}0 \\
-        Skill-overlap (\%)        & 0{,}0  & 3{,}0            & \textbf{11{,}0}  & 2{,}0  \\
-        Werklastverdeling (std)   & \textbf{0{,}51} & 3{,}13  & 3{,}35           & 1{,}37 \\
-        Max.\ taken (1 persoon)   & \textbf{5}      & 10      & 13               & 7      \\
-        Min.\ taken (1 persoon)   & \textbf{4}      & 0       & 0                & 3      \\
-        Overbelasting (\%)        & 59{,}1 & 50{,}0           & 54{,}5           & \textbf{54{,}5} \\
+        Rol-match (\%)            & 18{,}3 & \textbf{100{,}0} & \textbf{100{,}0} & 71{,}7 \\
+        Werklastverdeling (std)   & \textbf{0{,}46} & 2{,}23  & 1{,}70           & 1{,}39 \\
+        Gem.\ eindwerkdruk        & \textbf{0{,}873} & 0{,}886 & 0{,}859          & 0{,}905 \\
+        Overbelasting (\%)        & \textbf{31{,}8} & 36{,}4  & 36{,}4           & \textbf{31{,}8} \\
+        Ervaringsfit (\%)         & 85{,}0 & 78{,}3           & \textbf{88{,}3}  & 75{,}0 \\
+        Deadline-risico (\%)      & 5{,}0  & \textbf{0{,}0}   & 3{,}3            & 1{,}7  \\
         \bottomrule
     \end{tabular}
     \caption[Vergelijking taakallocatiemethodes]{\label{tab:vergelijking}Vergelijking van vier taakallocatiemethodes op zes metrics. Vetgedrukt = beste score per metric.}
@@ -83,18 +98,24 @@ Het ML-model is een Random Forest classifier die getraind werd op een samengeste
 \end{figure}
 
 \section{Analyse per methode}
-\vspace{1em}Round-Robin scoort uitsluitend sterk op de verdelingsmetrics: elke werknemer ontvangt 4 à 5 taken, wat resulteert in de laagste standaarddeviatie (0,51) en de kleinste spreiding tussen minimum en maximum taaklast. Dit is eerder niet de beste oplossing want slechts 21\% van de taken wordt toegewezen aan iemand met de vereiste rol en er is geen enkele skill-overlap. In een reële werkomgeving zou dit systeem volledig onbruikbaar zijn, omdat bijvoorbeeld beveiligingstaken aan developers worden toebedeeld en IT-ondersteuning aan systeembeheerders.
+\vspace{1em}Round-Robin scoort het sterkst op werklastverdeling (std = 0,46) maar dit is uitsluitend een gevolg van de blinde rotatie en niet van een bewuste strategie. Slechts 18,3\% van de taken wordt toegewezen aan iemand met de vereiste rol. In een reële werkomgeving zou dit systeem volledig onbruikbaar zijn, omdat taken bij de verkeerde persoon terechtkomen.
 
-Greedy Rol-Match lost het rolprobleem volledig op: 100\% van de taken belandt bij de juiste rol. Het knelpunt is wel dat het een ernstig ongelijke verdeling heeft: de standaarddeviatie loopt op tot 3,13, 1 werknemer ontvangt maximaal 10 taken, terwijl vier andere werknemers: Sophie Dubois, Laura De Wilde, Elena Petrova en Mark De Vries geen enkele taak ontvangen. Een perfecte rol-match gecombineerd met zulke extreme taakverdeling is in de praktijk niet werkbaar.
+Greedy Rol-Match lost het rolprobleem volledig op met 100\% rol-match en behaalt het laagste deadline-risico (0,0\%). Dit laatste is een rechtstreeks gevolg van de kernlogica: Greedy kiest altijd de minst belaste werknemer, waardoor taken met een korte deadline bijna nooit bij iemand met een hoge beginwerkdruk terechtkomen. Het knelpunt is de werklastverdeling: de standaarddeviatie loopt op tot 2,23, wat aantoont dat taken sterk geconcentreerd worden bij een beperkte groep werknemers met de juiste rol. De overbelasting (36,4\%) is bij Greedy hoger dan bij Round-Robin en het ML-model, wat verklaard wordt door het feit dat Greedy taken herhaaldelijk toewijst aan dezelfde werknemers totdat hun werkdruk de grens bereikt.
 
-ChatGPT (GPT-4o) behaalt sterke scores: 100\% rol-match en de hoogste skill-overlap van alle methodes (11\%). Dit toont aan dat het model verder kijkt dan enkel de rolbenaming en ook de skills van werknemers meeneemt in zijn redenering. Zo worden Python-ontwikkelaars bij data-taken ingezet en security-specialisten bij beveiligingstaken, wat verder gaat dan puur rolgebaseerde matching. Echter schiet ChatGPT tekort op verdelingsniveau: de standaarddeviatie is met 3,35 de hoogste van alle methodes, één werknemer:  Ahmed Benali ontvangt maar liefst 13 taken, terwijl Laura De Wilde en Mark De Vries geen enkele taak krijgen. ChatGPT optimaliseert voor de kwaliteit van individuele toewijzingen, maar vergeet de gehele werklastverdeling goed in kaart te brengen.
+ChatGPT (GPT-4o) behaalt de sterkste inhoudelijke resultaten van alle methodes. Met een perfecte rol-match (100\%) en de hoogste ervaringsfit (88,3\%) toont het model aan dat het meerdere criteria tegelijk afweegt en moeilijkere taken bewust koppelt aan meer ervaren werknemers. De werklastverdeling (std = 1,70) is beter dan die van Greedy maar minder evenwichtig dan die van het ML-model. De gemiddelde eindwerkdruk (0,859) is de laagste van alle methodes, wat aantoont dat ChatGPT ook rekening hield met de beginwerkdruk van werknemers. Enkel Mark De Vries ontving geen taak, wat realistisch is gezien zijn rol als IT Manager waarvoor geen taken in de testset voorkwamen. Het deadline-risico (3,3\%) is hoger dan dat van Greedy en het ML-model, maar nog steeds beperkt.
 
-Het ML-model neemt een tussenpositie in. De rol-match van 46\% ligt beduidend lager dan die van Greedy en ChatGPT, maar dit is het gevolg van een bewuste afweging waarbij beginwerkdruk en persoonlijkheidsfit worden meegewogen naast de rol. Werknemers met een hoge beginwerkdruk (0,9) worden actief ontzien, ook wanneer zij de vereiste rol bezitten. Het resultaat is een werklastverdeling met standaarddeviatie 1,37, wat beduidend eerlijker is dan zowel Greedy als ChatGPT, terwijl niemand zonder taken blijft (minimum = 3) en niemand meer dan 7 taken ontvangt. De overbelasting (54,5\%) is gelijk aan die van ChatGPT, maar bereikt dat resultaat met een gelijkmatigere spreiding over het volledige team.
+Het ML-model neemt een genuanceerde tussenpositie in. De rol-match van 71,7\% toont aan dat het model de onderliggende patronen in de trainingsdata grotendeels correct heeft geleerd. De werklastverdeling (std = 1,39) is de beste van alle methodes die ook inhoudelijke criteria meewegen, en de overbelasting (31,8\%) is gelijk aan Round-Robin en lager dan Greedy en ChatGPT. Het deadline-risico (1,7\%) is het laagste van de methodes die geen expliciete deadline-logica bevatten. De zwakste scores zijn ervaringsfit (75,0\%) en gemiddelde eindwerkdruk (0,905), beide criteria die niet expliciet in het trainingsproces werden opgenomen en daardoor minder geoptimaliseerd zijn.
 
-\section{Besluit}
-\vspace{1em}De vier methodes vertegenwoordigen elk een andere prioritering in het allocatieprobleem. Round-Robin maximaliseert eerlijkheid maar negeert inhoud volledig. Greedy en ChatGPT maximaliseren inhoudelijke kwaliteit, waarbij ChatGPT dankzij skill-bewustzijn zelfs verder gaat dan Greedy, maar beide creëren onaanvaardbare taakverdeling bij een minderheid van werknemers. Het ML-model is de enige methode die beide dimensies systematisch balanceert: het levert een redelijke inhoudelijke kwaliteit terwijl het de werklast evenwichtig spreidt over het volledige team.
+\section{Kritische reflectie}
+\vspace{1em}De resultaten van dit onderzoek tonen aan dat geen enkele methode op alle metrics tegelijk uitblinkt, wat de inherente complexiteit van het taakallocatieprobleem illustreert. Round-Robin maximaliseert eerlijkheid maar is inhoudelijk blind. Greedy excelleert op rol-match en deadline-risico maar concentreert de werklast bij een kleine groep. ChatGPT combineert perfecte rol-match met de beste ervaringsfit van alle methodes, maar vereist handmatige tussenkomst die niet schaalbaar is. Het ML-model is de enige geautomatiseerde methode die inhoudelijke kwaliteit en werklastverdeling systematisch combineert.
 
-Dit onderscheid is in de praktijk van groot belang. Een allocatiesysteem dat technisch correcte toewijzingen maakt maar consequent dezelfde werknemers overbelast, is op de middellange termijn niet houdbaar. Het ML-model lost dit op door werkdruk en persona-fit als expliciete criteria in het leerproces op te nemen, wat resulteert in een allocatie die duurzamer is voor het welzijn van het team als geheel. De sterke interne modelkwaliteit: recall van 1,00, ROC-AUC van 0,98 en stabiele kruisvalidatiescores bevestigt dat het model betrouwbaar presteert, al blijft de afhankelijkheid van synthetische trainingsdata een aandachtspunt voor verdere ontwikkeling.
+Tijdens de ontwikkeling werd vastgesteld dat een eerdere versie van het evaluatiescript de volledige dataset gebruikte voor vergelijking, waardoor het ML-model gedeeltelijk geëvalueerd werd op taken die het tijdens training al had gezien. Dit introduceert data leakage en leidt tot te optimistische resultaten. Na correctie werd uitsluitend de testset van 60 taken gebruikt voor alle evaluaties. Bovendien toonden eerdere runs op kleinere datasets zwakkere resultaten: bij een testset van 20 taken behaalde het model slechts 30\% rol-match, terwijl dit op de uiteindelijke testset van 60 taken opliep naar 71,7\%. Dit patroon bevestigt een fundamentele wetmatigheid in machine learning: meer en betere data leidt tot betere generalisatie.
+
+De voornaamste beperking van het huidige systeem is de afwezigheid van historische data. Omdat het model in essentie leert om een zelfopgesteld heuristisch puntensysteem na te bootsen, kan het geen patronen ontdekken die buiten die vooraf gedefinieerde regels vallen. Het systeem functioneert correct als proof of concept, maar zou voor productiegebruik getraind moeten worden op echte historische toewijzingsdata. Zonder die stap biedt het systeem geen aantoonbare meerwaarde ten opzichte van het onderliggende regelgebaseerde model zelf.
+
+Een tweede beperking is de onvolledige dekking van relevante criteria. De zwakste scores zijn ervaringsfit (75,0\%) en gemiddelde eindwerkdruk (0,905), beide criteria die niet expliciet in het trainingsproces werden opgenomen en daardoor minder geoptimaliseerd zijn. Dit is geen toeval maar een directe consequentie van het ontwerp: het model werd getraind op een samengestelde score die rol-match, persona-fit, werkdruk en taakaantal combineert, maar ervaringsfit en deadline urgentie niet expliciet meewoog. Voor een volgende versie zijn deze twee criteria de meest prioritaire uitbreidingen, samen met een herijking van de gewichten zodat rol-match zwaarder doorweegt zonder werklastverdeling volledig op te offeren.
+
+Een derde beperking is de vereenvoudigde modellering van werkdruk: na elke taaktoewijzing stijgt de werkbelasting met een vaste waarde van 0,1, zonder rekening te houden met taakvoltooiing of taakduur. In de praktijk varieert de impact van taken sterk en een realistischer model zou werkdruk dynamisch moeten laten dalen naarmate taken worden afgerond.
 
 %--------------------------------------------------------------------------------------
 \chapter{Conclusie}%
@@ -114,40 +135,25 @@ Dit onderscheid is in de praktijk van groot belang. Een allocatiesysteem dat tec
 Op basis van de literatuurstudie, de ontwikkeling van het proof-of-concept en de vergelijkende evaluatie kan geconcludeerd worden dat een AI-gedreven aanpak voor taakallocatie inderdaad een meerwaarde biedt ten opzichte van traditionele methoden. Er zijn wel een paar nuances.
 
 \section{Antwoord op de onderzoeksvragen}
-\vspace{1em}Het ontwikkelde ML-model op basis van een Random Forest classifier toont aan dat het haalbaar is om een geautomatiseerd taakallocatiesysteem te bouwen dat meerdere factoren tegelijk afweegt: rol-match, persona-fit, werkdruk en taakaantal. De vergelijkende evaluatie met Round-Robin, Greedy Rol-Match en ChatGPT (GPT-4o) toont aan dat het ML-model de enige methode is die beide 
-dimensies van het probleem balanceert: het levert een aanvaardbare toewijzing en een eerlijke spreiding van de werklast over het volledige team. Concreet behaalt het model een werklastverdeling met een standaarddeviatie van 1,37, dat aanzienlijk lager ligt dan Greedy (3,13) en ChatGPT (3,35), terwijl elke werknemer minimaal drie taken ontvangt en niemand meer dan 7.
+\vspace{1em}Het ontwikkelde ML-model op basis van een Random Forest classifier toont aan dat het haalbaar is om een geautomatiseerd taakallocatiesysteem te bouwen dat meerdere factoren tegelijk afweegt: rol-match, persona-fit, werkdruk en taakaantal. De vergelijkende evaluatie met Round-Robin, Greedy Rol-Match en ChatGPT (GPT-4o) toont aan dat het ML-model de enige methode is die beide dimensies van het probleem balanceert: het levert een aanvaardbare toewijzing en een eerlijke spreiding van de werklast over het volledige team. Concreet behaalt het model een werklastverdeling met een standaarddeviatie van 1,39, dat aanzienlijk lager ligt dan Greedy (2,23), terwijl de overbelasting (31,8\%) gelijk is aan Round-Robin en lager dan Greedy en ChatGPT (beiden 36,4\%).
 
-Methoden die uitsluitend optimaliseren voor rol-match, zoals Greedy en ChatGPT, presteren inhoudelijk sterk maar creëren onevenwichten waarbij bepaalde werknemers worden overbelast en anderen 
-volledig worden overgeslagen. Precies dat soort onevenwicht ligt aan de basis van de werkstress die deze proef wil aanpakken. Het model geeft dus een concreet, onderbouwd antwoord op de onderzoeksvraag: AI kan ingezet worden om taakverdeling te optimaliseren, op voorwaarde dat het systeem werkdruk en welzijn als expliciete criteria opneemt in het leerproces.
+Methoden die uitsluitend optimaliseren voor rol-match, zoals Greedy en ChatGPT, presteren inhoudelijk sterk maar creëren onevenwichten waarbij bepaalde werknemers worden overbelast en anderen volledig worden overgeslagen. Precies dat soort onevenwicht ligt aan de basis van de werkstress die deze proef wil aanpakken. Het model geeft dus een concreet, onderbouwd antwoord op de onderzoeksvraag: AI kan ingezet worden om taakverdeling te optimaliseren, op voorwaarde dat het systeem werkdruk en welzijn als expliciete criteria opneemt in het leerproces.
 
-\vspace{1em}Daarnaast werd ook de deelvraag beantwoord:
+Wat betreft de verwachte uitkomst: de hypothese dat een ML-model beter zou presteren op het vlak van werklastbalans werd bevestigd. Minder verwacht was het resultaat op rol-match (71,7\%) in vergelijking met Greedy en ChatGPT (beiden 100\%). Dit is echter geen fout in het model, maar een gevolg van een bewuste afweging: het model verkiest soms een werknemer met een iets minder perfecte rol maar een lagere werkdruk, boven een perfecte kandidaat die al overbelast is. Of deze afweging in de praktijk wenselijk is, hangt af van de organisatiecontext. Hier kan verder onderzoek gedaan worden door het systeem te testen binnen een reële bedrijfsomgeving, waarbij leidinggevenden en werknemers feedback geven op de gegenereerde toewijzingen. Op basis van die feedback kan bepaald worden welke afweging tussen rol-match en werklastbalans het meest aansluit bij de noden van de organisatie en kunnen de gewichten in het model bijgestuurd worden.
 
-\vspace{0.5em}``Hoe creëer je zo een AI-model en welke resources heb je hiervoor nodig?''
-
-Het ontwikkelde systeem toont aan dat de technische drempel voor een werkend prototype lager ligt dan vaak wordt aangenomen. Het model is volledig opgebouwd in Python, met \textbf{scikit-learn} als enige machine learning-bibliotheek. Het draait op standaard hardware zonder nood aan GPU's of cloudinfrastructuur. De architectuur bestaat uit vier module scripts: \textbf{datasetbuilder.py} voor 
-de constructie van feature-vectoren, \textbf{trainmodel.py} voor de training van de Random Forest classifier, \textbf{predictor.py} voor het berekenen van geschiktheidsscores en \textbf{taskallocator.py} voor de eigenlijke toewijzingslogica. Invoerdata wordt beheerd via twee JSON-bestanden die de werknemers- en taakprofielen bevatten.
+\vspace{1em}Daarnaast werd ook de deelvraag beantwoord: "Hoe creëer je zo een AI-model en welke resources heb je hiervoor nodig?" Het ontwikkelde systeem toont aan dat de technische drempel voor een werkend prototype lager ligt dan vaak wordt aangenomen. Het model is volledig opgebouwd in Python, met scikit-learn als enige machine learning-bibliotheek. Het draait op standaard hardware zonder nood aan GPU's of cloudinfrastructuur. De architectuur bestaat uit vier modulescripts: datasetbuilder.py voor de constructie van feature-vectoren, trainmodel.py voor de training van de Random Forest classifier, predictor.py voor het berekenen van geschiktheidsscores en taskallocator.py voor de eigenlijke toewijzingslogica. Invoerdata wordt beheerd via twee JSON-bestanden die de werknemers- en taakprofielen bevatten.
 
 De cruciale resource die in dit onderzoek ontbreekt, is een dataset van historische toewijzingsbeslissingen met bijbehorende uitkomsten. Bij afwezigheid daarvan werd de trainingsdata synthetisch gegenereerd via een heuristisch puntensysteem. Dit volstaat voor een proof of concept, maar beperkt de generaliseerbaarheid van het model.
 
 \section{Bijdrage aan het onderzoeksdomein}
-\vspace{1em}De meerwaarde van deze bachelorproef ligt in de benadering van het allocatieprobleem. Veel bestaande systemen, zoals het door \textcite{Arslan_2024} beschreven model focussen vrijwel uitsluitend op skill- en rol-matching. Dit onderzoek voegt een extra dimensie toe door ook stressniveau, persona en de dynamische evolutie van werkdruk na elke toewijzing mee te nemen in het model. Dit maakt het een meer duurzaam en mensgericht alternatief voor prestatiegerichte allocatiesystemen.
+\vspace{1em}De meerwaarde van deze bachelorproef ligt in de benadering van het allocatieprobleem. Veel bestaande systemen focussen vrijwel uitsluitend op skill- en rol-matching. Dit onderzoek voegt een extra dimensie toe door ook stressniveau, persona en de dynamische evolutie van werkdruk na elke toewijzing mee te nemen in het model. Dit maakt het een meer duurzaam en mensgericht alternatief voor prestatiegerichte allocatiesystemen. Bovendien biedt het onderzoek een vergelijkingsbasis tussen vier fundamenteel verschillende allocatiestrategieën, wat de relatieve sterktes en zwaktes van elk model concreet zichtbaar maakt.
 
-Bovendien biedt het onderzoek een vergelijkingsbasis tussen vier fundamenteel verschillende allocatiestrategieën, wat de relatieve sterktes en zwaktes van elk model concreet zichtbaar maakt.
+Verder roepen de persona-kenmerken ethische vragen op over hoe deze scores in de praktijk bepaald worden. Subjectieve beoordelingen door leidinggevenden kunnen persoonlijke vooroordelen inbakken in het model op een manier die moeilijker te detecteren is dan bij een menselijke beslissing. Een robuust systeem vereist objectief meetbare inputdata en transparante beslissingslogica, mede in het licht van de AVG-vereisten rond uitlegbaarheid van geautomatiseerde beslissingen.
 
-\section{Kritische reflectie}
-\vspace{1em}Toch zijn er beperkingen die eerlijk benoemd moeten worden. De voornaamste is de afwezigheid van historische data. Omdat het model in essentie leert om een zelfopgesteld heuristisch puntensysteem na te bootsen, kan het geen patronen ontdekken die buiten die vooraf gedefinieerde regels vallen. Het systeem functioneert correct als proof of concept, maar zou voor productiegebruik getraind moeten worden op echte historische toewijzingsdata. Zonder die stap biedt het systeem geen aantoonbare meerwaarde ten opzichte van het onderliggende regelgebaseerde model zelf.
-
-Een tweede beperking is de vereenvoudigde modellering van werkdruk: na elke taaktoewijzing stijgt de werkbelasting met een vaste waarde van 0,1, zonder rekening te houden met taakvoltooiing of taakduur. In de praktijk varieert de impact van taken sterk en een realistischer model zou werkdruk dynamisch moeten laten dalen naarmate taken worden afgerond.
-
-Verder roepen de persona-kenmerken ethische vragen op over hoe deze scores in de praktijk bepaald worden. Subjectieve beoordelingen door leidinggevenden kunnen persoonlijke 
-vooroordelen inbakken in het model op een manier die moeilijker te detecteren is dan bij een menselijke beslissing. Een robuust systeem vereist objectief meetbare inputdata en transparante beslissingslogica, denkende aan de AVG-vereisten rond uitlegbaarheid van geautomatiseerde beslissingen.
-
-Wat betreft de verwachte uitkomst: de hypothese dat een ML-model beter zou presteren op het vlak van werklastbalans werd bevestigd. Minder verwacht was het zwakke resultaat op rol-match (46\%) in vergelijking met Greedy en ChatGPT (beiden 100\%). Dit is echter geen fout in het model, maar een gevolg van de afweging: het model verkiest soms een werknemer met een iets minder perfecte rol maar een lagere werkdruk, boven een perfecte kandidaat die al overbelast is. Of deze afweging in de praktijk wenselijk is, hangt af van de organisatiecontext. Hier kan wel verder onderzoek gedaan 
-worden door het systeem te testen binnen een reële bedrijfsomgevin. Hier geven leidinggevenden en werknemers feedback op de gegenereerde toewijzingen. Op basis van die feedback kan dan bepaald worden welke afweging tussen rol-match en werklastbalans het meest aansluit bij de noden van de organisatie en kunnen de gewichten in het model bijgestuurd worden.
+De vergelijking met ChatGPT opent een bredere vraag. Als een algemeen taalmodel met enkel een gestructureerde prompt al een perfecte rol-match en de hoogste ervaringsfit behaalt, wat is dan de meerwaarde van een dedicated ML-systeem? Het antwoord ligt in schaalbaarheid en automatisering. ChatGPT vereist handmatige invoer van alle gegevens bij elke nieuwe allocatieronde, is niet integreerbaar in een geautomatiseerde pipeline en geeft geen reproduceerbare resultaten. Een dedicated ML-systeem kan daarentegen real-time worden aangeroepen, wordt beter naarmate er meer data beschikbaar is en kan volledig geïntegreerd worden in bestaande HR- of projectmanagementtools. De huidige resultaten van ChatGPT tonen vooral aan wat het potentieel is van een verder ontwikkeld ML-systeem: als een generiek model zonder specifieke training al zo sterk presteert, dan is de verwachting gerechtvaardigd dat een dedicated model met reële trainingsdata, uitgebreide criteria en iteratieve feedback van leidinggevenden en werknemers aanzienlijk beter kan presteren.
 
 \section{Aanbevelingen voor verder onderzoek}
 
-\vspace{1em}Ten eerste is er nood aan validatie met echte historische toewijzingsdata uit een bedrijfsomgeving, om te toetsen of de geleerde patronen overeenkomen met wat menselijke 
-planners als optimaal beschouwen. Ten tweede biedt de integratie van reinforcement learning, waarbij het systeem leert via feedback op werkelijke uitkomsten in plaats van gesimuleerde scores, een veelbelovende richting voor een adaptief systeem dat zichzelf continu verbetert op basis van ervaringen uit de praktijk. Ten derde zou een longitudinale studie kunnen nagaan of een evenwichtigere taakverdeling wel effectief leidt tot lagere stressniveaus en minder burn-out, wat de kern is van de oorspronkelijke probleemstelling.
+\vspace{1em}Ten eerste is er nood aan validatie met echte historische toewijzingsdata uit een bedrijfsomgeving, om te toetsen of de geleerde patronen overeenkomen met wat menselijke planners als optimaal beschouwen. Ten tweede biedt de integratie van reinforcement learning, waarbij het systeem leert via feedback op werkelijke uitkomsten in plaats van gesimuleerde scores, een veelbelovende richting voor een adaptief systeem dat zichzelf continu verbetert op basis van ervaringen uit de praktijk. Ten derde zou een longitudinale studie kunnen nagaan of een evenwichtigere taakverdeling wel effectief leidt tot lagere stressniveaus en minder burn-out, wat de kern is van de oorspronkelijke probleemstelling.
 
 Tot slot suggereert dit onderzoek dat de echte meerwaarde van AI in taakverdeling niet ligt in het volledig vervangen van menselijk oordeel, maar in het ondersteunen ervan: een systeem dat de planner wijst op onevenwichten, overbelasting of mismatches zorgt zo voor betere beslissingen die zowel de efficiëntie als het welzijn van het team dienen.
