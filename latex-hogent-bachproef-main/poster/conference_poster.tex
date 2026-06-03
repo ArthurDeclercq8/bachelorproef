@@ -14,15 +14,13 @@
 
 % Info over de bachelorproef
 \title{AI-ondersteunde taakverdeling voor IT-teams: een conceptueel model voor optimale taak-werknemer matching}
-\subtitle{Ondertitel (eventueel)}
 \author{Arthur Declercq}
 \email{Arthur.declercq2@student.hogent.be}
 \supervisor{Martine Van Audenrode}
-\cosupervisor{Voornaam Naam (Bedrijf)}
 
 % Indien ingevuld, wordt deze informatie toegevoegd aan het einde van de
 % abstract. Zet in commentaar als je dit niet wilt.
-\specialisation{AI & Data Engineering}
+\specialisation{AI \& Data Engineering}
 \keywords{AI, taakallocatie, stress}
 \projectrepo{https://github.com/ArthurDeclercq8/bachelorproef}
 
@@ -31,56 +29,38 @@
 \maketitle
 
 \begin{abstract}
-It's only a model.
-You don't vote for kings. Who's that then? We found them. Ni! Ni! Ni! Ni!
-The nose? On second thoughts, let's not go there. It is a silly place. Bloody Peasant! And the hat. She's a witch! Where'd you get the coconuts?
+Stress komt in elke job voor. In deze bachelorproef wordt er gekeken naar de IT-sector. Waar gemiddeld 29\% van de Europese werknemers lijdt aan stress of depressie, loopt dat cijfer bij IT-professionals op tot bijna het dubbele. Een belangrijke oorzaak is een onevenwichtige taakverdeling, dat geen rekening houdt met werkdruk of individuele capaciteiten. Dit onderzoek verkent hoe artificiële intelligentie de taakverdeling binnen IT-teams kan optimaliseren om werkdruk te verminderen en mentale gezondheid te ondersteunen. Via Python en scikit-learn werd een Random Forest-model getraind op synthetische data (22 werknemers, 300 taken) om voor elke werknemer-taakcombinatie een geschiktheidsscore te berekenen. Vergeleken met Round-Robin, Greedy Rol-Match en ChatGPT (GPT-4o) scoort het ML-model het tweede laagste op rol-match (71,7\%) en bereikt het ook de tweede meeste evenwichtige werklastdistributie (standaarddeviatie: 1,39 vs. 2,23–1,70 bij de alternatieven). Het is de enige methode die inhoudelijke kwaliteit én werklastbalans systematisch combineert. Vervolgonderzoek kan zich richten op validatie in een reële bedrijfsomgeving, integratie van reinforcement learning en longitudinale meting van de impact op stressniveaus.
 \end{abstract}
 
 \begin{multicols}{2} % This is how many columns your poster will be broken into, a portrait poster is generally split into 2 columns
 
 \section{Introductie}
 
-Be quiet! Found them? In Mercia?! The coconut's tropical! But you are dressed as one… Well, what do you want? Knights of Ni, we are but simple travelers who seek the enchanter who lives beyond these woods.
-
-Well, what do you want? It's only a model. Camelot! We found them. We shall say `Ni' again to you, if you do not appease us.
-
-The nose? Shut up! Burn her! I am your king. You don't vote for kings.
-
-You can't expect to wield supreme power just `cause some watery tart threw a sword at you! Well, we did do the nose. I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave before I am forced to taunt you a second time!
-
-Why do you think that she is a witch? We want a shrubbery!! I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave before I am forced to taunt you a second time!
+Stress treft elke werknemer, maar in de IT-sector is het probleem bijzonder acuut. Waar op de Werelddag voor Geestelijke Gezondheid 2025 al 29\% van de Europese werknemers leed aan stress of depressie, verdubbelt dat cijfer wanneer enkel naar IT-professionals wordt gekeken. Een onderbelichte oorzaak hiervan is de manier waarop taken worden verdeeld: de huidige taakverdeling houdt te weinig rekening met de individuele capaciteiten, werkdruk en mentale belasting van werknemers. Dit onderzoek stelt de vraag of artificiële intelligentie een oplossing kan bieden om niet alleen de taakverdeling te optimaliseren, maar ook om de mentale gezondheid van IT-professionals te ondersteunen en de werking van het bedrijf vlotter te laten verlopen.
 
 \section{Experimenten}
 
-A newt? Camelot! Why? No, no, no! Yes, yes. A bit. But she's got a wart.
-
-Shut up! I dunno. Must be a king. Who's that then? Look, my liege! On second thoughts, let's not go there. It is a silly place.
-
-Shut up! Will you shut up?! No, no, no! Yes, yes. A bit. But she's got a wart. He hasn't got shit all over him. It's only a model. It's only a model.
-
-Bring her forward! I don't want to talk to you no more, you empty-headed animal food trough water! I fart in your general direction! Your mother was a hamster and your father smelt of elderberries! Now leave 
+Het onderzoek werd uitgevoerd in Python met scikit-learn, op basis van synthetisch gegenereerde data: 22 werknemers en 300 taken, elk voorzien van kenmerken zoals rol, werkdruk, persona-scores en taakcomplexiteit. Via een heuristisch puntensysteem, dat gebaseerd is op rolmatch, persona-fit en werkdrukpenalty, werd een Random Forest classifier getraind met 200 beslissingsbomen. Het model voorspelt per werknemer-taakcombinatie een geschiktheidsscore, waarna de best scorende werknemer de taak ontvangt. Na elke toewijzing wordt de werkdruk dynamisch bijgewerkt, zodat het systeem taken op een meer realistische manier verdeelt.
 
 \section{Sectie met figuur}
 
-De {\LaTeX} figure-omgeving bepaalt zelf waar een afbeelding komt en dat is meestal niet op de plek in de tekst waar de figure-omgeving gedefinieerd wordt. Als je wilt forceren dat afbeeldingen toch in de flow van de tekst blijven, dan kan je dat zoals hieronder:
+Om de meerwaarde van het ontwikkelde systeem te beoordelen, werd het vergeleken met drie andere allocatiemethodes: Round-Robin, Greedy Rol-Match en ChatGPT (GPT-4o). Alle methodes ontvingen exact dezelfde invoer: een testset van 60 taken en 22 werknemers. Ze werden beoordeeld aan de hand van zes kwantitatieve metrics: rol-match, werklastverdeling, gemiddelde eindwerkdruk, overbelasting, ervaringsfit en deadline-risico. De evaluatie werd volledig geautomatiseerd via een evaluatiescript, met uitzondering van ChatGPT, waarvoor de toewijzingen handmatig werden ingevoerd.
+
+Hier staan de resultaten van het evaluatiescript.
 
 \begin{center}
   \captionsetup{type=figure}
-  \includegraphics[width=1.0\linewidth]{grail}
-  \captionof{figure}{He hasn't got shit all over him. The nose? Where'd you get the coconuts? What do you mean? We shall say `Ni' again to you, if you do not appease us}
+  \includegraphics[width=1.0\linewidth]{../graphics/screenshot010.png}
+  \captionof{Uitvoer evaluatiescript.py}{De uitvoer van het evaluatiescript.}
 \end{center}
-
-Let er wel op dat dit tot problemen met bladschikking kan leiden.
 
 \section{Conclusies}
 
-Don't underestimate the Force. Oh God, my uncle. How am I ever gonna explain this? I suggest you try it again, Luke. This time, let go your conscious self and act on instinct. Don't be too proud of this technological terror you've constructed. The ability to destroy a planet is insignificant next to the power of the Force.
+Het ontwikkelde ML-model is de enige geautomatiseerde methode die inhoudelijke kwaliteit én werklastbalans systematisch combineert. Met een werklastverdeling van standaarddeviatie 1,39 presteert het duidelijker beter dan Greedy (2,23) en ChatGPT (1,70), terwijl de overbelasting (31,8\%) gelijk blijft aan Round-Robin. De lagere rol-match (71,7\% tegenover 100\% bij Greedy en ChatGPT) is geen tekortkoming, maar een bewuste afweging: het model verkiest soms een iets minder perfecte rol boven een overbelaste werknemer. Dit maakt het systeem duurzamer voor het welzijn van het team. De voornaamste beperking blijft de afhankelijkheid van synthetische trainingsdata. Voor productiegebruik is training op echte historische data noodzakelijk.
 
 \section{Toekomstig onderzoek}
 
-I care. So, what do you think of her, Han? No! Alderaan is peaceful. We have no weapons. You can't possibly… I have traced the Rebel spies to her. Now she is my only link to finding their secret base.
-
-Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. You are a part of the Rebel Alliance and a traitor! Take her away! 
+Verder onderzoek richt zich op drie pijlers: validatie in een reële bedrijfsomgeving met echte historische toewijzingsdata, de integratie van reinforcement learning zodat het systeem zichzelf continu verbetert op basis van praktijkfeedback en een longitudinale meting die nagaat of een evenwichtigere taakverdeling effectief leidt tot lagere stressniveaus bij IT-professionals.
 
 \end{multicols}
 \end{document}

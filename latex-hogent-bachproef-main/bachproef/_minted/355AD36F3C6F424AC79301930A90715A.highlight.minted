@@ -1,0 +1,43 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{metrics}\PYG{p}{(}\PYG{n}{assignments}\PYG{p}{):}
+\PYG{n}{role\PYGZus{}match} \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{workload\PYGZus{}start} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{n}{e}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZdq{}}\PYG{p}{]:} \PYG{n}{e}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}workload\PYGZdq{}}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{)} \PYG{k}{for} \PYG{n}{e} \PYG{o+ow}{in} \PYG{n}{employees}\PYG{p}{\PYGZcb{}}
+\PYG{n}{workload}       \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{n}{e}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZdq{}}\PYG{p}{]:} \PYG{n}{e}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}workload\PYGZdq{}}\PYG{p}{,} \PYG{l+m+mf}{0.0}\PYG{p}{)} \PYG{k}{for} \PYG{n}{e} \PYG{o+ow}{in} \PYG{n}{employees}\PYG{p}{\PYGZcb{}}
+\PYG{n}{counts}         \PYG{o}{=} \PYG{n}{Counter}\PYG{p}{()}
+\PYG{n}{exp\PYGZus{}fit}        \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{deadline\PYGZus{}risk}  \PYG{o}{=} \PYG{l+m+mi}{0}
+
+\PYG{k}{for} \PYG{n}{task}\PYG{p}{,} \PYG{n}{emp} \PYG{o+ow}{in} \PYG{n}{assignments}\PYG{p}{:}
+\PYG{n}{counts}\PYG{p}{[}\PYG{n}{emp}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZdq{}}\PYG{p}{]]} \PYG{o}{+=} \PYG{l+m+mi}{1}
+\PYG{n}{workload}\PYG{p}{[}\PYG{n}{emp}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZdq{}}\PYG{p}{]]} \PYG{o}{=} \PYG{n+nb}{min}\PYG{p}{(}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{n}{workload}\PYG{p}{[}\PYG{n}{emp}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZdq{}}\PYG{p}{]]} \PYG{o}{+} \PYG{l+m+mf}{0.1}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Rol\PYGZhy{}match (inclusief Senior Developer → Developer fallback)}
+\PYG{n}{req} \PYG{o}{=} \PYG{n}{task}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}required\PYGZus{}role\PYGZdq{}}\PYG{p}{]}
+\PYG{k}{if} \PYG{n}{req} \PYG{o}{==} \PYG{n}{emp}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}role\PYGZdq{}}\PYG{p}{]} \PYG{o+ow}{or} \PYG{p}{(}\PYG{n}{req} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}Senior Developer\PYGZdq{}} \PYG{o+ow}{and} \PYG{n}{emp}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}role\PYGZdq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s2}{\PYGZdq{}Developer\PYGZdq{}}\PYG{p}{):}
+\PYG{n}{role\PYGZus{}match} \PYG{o}{+=} \PYG{l+m+mi}{1}
+
+\PYG{c+c1}{\PYGZsh{} Ervaringsfit: moeilijkheid \PYGZlt{}= ervaring van werknemer}
+\PYG{n}{difficulty} \PYG{o}{=} \PYG{n}{task}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}difficulty\PYGZdq{}}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n}{experience} \PYG{o}{=} \PYG{n}{emp}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}experience\PYGZdq{}}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{k}{if} \PYG{n}{difficulty} \PYG{o}{\PYGZlt{}=} \PYG{n}{experience}\PYG{p}{:}
+\PYG{n}{exp\PYGZus{}fit} \PYG{o}{+=} \PYG{l+m+mi}{1}
+
+\PYG{c+c1}{\PYGZsh{} Deadline\PYGZhy{}risico: hoge werkdruk (\PYGZgt{}= 0.7) én deadline binnen 2 dagen}
+\PYG{n}{days} \PYG{o}{=} \PYG{n}{task}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}days\PYGZus{}remaining\PYGZdq{}}\PYG{p}{,} \PYG{l+m+mi}{99}\PYG{p}{)}
+\PYG{k}{if} \PYG{n}{workload\PYGZus{}start}\PYG{p}{[}\PYG{n}{emp}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZdq{}}\PYG{p}{]]} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mf}{0.7} \PYG{o+ow}{and} \PYG{n}{days} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{2}\PYG{p}{:}
+\PYG{n}{deadline\PYGZus{}risk} \PYG{o}{+=} \PYG{l+m+mi}{1}
+
+\PYG{n}{n} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{assignments}\PYG{p}{)}
+\PYG{n}{c} \PYG{o}{=} \PYG{p}{[}\PYG{n}{counts}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{e}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}name\PYGZdq{}}\PYG{p}{],} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{k}{for} \PYG{n}{e} \PYG{o+ow}{in} \PYG{n}{employees}\PYG{p}{]}
+\PYG{n}{overload}     \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{k}{for} \PYG{n}{w} \PYG{o+ow}{in} \PYG{n}{workload}\PYG{o}{.}\PYG{n}{values}\PYG{p}{()} \PYG{k}{if} \PYG{n}{w} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mf}{1.0}\PYG{p}{)}
+\PYG{n}{avg\PYGZus{}workload} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{workload}\PYG{o}{.}\PYG{n}{values}\PYG{p}{())} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{workload}\PYG{p}{)}
+
+\PYG{k}{return} \PYG{p}{\PYGZob{}}
+    \PYG{l+s+s2}{\PYGZdq{}Rol\PYGZhy{}match \PYGZpc{}\PYGZdq{}}\PYG{p}{:}             \PYG{n+nb}{round}\PYG{p}{(}\PYG{l+m+mi}{100} \PYG{o}{*} \PYG{n}{role\PYGZus{}match} \PYG{o}{/} \PYG{n}{n}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{),}
+    \PYG{l+s+s2}{\PYGZdq{}Werklastverdeling std\PYGZdq{}}\PYG{p}{:}   \PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{statistics}\PYG{o}{.}\PYG{n}{stdev}\PYG{p}{(}\PYG{n}{c}\PYG{p}{),} \PYG{l+m+mi}{2}\PYG{p}{),}
+    \PYG{l+s+s2}{\PYGZdq{}Gem. eindwerkdruk\PYGZdq{}}\PYG{p}{:}       \PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{avg\PYGZus{}workload}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{),}
+    \PYG{l+s+s2}{\PYGZdq{}Overbelasting \PYGZpc{}\PYGZdq{}}\PYG{p}{:}         \PYG{n+nb}{round}\PYG{p}{(}\PYG{l+m+mi}{100} \PYG{o}{*} \PYG{n}{overload} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{employees}\PYG{p}{),} \PYG{l+m+mi}{1}\PYG{p}{),}
+    \PYG{l+s+s2}{\PYGZdq{}Ervaringsfit \PYGZpc{}\PYGZdq{}}\PYG{p}{:}          \PYG{n+nb}{round}\PYG{p}{(}\PYG{l+m+mi}{100} \PYG{o}{*} \PYG{n}{exp\PYGZus{}fit} \PYG{o}{/} \PYG{n}{n}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{),}
+    \PYG{l+s+s2}{\PYGZdq{}Deadline\PYGZhy{}risico \PYGZpc{}\PYGZdq{}}\PYG{p}{:}       \PYG{n+nb}{round}\PYG{p}{(}\PYG{l+m+mi}{100} \PYG{o}{*} \PYG{n}{deadline\PYGZus{}risk} \PYG{o}{/} \PYG{n}{n}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{),}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}
